@@ -21,7 +21,7 @@ export function Sidebar() {
   const cambiarDeEstudiante = useEstudiantesStore((s) => s.cambiarDeEstudiante)
 
   return (
-    <aside className="flex h-full w-[228px] shrink-0 flex-col border-r bg-surface">
+    <aside className="flex h-full w-[228px] shrink-0 flex-col border-r bg-gradient-to-b from-surface to-surface-2">
       <div className="flex h-14 items-center gap-2 border-b px-4">
         <button onClick={() => navigate('/')} className="flex cursor-pointer items-center gap-2" aria-label="Ir al inicio">
           <Isotipo size={28} />

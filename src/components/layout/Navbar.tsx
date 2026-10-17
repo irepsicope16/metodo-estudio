@@ -26,7 +26,7 @@ export function Navbar() {
   const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
 
   return (
-    <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b bg-surface px-4 lg:px-6">
+    <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b bg-gradient-to-r from-surface to-surface-2 px-4 lg:px-6">
       <button
         onClick={() => setMobileNavOpen(true)}
         className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border-2 text-secondary transition-colors hover:bg-secondary/10 lg:hidden"
