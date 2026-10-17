@@ -1,6 +1,6 @@
 # Método Estudio — Estado del proyecto
 
-> Fecha: 2026-10-17 (ronda 25) · Rama: `main`
+> Fecha: 2026-10-17 (ronda 26) · Rama: `main`
 
 ## 📦 Repositorio propio (17/10/2026)
 
@@ -859,6 +859,19 @@ sobre el estado fusionado antes de pushear. `main` ahora tiene todo:
 sitio completo + Método Brújula actualizado + Método Estudio con varios
 estudiantes y el video nuevo, publicándose solo vía el método de
 siempre.
+
+## ✅ Ronda 26 (17/10/2026): más celeste en los fondos
+
+La usuaria pidió más color celeste claro en los fondos que se ve
+"demasiado blanco", para que el contraste entre los azules de marca y
+el ladrillo de fondo se note en toda la app. Se cambió `--surface-2`
+(usado en el degradé de todas las `Card`, en los hovers y en el estado
+activo del menú) de un gris verdoso apagado a un celeste suave — el
+mismo tono que ya tenía `--dia-mar` en el planificador semanal, para
+no inventar un color nuevo. Sidebar, Navbar y el panel principal de
+`AppShell`, que antes eran blanco liso (`bg-surface`), pasan a un
+degradé sutil hacia ese celeste. Verificado visualmente con Playwright
+en desktop y mobile antes de publicar.
 
 ## 🔜 Backlog
 
