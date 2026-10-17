@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BookOpen, Clapperboard, ExternalLink, Printer } from 'lucide-react'
+import { BookOpen, Clapperboard, ExternalLink, Printer, Sparkles } from 'lucide-react'
 import { FadeIn, PageHeader } from '@/components/shared'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -8,7 +8,18 @@ import { RUTAS } from '@/data/rutas'
 import { FICHAS_POR_RUTA, type NivelHerramienta } from '@/data/biblioteca'
 import { DIMENSIONES } from '@/data/items'
 import { VIDEOS } from '@/data/videos'
+import { TECNICAS_VISUALES } from '@/data/tecnicasVisuales'
 import { moduleCardStyle, RUTA_COLOR } from '@/lib/moduleColors'
+import { VistaPreviaTecnica } from './VistaPreviaTecnica'
+
+const COLOR_CICLO = [
+  { color: 'var(--color-mod-organizar)', soft: 'var(--color-mod-organizar-soft)' },
+  { color: 'var(--color-mod-atencion)', soft: 'var(--color-mod-atencion-soft)' },
+  { color: 'var(--color-secondary)', soft: 'var(--color-secondary-soft)' },
+  { color: 'var(--color-mod-escribir)', soft: 'var(--color-mod-escribir-soft)' },
+  { color: 'var(--color-mod-aprender)', soft: 'var(--color-mod-aprender-soft)' },
+  { color: 'var(--color-mod-regular)', soft: 'var(--color-mod-regular-soft)' },
+] as const
 
 const NIVEL_LABEL: Record<NivelHerramienta, string> = {
   1: 'Principiante',
@@ -23,9 +34,11 @@ const NIVEL_BADGE_VARIANT: Record<NivelHerramienta, 'default' | 'primario' | 'ac
 }
 
 type FiltroNivel = 'todos' | NivelHerramienta
+type Vista = 'rutas' | 'visuales'
 
 export default function BibliotecaPage() {
   const [filtro, setFiltro] = useState<FiltroNivel>('todos')
+  const [vista, setVista] = useState<Vista>('rutas')
 
   return (
     <FadeIn>
@@ -34,6 +47,63 @@ export default function BibliotecaPage() {
         subtitle="Una ficha por cada herramienta de las 8 rutas: qué es, para qué sirve y cómo aplicarla."
       />
 
+      <div className="mb-6 flex gap-1.5 border-b">
+        <button
+          type="button"
+          onClick={() => setVista('rutas')}
+          className={`border-b-2 px-3 py-2 text-[13px] font-medium transition-colors ${
+            vista === 'rutas' ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'
+          }`}
+        >
+          Por ruta
+        </button>
+        <button
+          type="button"
+          onClick={() => setVista('visuales')}
+          className={`flex items-center gap-1.5 border-b-2 px-3 py-2 text-[13px] font-medium transition-colors ${
+            vista === 'visuales' ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'
+          }`}
+        >
+          <Sparkles className="h-3.5 w-3.5" /> Técnicas visuales
+        </button>
+      </div>
+
+      {vista === 'visuales' && (
+        <div className="space-y-5">
+          <p className="text-[12.5px] text-muted-foreground">
+            Técnicas con un ejemplo gráfico además de la explicación — probalas y quedate con las que te sirvan.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {TECNICAS_VISUALES.map((t, i) => {
+              const c = COLOR_CICLO[i % COLOR_CICLO.length]
+              return (
+                <Card key={t.id} className="flex flex-col border-t-[3px]" style={{ borderTopColor: c.color, backgroundColor: c.soft, boxShadow: `0 10px 20px -14px ${c.color}` }}>
+                  <CardHeader>
+                    <CardTitle className="text-[14px]">{t.titulo}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex flex-1 flex-col gap-3 pt-0">
+                    <VistaPreviaTecnica id={t.id} />
+                    <p className="text-[12.5px] leading-relaxed text-muted-foreground">{t.resumen}</p>
+                    <ol className="space-y-1 text-[12px] leading-relaxed text-muted-foreground">
+                      {t.pasos.map((p, j) => (
+                        <li key={j} className="flex gap-1.5">
+                          <span className="shrink-0 font-semibold" style={{ color: c.color }}>
+                            {j + 1}.
+                          </span>
+                          {p}
+                        </li>
+                      ))}
+                    </ol>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {vista === 'rutas' && (
+      <>
       <div className="mb-6 rounded-xl border bg-surface p-4">
         <p className="mb-2.5 text-[12.5px] text-muted-foreground">
           El nivel es una complejidad orientativa, no una edad — depende de dónde estás vos ahora, no de cuántos años
@@ -179,6 +249,8 @@ export default function BibliotecaPage() {
         Estas fichas son una guía rápida — probá, quedate con lo que te sirve y descartá lo que no. No hay una
         combinación "correcta" de herramientas, cada quien arma la propia.
       </p>
+      </>
+      )}
     </FadeIn>
   )
 }
