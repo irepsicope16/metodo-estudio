@@ -36,7 +36,7 @@ export function AppShell() {
   if (!hayActivo) {
     return (
       <div className="flex h-screen w-full items-center justify-center overflow-y-auto bg-background p-4">
-        <div className="w-full max-w-[640px] rounded-2xl bg-gradient-to-br from-surface via-surface-2 to-accent-soft px-6 py-8 shadow-[0_2px_4px_rgba(16,24,32,0.06),0_16px_32px_-12px_rgba(16,24,32,0.18)] sm:px-10">
+        <div className="w-full max-w-[640px] rounded-2xl bg-gradient-to-br from-surface-2 via-surface to-accent-soft px-6 py-8 shadow-[0_2px_4px_rgba(16,24,32,0.06),0_16px_32px_-12px_rgba(16,24,32,0.18)] sm:px-10">
           <Bienvenida />
         </div>
       </div>
@@ -69,7 +69,7 @@ export function AppShell() {
       <div className="flex min-w-0 flex-1 flex-col">
         <Navbar />
         <main className="min-w-0 flex-1 overflow-y-auto bg-background p-3.5 sm:p-4 lg:p-5">
-          <div className="mx-auto min-h-full w-full max-w-[1200px] rounded-2xl bg-gradient-to-br from-surface via-surface-2 to-accent-soft px-6 py-6 shadow-[0_2px_4px_rgba(16,24,32,0.06),0_16px_32px_-12px_rgba(16,24,32,0.18)] lg:px-10">
+          <div className="mx-auto min-h-full w-full max-w-[1200px] rounded-2xl bg-gradient-to-br from-surface-2 via-surface to-accent-soft px-6 py-6 shadow-[0_2px_4px_rgba(16,24,32,0.06),0_16px_32px_-12px_rgba(16,24,32,0.18)] lg:px-10">
             <Outlet />
           </div>
         </main>
