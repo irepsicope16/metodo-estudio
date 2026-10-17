@@ -1,0 +1,285 @@
+@import 'tailwindcss';
+/* Solo subsets latin + latin-ext (app en español) — las variantes cirílico,
+   griego y vietnamita de @fontsource infla el bundle sin usarse nunca. */
+@import '@fontsource/ibm-plex-sans/latin-400.css';
+@import '@fontsource/ibm-plex-sans/latin-ext-400.css';
+@import '@fontsource/ibm-plex-sans/latin-500.css';
+@import '@fontsource/ibm-plex-sans/latin-ext-500.css';
+@import '@fontsource/ibm-plex-sans/latin-600.css';
+@import '@fontsource/ibm-plex-sans/latin-ext-600.css';
+@import '@fontsource/ibm-plex-sans/latin-700.css';
+@import '@fontsource/ibm-plex-sans/latin-ext-700.css';
+@import '@fontsource/ibm-plex-mono/latin-400.css';
+@import '@fontsource/ibm-plex-mono/latin-ext-400.css';
+@import '@fontsource/ibm-plex-mono/latin-500.css';
+@import '@fontsource/ibm-plex-mono/latin-ext-500.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   Método Estudio — Design tokens
+   Paleta tomada directamente del isotipo definitivo (la "E" de
+   fichas): tinta azul-marino (primario), rojo de la barra/subrayado
+   (acento) y el azul acero de "Estrategias" (secundario). Ver
+   src/branding/Logo.tsx y PROJECT_STATUS.md.
+   ============================================================ */
+
+:root {
+  --background: #b5452e;
+  --surface: #fffdf9;
+  --surface-2: #eef0e9;
+  --foreground: #1f2e3d;
+  --muted-foreground: #54636f;
+  --faint-foreground: #7c8a93;
+
+  --primary: #223346;
+  --primary-strong: #16222f;
+  --primary-soft: #e3e8ec;
+  --primary-foreground: #ffffff;
+
+  --accent: #c14f3a;
+  --accent-strong: #9c3a28;
+  --accent-soft: #f7ded7;
+  --accent-foreground: #ffffff;
+
+  --secondary: #5e7686;
+  --secondary-strong: #48606f;
+  --secondary-soft: #e6ebee;
+  --secondary-foreground: #ffffff;
+
+  --border: #e4dcc8;
+  --border-strong: #d3c7a9;
+  --ring: #22334655;
+
+  --danger: #c23b2e;
+  --danger-soft: #fbe6e1;
+  --warning: #b3821f;
+  --warning-soft: #f8efd9;
+
+  /* Color por módulo (ruta) — 5 tonos nuevos; comprender, prepararse_evaluar
+     y construir_autonomia reusan secondary/accent/primary (ver rutas.ts). */
+  --mod-organizar: #b8863a;
+  --mod-organizar-soft: #f3e6cd;
+  --mod-atencion: #3f8f86;
+  --mod-atencion-soft: #dcece9;
+  --mod-escribir: #8a5a7a;
+  --mod-escribir-soft: #ecdfe8;
+  --mod-aprender: #6a5fa8;
+  --mod-aprender-soft: #e5e2f2;
+  --mod-regular: #5f8a5a;
+  --mod-regular-soft: #e2ecdf;
+
+  /* Paleta "planner" — un pastel por día de la semana, al estilo de los
+     planificadores semanales que pidió la usuaria como referencia directa:
+     cada día con personalidad propia en vez de tarjetas blancas uniformes. */
+  --dia-lun: #fcdfe6;
+  --dia-lun-strong: #d97a94;
+  --dia-mar: #dcebfb;
+  --dia-mar-strong: #5e93c4;
+  --dia-mie: #d7f1e8;
+  --dia-mie-strong: #3f9c82;
+  --dia-jue: #e4f0d6;
+  --dia-jue-strong: #74a14a;
+  --dia-vie: #fdf1cf;
+  --dia-vie-strong: #c99a2c;
+  --dia-sab: #fbe3d2;
+  --dia-sab-strong: #ca7f44;
+  --dia-dom: #ead9f7;
+  --dia-dom-strong: #8c5bb5;
+
+  --radius: 1rem;
+}
+
+.dark {
+  --background: #191b20;
+  --surface: #23262f;
+  --surface-2: #2a2d37;
+  --foreground: #efe9db;
+  --muted-foreground: #b3ac9b;
+  --faint-foreground: #90897a;
+
+  --primary: #8ba0b2;
+  --primary-strong: #a6b8c6;
+  --primary-soft: #232f39;
+  --primary-foreground: #12191f;
+
+  --accent: #d99184;
+  --accent-strong: #e6ab9f;
+  --accent-soft: #3a2420;
+  --accent-foreground: #241210;
+
+  --secondary: #93aebc;
+  --secondary-strong: #aec4cf;
+  --secondary-soft: #1f2f37;
+  --secondary-foreground: #0d1418;
+
+  --border: #34363f;
+  --border-strong: #40424d;
+  --ring: #8ba0b266;
+
+  --danger: #e2726a;
+  --danger-soft: #3a201c;
+  --warning: #d2a750;
+  --warning-soft: #362c16;
+
+  --mod-organizar: #d9ab5f;
+  --mod-organizar-soft: #3a3320;
+  --mod-atencion: #6fc2b8;
+  --mod-atencion-soft: #1f3735;
+  --mod-escribir: #c68eb5;
+  --mod-escribir-soft: #3a2b35;
+  --mod-aprender: #a79cdb;
+  --mod-aprender-soft: #2f2b47;
+  --mod-regular: #90bd8a;
+  --mod-regular-soft: #263a24;
+
+  --dia-lun: #3a2530;
+  --dia-lun-strong: #e38fa8;
+  --dia-mar: #202f3d;
+  --dia-mar-strong: #85b2dd;
+  --dia-mie: #1c3630;
+  --dia-mie-strong: #6bc3a9;
+  --dia-jue: #263420;
+  --dia-jue-strong: #9ec776;
+  --dia-vie: #3a3018;
+  --dia-vie-strong: #e3c05c;
+  --dia-sab: #392a1d;
+  --dia-sab-strong: #e2a06a;
+  --dia-dom: #2e2238;
+  --dia-dom-strong: #b793e0;
+}
+
+@theme inline {
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  /* Títulos en la misma sans-serif que el cuerpo (no serif): más fácil de leer
+     para personas con dislexia — menos ornamento, formas de letra más simples. */
+  --font-display: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-faint: var(--faint-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-strong: var(--secondary-strong);
+  --color-secondary-soft: var(--secondary-soft);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+
+  --color-mod-organizar: var(--mod-organizar);
+  --color-mod-organizar-soft: var(--mod-organizar-soft);
+  --color-mod-atencion: var(--mod-atencion);
+  --color-mod-atencion-soft: var(--mod-atencion-soft);
+  --color-mod-escribir: var(--mod-escribir);
+  --color-mod-escribir-soft: var(--mod-escribir-soft);
+  --color-mod-aprender: var(--mod-aprender);
+  --color-mod-aprender-soft: var(--mod-aprender-soft);
+  --color-mod-regular: var(--mod-regular);
+  --color-mod-regular-soft: var(--mod-regular-soft);
+
+  --color-dia-lun: var(--dia-lun);
+  --color-dia-lun-strong: var(--dia-lun-strong);
+  --color-dia-mar: var(--dia-mar);
+  --color-dia-mar-strong: var(--dia-mar-strong);
+  --color-dia-mie: var(--dia-mie);
+  --color-dia-mie-strong: var(--dia-mie-strong);
+  --color-dia-jue: var(--dia-jue);
+  --color-dia-jue-strong: var(--dia-jue-strong);
+  --color-dia-vie: var(--dia-vie);
+  --color-dia-vie-strong: var(--dia-vie-strong);
+  --color-dia-sab: var(--dia-sab);
+  --color-dia-sab-strong: var(--dia-sab-strong);
+  --color-dia-dom: var(--dia-dom);
+  --color-dia-dom-strong: var(--dia-dom-strong);
+
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    /* Fondo "ladrillo": un lienzo de color intenso detrás de la app — el
+       contenido (títulos, texto) siempre vive dentro de la "hoja" clara
+       (AppShell / tarjetas), nunca directo sobre este color, así que la
+       intensidad no compromete la lectura. Un resplandor sutil arriba le
+       da profundidad sin volverse un degradé de otro color. */
+    background: radial-gradient(1200px 700px at 50% -12%, rgba(255, 255, 255, 0.1), transparent 60%), var(--background);
+    background-attachment: fixed;
+    color: var(--foreground);
+    font-size: 16.5px;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+  }
+  ::selection {
+    background: var(--primary-soft);
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #1d1f24 !important;
+    font-size: 12px;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-page {
+    page-break-after: always;
+  }
+  @page {
+    margin: 18mm 16mm;
+  }
+}
