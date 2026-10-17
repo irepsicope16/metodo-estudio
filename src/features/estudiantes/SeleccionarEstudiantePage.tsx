@@ -1,11 +1,47 @@
 import { useState } from 'react'
-import { User } from 'lucide-react'
+import { Briefcase, GraduationCap, User } from 'lucide-react'
 import { useEstudiantesStore } from '@/stores/estudiantesStore'
+import { useRolStore, type Rol } from '@/stores/rolStore'
 import { FadeIn } from '@/components/shared'
 import { BrandCover } from '@/branding/Logo'
 import { Button } from '@/components/ui/button'
 import { Input, Label } from '@/components/ui/input'
 import { MENSAJES } from '@/data/mensajes'
+
+/** Paso único por dispositivo: quién lo usa, antes de crear el primer estudiante. */
+function SelectorDeRol({ onElegir }: { onElegir: (rol: Rol) => void }) {
+  const opciones: { rol: Rol; icon: typeof User; label: string; detalle: string }[] = [
+    { rol: 'profesional', icon: Briefcase, label: 'Soy profesional', detalle: 'Psicopedagogo/a, docente, acompañante' },
+    { rol: 'familia', icon: GraduationCap, label: 'Soy estudiante o familia', detalle: 'Uso la app para mí o para quien acompaño' },
+  ]
+  return (
+    <FadeIn className="flex min-h-[70vh] items-center justify-center">
+      <div className="w-full max-w-md text-center">
+        <BrandCover className="mx-auto max-w-[220px]" />
+        <h1 className="font-display mt-6 text-[20px] font-semibold tracking-tight">¿Cómo vas a usar Método Estudio?</h1>
+        <p className="mt-2 text-[13.5px] leading-relaxed text-muted-foreground">
+          Para conocer quién usa la app. No pedimos ningún dato personal.
+        </p>
+        <div className="mt-6 space-y-2.5 text-left">
+          {opciones.map((o) => (
+            <button
+              key={o.rol}
+              type="button"
+              onClick={() => onElegir(o.rol)}
+              className="flex w-full cursor-pointer items-center gap-3 rounded-xl border bg-surface px-4 py-3.5 text-left transition-colors hover:bg-surface-2"
+            >
+              <o.icon className="h-5 w-5 shrink-0 text-primary" />
+              <span className="min-w-0 flex-1">
+                <span className="block font-medium">{o.label}</span>
+                <span className="block text-[12px] text-muted-foreground">{o.detalle}</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </FadeIn>
+  )
+}
 
 /**
  * Pantalla de bienvenida / selector de estudiante: si no hay nadie activo,
@@ -17,6 +53,8 @@ export function Bienvenida({ preview = false }: { preview?: boolean }) {
   const estudiantes = useEstudiantesStore((s) => s.estudiantes)
   const crear = useEstudiantesStore((s) => s.crear)
   const seleccionar = useEstudiantesStore((s) => s.seleccionar)
+  const rol = useRolStore((s) => s.rol)
+  const elegirRol = useRolStore((s) => s.elegirRol)
   const [valor, setValor] = useState('')
   const [agregando, setAgregando] = useState(estudiantes.length === 0)
 
@@ -25,6 +63,10 @@ export function Bienvenida({ preview = false }: { preview?: boolean }) {
     if (!preview) crear(valor.trim())
     setValor('')
     setAgregando(false)
+  }
+
+  if (!preview && estudiantes.length === 0 && rol === null) {
+    return <SelectorDeRol onElegir={elegirRol} />
   }
 
   return (
