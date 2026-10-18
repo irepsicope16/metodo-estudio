@@ -110,8 +110,8 @@ export default function AutoperfilPage() {
               return (
                 <div
                   key={item.codigo}
-                  className="rounded-lg border-l-[3px] bg-surface p-3"
-                  style={{ borderLeftColor: colorArea?.color, backgroundColor: colorArea?.soft }}
+                  className="rounded-lg border-l-[3px] bg-surface p-3 shadow-[0_1px_2px_rgba(16,24,32,0.04)]"
+                  style={{ borderLeftColor: colorArea?.color }}
                 >
                   <p className="mb-2.5 text-[15.5px] font-semibold leading-snug" style={{ color: colorArea?.color }}>
                     {item.enunciado}
