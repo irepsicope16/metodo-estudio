@@ -258,6 +258,9 @@ export default function SettingsPage() {
             <Button variant="ghost" size="sm" onClick={() => setResetOpen(true)}>
               <RefreshCcw /> Borrar datos de este estudiante
             </Button>
+            <Button asChild variant="ghost" size="sm">
+              <Link to="/privacidad">Privacidad y términos</Link>
+            </Button>
           </CardContent>
         </Card>
       </div>

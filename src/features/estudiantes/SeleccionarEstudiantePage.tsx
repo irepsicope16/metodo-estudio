@@ -128,7 +128,10 @@ export function Bienvenida({ preview = false }: { preview?: boolean }) {
         <p className="mt-3 text-[11px] leading-relaxed text-faint">
           Método Estudio es una herramienta creada por la Lic. Irene Morbidelli (Psicopedagoga).
           <br />
-          Prohibida su venta o copia sin autorización.
+          Prohibida su venta o copia sin autorización. ·{' '}
+          <a href="#/privacidad" className="underline hover:text-muted-foreground">
+            Privacidad y términos
+          </a>
         </p>
       </div>
     </FadeIn>
