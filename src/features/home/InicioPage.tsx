@@ -24,7 +24,8 @@ import { fechaLocal } from '@/lib/utils'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { AvisoOrientativo, EmptyState, FadeIn, IconBadge, InsigniasRow, PageHeader, StatCard } from '@/components/shared'
+import { AvisoOrientativo, EmptyState, FadeIn, IconBadge, InsigniasRow, StatCard } from '@/components/shared'
+import { EscritorioEstudio } from '@/components/illustrations/EscritorioEstudio'
 
 export default function InicioPage() {
   const nombre = useEstudiantesStore((s) => s.estudiantes.find((e) => e.id === s.activoId)?.nombre ?? '')
@@ -85,7 +86,15 @@ export default function InicioPage() {
 
   return (
     <FadeIn className="space-y-5">
-      <PageHeader title={`Hola, ${nombre}`} subtitle="Tu espacio para mejorar cómo estudiás." />
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-soft via-surface to-accent-soft">
+        <div className="relative z-10 flex flex-wrap items-center gap-4 px-5 py-6 sm:px-7">
+          <div className="min-w-[220px] flex-1">
+            <h1 className="font-display text-[32px] font-bold leading-tight tracking-tight sm:text-[35px]">Hola, {nombre}</h1>
+            <p className="mt-1.5 text-[15.5px] leading-relaxed text-muted-foreground">Tu espacio para mejorar cómo estudiás.</p>
+          </div>
+          <EscritorioEstudio className="hidden h-[150px] w-[220px] shrink-0 sm:block" />
+        </div>
+      </div>
 
       {rachaEnRiesgo && (
         <Card className="border-danger/30 bg-danger-soft/40">
