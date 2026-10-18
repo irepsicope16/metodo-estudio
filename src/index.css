@@ -57,16 +57,19 @@
   --warning-soft: #f8efd9;
 
   /* Color por módulo (ruta) — 5 tonos nuevos; comprender, prepararse_evaluar
-     y construir_autonomia reusan secondary/accent/primary (ver rutas.ts). */
-  --mod-organizar: #b8863a;
+     y construir_autonomia reusan secondary/accent/primary (ver rutas.ts).
+     organizar/atencion/regular oscurecidos un poco respecto del primer
+     borrador: sobre fondo claro no llegaban al contraste mínimo legible
+     (WCAG 4.5:1) cuando se usan como texto, no solo como borde/ícono. */
+  --mod-organizar: #936b2e;
   --mod-organizar-soft: #f3e6cd;
-  --mod-atencion: #3f8f86;
+  --mod-atencion: #377e76;
   --mod-atencion-soft: #dcece9;
   --mod-escribir: #8a5a7a;
   --mod-escribir-soft: #ecdfe8;
   --mod-aprender: #6a5fa8;
   --mod-aprender-soft: #e5e2f2;
-  --mod-regular: #5f8a5a;
+  --mod-regular: #557c51;
   --mod-regular-soft: #e2ecdf;
 
   /* Paleta "planner" — un pastel por día de la semana, al estilo de los
