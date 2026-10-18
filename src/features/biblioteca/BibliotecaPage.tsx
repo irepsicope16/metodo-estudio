@@ -77,7 +77,7 @@ export default function BibliotecaPage() {
             {TECNICAS_VISUALES.map((t, i) => {
               const c = COLOR_CICLO[i % COLOR_CICLO.length]
               return (
-                <Card key={t.id} className="flex flex-col border-t-[3px]" style={{ borderTopColor: c.color, backgroundColor: c.soft, boxShadow: `0 10px 20px -14px ${c.color}` }}>
+                <Card key={t.id} className="flex flex-col border-t-[3px]" style={{ borderTopColor: c.color, boxShadow: `0 10px 20px -14px ${c.color}` }}>
                   <CardHeader>
                     <CardTitle className="text-[14px]">{t.titulo}</CardTitle>
                   </CardHeader>

@@ -36,14 +36,14 @@ export const DIMENSION_COLOR: Record<string, ModuleColor> = {
   H: { color: 'var(--color-primary)', soft: 'var(--color-primary-soft)' },
 }
 
-/** Estilo listo para aplicar a una ficha/tarjeta: franja superior de color + sombra + fondo tintado. */
+/** Estilo listo para aplicar a una ficha/tarjeta: franja superior de color + sombra. El fondo
+ * queda el claro de siempre (el de Card) para que el color resalte en vez de mezclarse. */
 export function moduleCardStyle(rutaId: string): CSSProperties {
   const c = RUTA_COLOR[rutaId]
   if (!c) return {}
   return {
     borderTopColor: c.color,
     borderTopWidth: 3,
-    backgroundColor: c.soft,
     boxShadow: `0 10px 20px -14px ${c.color}`,
   }
 }
@@ -55,7 +55,6 @@ export function dimensionCardStyle(dimension: string): CSSProperties {
   return {
     borderTopColor: c.color,
     borderTopWidth: 3,
-    backgroundColor: c.soft,
     boxShadow: `0 10px 20px -14px ${c.color}`,
   }
 }
