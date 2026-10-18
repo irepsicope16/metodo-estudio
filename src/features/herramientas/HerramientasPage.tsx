@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BookOpenCheck, ListChecks, NotebookPen, PieChart, Table2, Timer, Workflow } from 'lucide-react'
+import { BookOpenCheck, ClipboardCheck, ListChecks, NotebookPen, PieChart, Table2, Timer, Workflow } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { FadeIn, IconBadge, PageHeader } from '@/components/shared'
 
@@ -24,6 +24,13 @@ const HERRAMIENTAS = [
     tono: 'dorado',
     titulo: 'Fichas de repaso',
     descripcion: 'Creá tus propias tarjetas pregunta/respuesta y practicá con ellas.',
+  },
+  {
+    to: '/herramientas/evaluacion',
+    icon: ClipboardCheck,
+    tono: 'acento',
+    titulo: 'Autoevaluación',
+    descripcion: 'Rendí una evaluación con tus fichas, cronometrada, y mirá tu puntaje.',
   },
   {
     to: '/herramientas/diario',

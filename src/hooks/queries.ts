@@ -7,6 +7,7 @@ import type {
   ActividadProbada,
   DimensionSnapshot,
   EntradaMetacognicion,
+  EvaluacionFichas,
   EventoAgenda,
   Ficha,
   MapaConceptual,
@@ -228,6 +229,26 @@ export function useEliminarFicha() {
   return useMutation({
     mutationFn: (id: string) => db.fichas.remove(id),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['fichas'] }),
+  })
+}
+
+// ---------- Autoevaluación (modo examen con las fichas de repaso) ----------
+
+export function useEvaluaciones() {
+  return useQuery({
+    queryKey: ['evaluaciones'],
+    queryFn: async () => {
+      const rows = await db.evaluaciones.list()
+      return rows.sort((a, b) => b.fecha.localeCompare(a.fecha))
+    },
+  })
+}
+
+export function useCrearEvaluacion() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (data: Omit<EvaluacionFichas, 'id' | 'createdAt' | 'updatedAt'>) => db.evaluaciones.create(data),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['evaluaciones'] }),
   })
 }
 

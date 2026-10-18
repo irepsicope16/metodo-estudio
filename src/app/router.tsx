@@ -20,6 +20,7 @@ const HerramientasPage = lazy(() => import('@/features/herramientas/Herramientas
 const CronometroPage = lazy(() => import('@/features/herramientas/CronometroPage'))
 const MapasPage = lazy(() => import('@/features/herramientas/MapasPage'))
 const FichasPage = lazy(() => import('@/features/herramientas/FichasPage'))
+const EvaluacionPage = lazy(() => import('@/features/herramientas/EvaluacionPage'))
 const DiarioPage = lazy(() => import('@/features/herramientas/DiarioPage'))
 const GuiaTextosPage = lazy(() => import('@/features/herramientas/GuiaTextosPage'))
 const HorarioCursadaPage = lazy(() => import('@/features/herramientas/HorarioCursadaPage'))
@@ -60,6 +61,7 @@ export const router = createHashRouter([
       { path: '/herramientas/cronometro', element: <Page><CronometroPage /></Page> },
       { path: '/herramientas/mapas', element: <Page><MapasPage /></Page> },
       { path: '/herramientas/fichas', element: <Page><FichasPage /></Page> },
+      { path: '/herramientas/evaluacion', element: <Page><EvaluacionPage /></Page> },
       { path: '/herramientas/diario', element: <Page><DiarioPage /></Page> },
       { path: '/herramientas/guia-textos', element: <Page><GuiaTextosPage /></Page> },
       { path: '/herramientas/horario-cursada', element: <Page><HorarioCursadaPage /></Page> },

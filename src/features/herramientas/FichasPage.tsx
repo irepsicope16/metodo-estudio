@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { BookOpenCheck, Check, Plus, Printer, Trash2, X } from 'lucide-react'
+import { BookOpenCheck, Check, ClipboardCheck, Plus, Printer, Trash2, X } from 'lucide-react'
 import { useCrearFicha, useEliminarFicha, useFichas, useResponderFicha } from '@/hooks/queries'
 import { estaParaHoy, etiquetaCaja } from '@/lib/leitner'
 import { Button } from '@/components/ui/button'
@@ -51,11 +51,18 @@ export default function FichasPage() {
         actions={
           <div className="flex items-center gap-2">
             {fichas.length > 0 && (
-              <Button variant="outline" size="sm" asChild>
-                <Link to={temaFiltro === 'todos' ? '/print/fichas' : `/print/fichas?tema=${encodeURIComponent(temaFiltro)}`}>
-                  <Printer className="h-4 w-4" /> Imprimir
-                </Link>
-              </Button>
+              <>
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/herramientas/evaluacion">
+                    <ClipboardCheck className="h-4 w-4" /> Modo evaluación
+                  </Link>
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <Link to={temaFiltro === 'todos' ? '/print/fichas' : `/print/fichas?tema=${encodeURIComponent(temaFiltro)}`}>
+                    <Printer className="h-4 w-4" /> Imprimir
+                  </Link>
+                </Button>
+              </>
             )}
             <Button onClick={() => setNuevaAbierta(true)}>
               <Plus className="h-4 w-4" /> Nueva ficha

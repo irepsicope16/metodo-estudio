@@ -15,6 +15,7 @@ const COLLECTIONS = [
   'sesionesEstudio',
   'mapas',
   'fichas',
+  'evaluaciones',
   'diario',
   'agenda',
   'planificadorPrincipiante',

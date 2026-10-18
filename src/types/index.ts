@@ -170,6 +170,19 @@ export interface Ficha {
   updatedAt: string
 }
 
+// ---------- Autoevaluación (modo examen con las propias fichas) ----------
+
+export interface EvaluacionFichas {
+  id: string
+  tema: string // tema elegido, o 'todos'
+  totalPreguntas: number
+  correctas: number
+  duracionSegundos: number
+  fecha: string // ISO, momento en que se rindió
+  createdAt: string
+  updatedAt: string
+}
+
 // ---------- Guía de textos (seguimiento de lecturas: leído/subrayado/resumido) ----------
 
 export interface TextoGuia {
