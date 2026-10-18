@@ -1,6 +1,8 @@
-import { Flame, Menu, Moon, Sun } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
+import { Flame, Menu, Moon, Sun, Timer } from 'lucide-react'
 import { useUIStore } from '@/stores/uiStore'
 import { useEstudiantesStore } from '@/stores/estudiantesStore'
+import { useCronometroStore } from '@/stores/cronometroStore'
 import { useActividadesProbadas, useDiario, useFichas, useSesionesEstudio } from '@/hooks/queries'
 import { calcularRacha } from '@/lib/progreso'
 
@@ -23,6 +25,17 @@ export function Navbar() {
   ]
   const racha = calcularRacha(fechasActividad)
 
+  const corriendo = useCronometroStore((s) => s.corriendo)
+  const tecnica = useCronometroStore((s) => s.tecnica)
+  const enDescanso = useCronometroStore((s) => s.enDescanso)
+  const segundosRestantes = useCronometroStore((s) => s.segundosRestantes)
+  const segundosLibres = useCronometroStore((s) => s.segundosLibres)
+  const location = useLocation()
+  const enCronometro = location.pathname === '/herramientas/cronometro'
+  const mostrarSegundos = tecnica === 'libre' ? segundosLibres : segundosRestantes
+  const mmCron = String(Math.floor(mostrarSegundos / 60)).padStart(2, '0')
+  const ssCron = String(mostrarSegundos % 60).padStart(2, '0')
+
   const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
 
   return (
@@ -39,6 +52,17 @@ export function Navbar() {
       <div className="flex-1" />
 
       <div className="flex items-center gap-1.5">
+        {corriendo && !enCronometro && (
+          <Link
+            to="/herramientas/cronometro"
+            className="flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-semibold tabular-nums transition-colors hover:opacity-80"
+            style={{ background: 'var(--color-primary-soft)', color: 'var(--color-primary-strong)' }}
+          >
+            <Timer className="h-3.5 w-3.5 animate-pulse" />
+            {mmCron}:{ssCron}
+            {tecnica === 'pomodoro' && <span className="hidden sm:inline">· {enDescanso ? 'descanso' : 'foco'}</span>}
+          </Link>
+        )}
         {racha > 0 && (
           <span className="flex items-center gap-1 rounded-full bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-strong">
             <Flame className="h-3.5 w-3.5" />
