@@ -183,6 +183,27 @@ export interface EvaluacionFichas {
   updatedAt: string
 }
 
+// ---------- Cuadro comparativo ----------
+
+export interface CuadroComparativo {
+  id: string
+  titulo: string
+  columnas: string[]
+  filas: { criterio: string; valores: string[] }[] // valores.length === columnas.length
+  createdAt: string
+  updatedAt: string
+}
+
+// ---------- Línea de tiempo ----------
+
+export interface LineaTiempoItem {
+  id: string
+  titulo: string
+  eventos: { fecha: string; texto: string }[]
+  createdAt: string
+  updatedAt: string
+}
+
 // ---------- Guía de textos (seguimiento de lecturas: leído/subrayado/resumido) ----------
 
 export interface TextoGuia {

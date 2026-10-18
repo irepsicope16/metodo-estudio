@@ -2,11 +2,13 @@ import { LocalStorageDriver } from './driver'
 import { Repository } from './repository'
 import type {
   ActividadProbada,
+  CuadroComparativo,
   DimensionSnapshot,
   EntradaMetacognicion,
   EvaluacionFichas,
   EventoAgenda,
   Ficha,
+  LineaTiempoItem,
   MapaConceptual,
   OpenAnswer,
   QuestionnaireResponse,
@@ -32,6 +34,8 @@ export const db = {
   mapas: new Repository<MapaConceptual>(driver, 'mapas_conceptuales'),
   fichas: new Repository<Ficha>(driver, 'fichas'),
   evaluaciones: new Repository<EvaluacionFichas>(driver, 'evaluaciones_fichas'),
+  cuadrosComparativos: new Repository<CuadroComparativo>(driver, 'cuadros_comparativos'),
+  lineasTiempo: new Repository<LineaTiempoItem>(driver, 'lineas_tiempo'),
   diario: new Repository<EntradaMetacognicion>(driver, 'diario_metacognicion'),
   agenda: new Repository<EventoAgenda>(driver, 'agenda_eventos'),
   planificadorPrincipiante: new Repository<EventoAgenda>(driver, 'planificador_principiante'),

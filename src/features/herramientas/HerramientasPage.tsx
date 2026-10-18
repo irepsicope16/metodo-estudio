@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BookOpenCheck, ClipboardCheck, ListChecks, NotebookPen, PieChart, Table2, Timer, Workflow } from 'lucide-react'
+import { BookOpenCheck, ClipboardCheck, Columns3, Gamepad2, History, ListChecks, NotebookPen, PieChart, Table2, Timer, Workflow } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { FadeIn, IconBadge, PageHeader } from '@/components/shared'
 
@@ -31,6 +31,27 @@ const HERRAMIENTAS = [
     tono: 'acento',
     titulo: 'Autoevaluación',
     descripcion: 'Rendí una evaluación con tus fichas, cronometrada, y mirá tu puntaje.',
+  },
+  {
+    to: '/herramientas/memotest',
+    icon: Gamepad2,
+    tono: 'dorado',
+    titulo: 'Memotest',
+    descripcion: 'Emparejá pregunta con respuesta usando tus fichas, contra el reloj.',
+  },
+  {
+    to: '/herramientas/cuadros',
+    icon: Columns3,
+    tono: 'secundario',
+    titulo: 'Cuadros comparativos',
+    descripcion: 'Comparar dos o más elementos, criterio por criterio, en una tabla propia.',
+  },
+  {
+    to: '/herramientas/lineas-tiempo',
+    icon: History,
+    tono: 'primario',
+    titulo: 'Líneas de tiempo',
+    descripcion: 'Ordená eventos cronológicamente para entender cuándo pasó cada cosa.',
   },
   {
     to: '/herramientas/diario',

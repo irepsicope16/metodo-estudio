@@ -21,6 +21,9 @@ const CronometroPage = lazy(() => import('@/features/herramientas/CronometroPage
 const MapasPage = lazy(() => import('@/features/herramientas/MapasPage'))
 const FichasPage = lazy(() => import('@/features/herramientas/FichasPage'))
 const EvaluacionPage = lazy(() => import('@/features/herramientas/EvaluacionPage'))
+const MemotestPage = lazy(() => import('@/features/herramientas/MemotestPage'))
+const CuadrosComparativosPage = lazy(() => import('@/features/herramientas/CuadrosComparativosPage'))
+const LineasTiempoPage = lazy(() => import('@/features/herramientas/LineasTiempoPage'))
 const DiarioPage = lazy(() => import('@/features/herramientas/DiarioPage'))
 const GuiaTextosPage = lazy(() => import('@/features/herramientas/GuiaTextosPage'))
 const HorarioCursadaPage = lazy(() => import('@/features/herramientas/HorarioCursadaPage'))
@@ -31,6 +34,8 @@ const PrintAcentuacionPage = lazy(() => import('@/features/print/PrintAcentuacio
 const PrintPasosEstudioPage = lazy(() => import('@/features/print/PrintPasosEstudioPage'))
 const PrintFichasPage = lazy(() => import('@/features/print/PrintFichasPage'))
 const PrintMapaPage = lazy(() => import('@/features/print/PrintMapaPage'))
+const PrintCuadroPage = lazy(() => import('@/features/print/PrintCuadroPage'))
+const PrintLineaTiempoPage = lazy(() => import('@/features/print/PrintLineaTiempoPage'))
 const PrivacidadPage = lazy(() => import('@/features/legal/PrivacidadPage'))
 
 function Page({ children }: { children: React.ReactNode }) {
@@ -46,6 +51,8 @@ export const router = createHashRouter([
   { path: '/print/pasos-estudio', element: <Page><PrintPasosEstudioPage /></Page> },
   { path: '/print/fichas', element: <Page><PrintFichasPage /></Page> },
   { path: '/print/mapa/:id', element: <Page><PrintMapaPage /></Page> },
+  { path: '/print/cuadro/:id', element: <Page><PrintCuadroPage /></Page> },
+  { path: '/print/linea-tiempo/:id', element: <Page><PrintLineaTiempoPage /></Page> },
   { path: '/privacidad', element: <Page><PrivacidadPage /></Page> },
   {
     element: <AppShell />,
@@ -62,6 +69,9 @@ export const router = createHashRouter([
       { path: '/herramientas/mapas', element: <Page><MapasPage /></Page> },
       { path: '/herramientas/fichas', element: <Page><FichasPage /></Page> },
       { path: '/herramientas/evaluacion', element: <Page><EvaluacionPage /></Page> },
+      { path: '/herramientas/memotest', element: <Page><MemotestPage /></Page> },
+      { path: '/herramientas/cuadros', element: <Page><CuadrosComparativosPage /></Page> },
+      { path: '/herramientas/lineas-tiempo', element: <Page><LineasTiempoPage /></Page> },
       { path: '/herramientas/diario', element: <Page><DiarioPage /></Page> },
       { path: '/herramientas/guia-textos', element: <Page><GuiaTextosPage /></Page> },
       { path: '/herramientas/horario-cursada', element: <Page><HorarioCursadaPage /></Page> },

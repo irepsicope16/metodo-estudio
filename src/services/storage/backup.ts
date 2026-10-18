@@ -16,6 +16,8 @@ const COLLECTIONS = [
   'mapas',
   'fichas',
   'evaluaciones',
+  'cuadrosComparativos',
+  'lineasTiempo',
   'diario',
   'agenda',
   'planificadorPrincipiante',

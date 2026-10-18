@@ -5,11 +5,13 @@ import { proximaCajaYFecha } from '@/lib/leitner'
 import type {
   ActividadCatalogo,
   ActividadProbada,
+  CuadroComparativo,
   DimensionSnapshot,
   EntradaMetacognicion,
   EvaluacionFichas,
   EventoAgenda,
   Ficha,
+  LineaTiempoItem,
   MapaConceptual,
   SesionEstudio,
   TextoGuia,
@@ -249,6 +251,72 @@ export function useCrearEvaluacion() {
   return useMutation({
     mutationFn: (data: Omit<EvaluacionFichas, 'id' | 'createdAt' | 'updatedAt'>) => db.evaluaciones.create(data),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['evaluaciones'] }),
+  })
+}
+
+// ---------- Cuadros comparativos ----------
+
+export function useCuadros() {
+  return useQuery({
+    queryKey: ['cuadros'],
+    queryFn: () => db.cuadrosComparativos.list(),
+  })
+}
+
+export function useCrearCuadro() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (data: Omit<CuadroComparativo, 'id' | 'createdAt' | 'updatedAt'>) => db.cuadrosComparativos.create(data),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['cuadros'] }),
+  })
+}
+
+export function useActualizarCuadro() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, ...patch }: Partial<CuadroComparativo> & { id: string }) => db.cuadrosComparativos.update(id, patch),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['cuadros'] }),
+  })
+}
+
+export function useEliminarCuadro() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (id: string) => db.cuadrosComparativos.remove(id),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['cuadros'] }),
+  })
+}
+
+// ---------- Líneas de tiempo ----------
+
+export function useLineasTiempo() {
+  return useQuery({
+    queryKey: ['lineasTiempo'],
+    queryFn: () => db.lineasTiempo.list(),
+  })
+}
+
+export function useCrearLineaTiempo() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (data: Omit<LineaTiempoItem, 'id' | 'createdAt' | 'updatedAt'>) => db.lineasTiempo.create(data),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['lineasTiempo'] }),
+  })
+}
+
+export function useActualizarLineaTiempo() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, ...patch }: Partial<LineaTiempoItem> & { id: string }) => db.lineasTiempo.update(id, patch),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['lineasTiempo'] }),
+  })
+}
+
+export function useEliminarLineaTiempo() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (id: string) => db.lineasTiempo.remove(id),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['lineasTiempo'] }),
   })
 }
 

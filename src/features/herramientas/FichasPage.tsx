@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { BookOpenCheck, Check, ClipboardCheck, Plus, Printer, Trash2, X } from 'lucide-react'
+import { BookOpenCheck, Check, ClipboardCheck, Gamepad2, Plus, Printer, Trash2, X } from 'lucide-react'
 import { useCrearFicha, useEliminarFicha, useFichas, useResponderFicha } from '@/hooks/queries'
 import { estaParaHoy, etiquetaCaja } from '@/lib/leitner'
 import { Button } from '@/components/ui/button'
@@ -55,6 +55,11 @@ export default function FichasPage() {
                 <Button variant="outline" size="sm" asChild>
                   <Link to="/herramientas/evaluacion">
                     <ClipboardCheck className="h-4 w-4" /> Modo evaluación
+                  </Link>
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/herramientas/memotest">
+                    <Gamepad2 className="h-4 w-4" /> Memotest
                   </Link>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
