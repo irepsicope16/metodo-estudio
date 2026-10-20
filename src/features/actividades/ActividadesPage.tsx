@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CheckCircle2, Circle, Lightbulb, ListChecks, PenLine, Star, Timer, Trash2 } from 'lucide-react'
 import {
   useActividadesProbadas,
@@ -32,6 +32,18 @@ export default function ActividadesPage() {
   const [filtro, setFiltro] = useState<FiltroNivel>('todos')
   const [calificando, setCalificando] = useState<ActividadProbada | null>(null)
   const [detalle, setDetalle] = useState<ActividadCatalogo | null>(null)
+  const [searchParams] = useSearchParams()
+  const rutaDestacada = searchParams.get('ruta')
+  const seccionesRef = useRef<Record<string, HTMLElement | null>>({})
+
+  useEffect(() => {
+    if (!rutaDestacada) return
+    const el = seccionesRef.current[rutaDestacada]
+    if (el) {
+      const id = window.setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150)
+      return () => window.clearTimeout(id)
+    }
+  }, [rutaDestacada])
 
   function probadaDe(actividadId: string): ActividadProbada | undefined {
     const deEsta = probadas.filter((p) => p.actividadId === actividadId)
@@ -84,9 +96,20 @@ export default function ActividadesPage() {
           {RUTAS.map((ruta) => {
             const fichas = ACTIVIDADES.filter((a) => a.rutaId === ruta.id && (filtro === 'todos' || a.nivel === filtro))
             if (fichas.length === 0) return null
+            const destacada = rutaDestacada === ruta.id
             return (
-              <section key={ruta.id}>
-                <h3 className="mb-2.5 text-[13.5px] font-semibold tracking-tight">{ruta.nombre}</h3>
+              <section
+                key={ruta.id}
+                id={`ruta-${ruta.id}`}
+                ref={(el) => {
+                  seccionesRef.current[ruta.id] = el
+                }}
+                className={destacada ? 'scroll-mt-4 rounded-xl p-2 ring-2 ring-accent ring-offset-4 ring-offset-background' : 'scroll-mt-4'}
+              >
+                <div className="mb-2.5 flex flex-wrap items-center gap-2">
+                  <h3 className="text-[13.5px] font-semibold tracking-tight">{ruta.nombre}</h3>
+                  {destacada && <Badge variant="acento">Recomendada para vos</Badge>}
+                </div>
                 <div className="grid gap-2.5 lg:grid-cols-2">
                   {fichas.map((actividad) => {
                     const probadaActual = probadaDe(actividad.id)

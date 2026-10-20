@@ -255,9 +255,36 @@ function ResultadosAutoperfil({ onVolver }: { onVolver: () => void }) {
     return (orden[a.banda ?? 'baja'] ?? 4) - (orden[b.banda ?? 'baja'] ?? 4)
   })
 
+  const prioritaria = ordenados.find((s) => s.banda) ?? ordenados[0]
+  const rutaPrioritaria = prioritaria?.banda
+    ? RUTAS.find((r) => r.dimensiones.includes(prioritaria.dimension))
+    : undefined
+
   return (
     <FadeIn className="space-y-5">
       <PageHeader title="Tus resultados" subtitle={MENSAJES.resultado} />
+
+      {rutaPrioritaria && prioritaria && (
+        <Card className="border-t-[3px]" style={dimensionCardStyle(prioritaria.dimension)}>
+          <CardHeader>
+            <CardTitle className="text-[15px]">
+              Tu primer paso: {DIMENSIONES[prioritaria.dimension].nombre}
+            </CardTitle>
+            <CardDescription className="text-[12.5px]">
+              {ETIQUETA_BANDA[prioritaria.banda!]} — empezá por acá, no hace falta leer todo lo demás todavía.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-2 pt-0">
+            <Button asChild>
+              <Link to={`/biblioteca?ruta=${rutaPrioritaria.id}`}>Ver técnicas de "{rutaPrioritaria.nombre}"</Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to={`/actividades?ruta=${rutaPrioritaria.id}`}>Probar una actividad de esta ruta</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      )}
+
       <div className="grid gap-3 lg:grid-cols-2">
         {ordenados.map((snap) => {
           const rutasSugeridas = RUTAS.filter((r) => r.dimensiones.includes(snap.dimension))
@@ -280,7 +307,7 @@ function ResultadosAutoperfil({ onVolver }: { onVolver: () => void }) {
                     {rutasSugeridas.map((r) => (
                       <Link
                         key={r.id}
-                        to="/biblioteca"
+                        to={`/biblioteca?ruta=${r.id}`}
                         className="rounded-full border px-2.5 py-1 text-[11.5px] font-medium transition-colors hover:bg-surface-2"
                         style={{ borderTopColor: RUTA_COLOR[r.id]?.color, borderTopWidth: 2 }}
                       >
@@ -299,7 +326,9 @@ function ResultadosAutoperfil({ onVolver }: { onVolver: () => void }) {
           <RefreshCcw className="h-3.5 w-3.5" /> Volver a responder
         </Button>
         <Button asChild>
-          <Link to="/actividades">Ver actividades sugeridas</Link>
+          <Link to={rutaPrioritaria ? `/actividades?ruta=${rutaPrioritaria.id}` : '/actividades'}>
+            Ver actividades sugeridas
+          </Link>
         </Button>
       </div>
     </FadeIn>

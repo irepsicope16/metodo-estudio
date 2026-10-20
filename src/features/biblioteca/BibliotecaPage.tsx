@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { BookOpen, Clapperboard, ExternalLink, Printer, Sparkles } from 'lucide-react'
 import { FadeIn, PageHeader } from '@/components/shared'
 import { Badge } from '@/components/ui/badge'
@@ -39,6 +40,19 @@ type Vista = 'rutas' | 'visuales'
 export default function BibliotecaPage() {
   const [filtro, setFiltro] = useState<FiltroNivel>('todos')
   const [vista, setVista] = useState<Vista>('rutas')
+  const [searchParams] = useSearchParams()
+  const rutaDestacada = searchParams.get('ruta')
+  const seccionesRef = useRef<Record<string, HTMLElement | null>>({})
+
+  useEffect(() => {
+    if (!rutaDestacada) return
+    setVista('rutas')
+    const el = seccionesRef.current[rutaDestacada]
+    if (el) {
+      const id = window.setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150)
+      return () => window.clearTimeout(id)
+    }
+  }, [rutaDestacada])
 
   return (
     <FadeIn>
@@ -128,11 +142,20 @@ export default function BibliotecaPage() {
           const fichas = (FICHAS_POR_RUTA[ruta.id] ?? []).filter((f) => filtro === 'todos' || f.nivel === filtro)
           const videos = VIDEOS.filter((v) => v.rutaId === ruta.id)
           if (fichas.length === 0 && videos.length === 0) return null
+          const destacada = rutaDestacada === ruta.id
           return (
-            <section key={ruta.id}>
+            <section
+              key={ruta.id}
+              id={`ruta-${ruta.id}`}
+              ref={(el) => {
+                seccionesRef.current[ruta.id] = el
+              }}
+              className={destacada ? 'scroll-mt-4 rounded-xl ring-2 ring-accent ring-offset-4 ring-offset-background transition-shadow' : 'scroll-mt-4'}
+            >
               <div className="mb-3 flex flex-wrap items-center gap-2">
                 <BookOpen className="h-4 w-4" style={{ color: RUTA_COLOR[ruta.id]?.color }} />
                 <h2 className="text-[15px] font-semibold tracking-tight">{ruta.nombre}</h2>
+                {destacada && <Badge variant="acento">Recomendada para vos</Badge>}
                 <div className="flex flex-wrap gap-1">
                   {ruta.dimensiones.map((d) => (
                     <Badge key={d} variant="secundario" title={DIMENSIONES[d].nombre}>
