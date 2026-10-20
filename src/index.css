@@ -25,7 +25,7 @@
    ============================================================ */
 
 :root {
-  --background: #b5452e;
+  --background: #824235;
   --surface: #f5f9fd;
   --surface-2: #c8e0f5;
   --foreground: #1f2e3d;
@@ -37,9 +37,9 @@
   --primary-soft: #e3e8ec;
   --primary-foreground: #ffffff;
 
-  --accent: #c14f3a;
-  --accent-strong: #9c3a28;
-  --accent-soft: #f7ded7;
+  --accent: #a25349;
+  --accent-strong: #7d3d37;
+  --accent-soft: #f3dedb;
   --accent-foreground: #ffffff;
 
   --secondary: #5e7686;
@@ -106,8 +106,8 @@
   --primary-soft: #232f39;
   --primary-foreground: #12191f;
 
-  --accent: #d99184;
-  --accent-strong: #e6ab9f;
+  --accent: #cc9a91;
+  --accent-strong: #dbb2aa;
   --accent-soft: #3a2420;
   --accent-foreground: #241210;
 
