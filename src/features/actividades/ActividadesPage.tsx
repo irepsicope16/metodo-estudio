@@ -197,16 +197,16 @@ function DetalleActividad({
   onProbar: (a: ActividadCatalogo) => void
   onCalificar: (p: ActividadProbada) => void
 }) {
-  const actualizar = useActualizarActividad()
-  const [aplicacion, setAplicacion] = useState(probada?.aplicacionPropia ?? '')
+  const [respuestaRevelada, setRespuestaRevelada] = useState(false)
 
   useEffect(() => {
-    setAplicacion(probada?.aplicacionPropia ?? '')
-  }, [probada?.id, probada?.aplicacionPropia])
+    setRespuestaRevelada(probada?.estado === 'completada')
+  }, [actividad?.id, probada?.estado])
 
   if (!actividad) return null
 
-  const enCurso = probada && probada.estado !== 'completada'
+  const hayEjemplo = !!actividad.ejemplo
+  const mostrarEjemplo = respuestaRevelada || !hayEjemplo
 
   return (
     <Dialog open={!!actividad} onOpenChange={(o) => !o && onClose()}>
@@ -221,36 +221,29 @@ function DetalleActividad({
           </div>
           <p className="text-[13.5px] leading-relaxed text-muted-foreground">{actividad.descripcion}</p>
 
-          {actividad.ejemplo && (
-            <div className="rounded-lg border bg-surface-2 p-3.5">
-              <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-primary">
-                <Lightbulb className="h-3.5 w-3.5" /> Ejemplo
-              </p>
-              <p className="mt-1.5 text-[13px] leading-relaxed">{actividad.ejemplo}</p>
-            </div>
-          )}
-
           {actividad.ejercicio && (
             <div className="rounded-lg border border-accent/30 bg-accent-soft/40 p-3.5">
               <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-accent-strong">
                 <PenLine className="h-3.5 w-3.5" /> Ejercicio para practicar
               </p>
               <p className="mt-1.5 text-[13px] leading-relaxed">{actividad.ejercicio}</p>
+              {!mostrarEjemplo && <p className="mt-2 text-[11.5px] text-faint">Pensalo o hacelo en voz alta — después revisá tu respuesta.</p>}
             </div>
           )}
 
-          {enCurso && (
-            <div>
-              <Label>¿Cómo la vas a aplicar a lo que estás estudiando ahora?</Label>
-              <Textarea
-                value={aplicacion}
-                onChange={(e) => setAplicacion(e.target.value)}
-                onBlur={() => {
-                  if (probada) actualizar.mutate({ id: probada.id, aplicacionPropia: aplicacion })
-                }}
-                placeholder="Escribí tu propio tema y cómo pensás usar esta técnica con él..."
-              />
-            </div>
+          {!mostrarEjemplo ? (
+            <Button variant="outline" size="sm" className="w-fit" onClick={() => setRespuestaRevelada(true)}>
+              Revisá tu respuesta
+            </Button>
+          ) : (
+            actividad.ejemplo && (
+              <div className="rounded-lg border bg-surface-2 p-3.5">
+                <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-primary">
+                  <Lightbulb className="h-3.5 w-3.5" /> Ejemplo
+                </p>
+                <p className="mt-1.5 text-[13px] leading-relaxed">{actividad.ejemplo}</p>
+              </div>
+            )
           )}
 
           <div className="flex flex-wrap items-center justify-between gap-2 border-t pt-3.5">
