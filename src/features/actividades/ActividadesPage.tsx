@@ -133,7 +133,7 @@ export default function ActividadesPage() {
                             )}
                             <div className="min-w-0">
                               <p className="text-[13.5px] font-medium">{actividad.titulo}</p>
-                              <p className="mt-1 text-[15px] leading-relaxed text-muted-foreground">{actividad.descripcion}</p>
+                              <p className="mt-1 text-[18px] leading-relaxed text-muted-foreground">{actividad.descripcion}</p>
                             </div>
                           </button>
                           <div className="flex shrink-0 items-center gap-1.5">
