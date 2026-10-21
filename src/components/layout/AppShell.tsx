@@ -11,7 +11,7 @@ import { useDistribucionActividadesStore } from '@/stores/distribucionActividade
 import { Bienvenida } from '@/features/estudiantes/SeleccionarEstudiantePage'
 import { useAuthStore } from '@/stores/authStore'
 import { useRolStore } from '@/stores/rolStore'
-import { AuthGate } from '@/features/auth/AuthGate'
+import { AuthGate, NuevaPasswordGate } from '@/features/auth/AuthGate'
 
 export function AppShell() {
   const mobileNavOpen = useUIStore((s) => s.mobileNavOpen)
@@ -23,6 +23,7 @@ export function AppShell() {
   const cargandoAuth = useAuthStore((s) => s.cargando)
   const session = useAuthStore((s) => s.session)
   const perfil = useAuthStore((s) => s.perfil)
+  const modoRecuperacion = useAuthStore((s) => s.modoRecuperacion)
   const rolActual = useRolStore((s) => s.rol)
   const elegirRol = useRolStore((s) => s.elegirRol)
 
@@ -49,6 +50,8 @@ export function AppShell() {
   }, [activoId, qc, setMobileNavOpen])
 
   if (cargandoAuth) return null
+
+  if (modoRecuperacion) return <NuevaPasswordGate />
 
   if (!session) return <AuthGate />
 

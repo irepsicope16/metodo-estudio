@@ -12,7 +12,9 @@ import { createClient } from '@supabase/supabase-js'
 const SUPABASE_URL = 'https://txzqivoubmfyqnprehrp.supabase.co'
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_kfk_vwaQA3XNTthE_6lOMw_fi7l1hUd'
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
+export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+  auth: { flowType: 'pkce' },
+})
 
 /** Mail de la única cuenta con acceso al panel de administración. */
 export const MAIL_ADMIN = 'irenemorbidelli@gmail.com'
