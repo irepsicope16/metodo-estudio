@@ -5,6 +5,7 @@ import { proximaCajaYFecha } from '@/lib/leitner'
 import type {
   ActividadCatalogo,
   ActividadProbada,
+  AprendizajeSesion,
   CuadroComparativo,
   DimensionSnapshot,
   EntradaMetacognicion,
@@ -209,6 +210,29 @@ export function useCrearFicha() {
   })
 }
 
+/** Crea varias fichas de una vez (ej: pegadas desde una IA externa), todas en el mismo tema. */
+export function useCrearFichasEnLote() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (data: { tema: string; pares: { pregunta: string; respuesta: string }[] }) => {
+      const ahora = new Date().toISOString()
+      const filas: Ficha[] = data.pares.map((p) => ({
+        id: crypto.randomUUID(),
+        tema: data.tema,
+        pregunta: p.pregunta,
+        respuesta: p.respuesta,
+        vecesRepasada: 0,
+        caja: 1,
+        proximoRepaso: ahora,
+        createdAt: ahora,
+        updatedAt: ahora,
+      }))
+      return db.fichas.bulkCreate(filas)
+    },
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['fichas'] }),
+  })
+}
+
 /** Registra la respuesta de un repaso y reprograma la ficha (caja de Leitner). */
 export function useResponderFicha() {
   const qc = useQueryClient()
@@ -338,6 +362,43 @@ export function useCrearEntradaDiario() {
     mutationFn: (data: Omit<EntradaMetacognicion, 'id' | 'fecha' | 'createdAt' | 'updatedAt'>) =>
       db.diario.create({ ...data, fecha: new Date().toISOString() }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['diario'] }),
+  })
+}
+
+// ---------- Aprendizajes de la sesión ----------
+
+export function useAprendizajesSesion() {
+  return useQuery({
+    queryKey: ['aprendizajesSesion'],
+    queryFn: async () => {
+      const rows = await db.aprendizajesSesion.list()
+      return rows.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+    },
+  })
+}
+
+export function useCrearAprendizajeSesion() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (data: { pregunta: string; respuesta: string }) => db.aprendizajesSesion.create(data),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['aprendizajesSesion'] }),
+  })
+}
+
+export function useRevisarAprendizajeSesion() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, estrellas }: { id: string; estrellas: 1 | 2 | 3 | 4 | 5 }) =>
+      db.aprendizajesSesion.update(id, { ultimaRevision: { fecha: new Date().toISOString(), estrellas } }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['aprendizajesSesion'] }),
+  })
+}
+
+export function useEliminarAprendizajeSesion() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (id: string) => db.aprendizajesSesion.remove(id),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['aprendizajesSesion'] }),
   })
 }
 

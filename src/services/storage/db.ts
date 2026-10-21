@@ -2,6 +2,7 @@ import { LocalStorageDriver } from './driver'
 import { Repository } from './repository'
 import type {
   ActividadProbada,
+  AprendizajeSesion,
   CuadroComparativo,
   DimensionSnapshot,
   EntradaMetacognicion,
@@ -37,6 +38,7 @@ export const db = {
   cuadrosComparativos: new Repository<CuadroComparativo>(driver, 'cuadros_comparativos'),
   lineasTiempo: new Repository<LineaTiempoItem>(driver, 'lineas_tiempo'),
   diario: new Repository<EntradaMetacognicion>(driver, 'diario_metacognicion'),
+  aprendizajesSesion: new Repository<AprendizajeSesion>(driver, 'aprendizajes_sesion'),
   agenda: new Repository<EventoAgenda>(driver, 'agenda_eventos'),
   planificadorPrincipiante: new Repository<EventoAgenda>(driver, 'planificador_principiante'),
   planificadorSecundaria: new Repository<EventoAgenda>(driver, 'planificador_secundaria'),

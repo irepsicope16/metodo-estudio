@@ -19,6 +19,7 @@ const COLLECTIONS = [
   'cuadrosComparativos',
   'lineasTiempo',
   'diario',
+  'aprendizajesSesion',
   'agenda',
   'planificadorPrincipiante',
   'planificadorSecundaria',

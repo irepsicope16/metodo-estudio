@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { BookOpenCheck, Check, ClipboardCheck, Gamepad2, Plus, Printer, Trash2, X } from 'lucide-react'
-import { useCrearFicha, useEliminarFicha, useFichas, useResponderFicha } from '@/hooks/queries'
+import { BookOpenCheck, Check, ClipboardCheck, Copy, Gamepad2, Plus, Printer, Sparkles, Trash2, X } from 'lucide-react'
+import { useCrearFicha, useCrearFichasEnLote, useEliminarFicha, useFichas, useResponderFicha } from '@/hooks/queries'
 import { estaParaHoy, etiquetaCaja } from '@/lib/leitner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -14,10 +14,12 @@ import { cn } from '@/lib/utils'
 export default function FichasPage() {
   const { data: fichas = [] } = useFichas()
   const crear = useCrearFicha()
+  const crearEnLote = useCrearFichasEnLote()
   const responder = useResponderFicha()
   const eliminar = useEliminarFicha()
 
   const [nuevaAbierta, setNuevaAbierta] = useState(false)
+  const [iaAbierta, setIaAbierta] = useState(false)
   const [temaFiltro, setTemaFiltro] = useState('todos')
   const [soloHoy, setSoloHoy] = useState(true)
   const [vueltas, setVueltas] = useState<Record<string, boolean>>({})
@@ -69,6 +71,9 @@ export default function FichasPage() {
                 </Button>
               </>
             )}
+            <Button variant="outline" onClick={() => setIaAbierta(true)}>
+              <Sparkles className="h-4 w-4" /> Generar con IA
+            </Button>
             <Button onClick={() => setNuevaAbierta(true)}>
               <Plus className="h-4 w-4" /> Nueva ficha
             </Button>
@@ -176,7 +181,131 @@ export default function FichasPage() {
           setNuevaAbierta(false)
         }}
       />
+
+      <DialogoGenerarConIA
+        open={iaAbierta}
+        onClose={() => setIaAbierta(false)}
+        temasExistentes={temas}
+        onCrear={async (data) => {
+          await crearEnLote.mutateAsync(data)
+          toast.success(`${data.pares.length} fichas creadas`)
+          setIaAbierta(false)
+        }}
+      />
     </FadeIn>
+  )
+}
+
+const PROMPT_IA = `Actuá como asistente de estudio. Te voy a pegar un texto (apuntes, resumen o capítulo). Generá entre 8 y 15 fichas de repaso (pregunta y respuesta) que cubran los conceptos más importantes, en español, pensadas para estudiar con repetición espaciada.
+
+Usá SOLO este formato exacto, una ficha debajo de la otra, dejando una línea en blanco entre cada una, sin numerarlas ni agregar ningún texto antes o después:
+
+P: [pregunta corta y clara]
+R: [respuesta breve y precisa]
+
+Acá está el texto:
+[PEGÁ ACÁ EL TEXTO QUE QUERÉS CONVERTIR EN FICHAS]`
+
+function parsearFichasIA(texto: string): { pregunta: string; respuesta: string }[] {
+  const bloques = texto.split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean)
+  const resultado: { pregunta: string; respuesta: string }[] = []
+  for (const bloque of bloques) {
+    const match = bloque.match(/P:\s*([\s\S]*?)\n?R:\s*([\s\S]*)/i)
+    if (match) {
+      const pregunta = match[1].trim()
+      const respuesta = match[2].trim()
+      if (pregunta && respuesta) resultado.push({ pregunta, respuesta })
+    }
+  }
+  return resultado
+}
+
+function DialogoGenerarConIA({
+  open,
+  onClose,
+  temasExistentes,
+  onCrear,
+}: {
+  open: boolean
+  onClose: () => void
+  temasExistentes: string[]
+  onCrear: (data: { tema: string; pares: { pregunta: string; respuesta: string }[] }) => Promise<void>
+}) {
+  const [tema, setTema] = useState('')
+  const [temaNuevo, setTemaNuevo] = useState('')
+  const [resultadoIA, setResultadoIA] = useState('')
+
+  const temaFinal = tema === '__nuevo__' ? temaNuevo.trim() : tema
+  const pares = useMemo(() => parsearFichasIA(resultadoIA), [resultadoIA])
+
+  function copiarPrompt() {
+    navigator.clipboard.writeText(PROMPT_IA).then(() => toast.success('Prompt copiado'))
+  }
+
+  async function guardar() {
+    if (!temaFinal || pares.length === 0) return
+    await onCrear({ tema: temaFinal, pares })
+    setResultadoIA('')
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
+      <DialogContent className="max-w-xl">
+        <DialogHeader>
+          <DialogTitle>Generar fichas con IA</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4">
+          <div className="space-y-2 rounded-lg border bg-surface-2 p-3">
+            <p className="text-[12.5px] text-muted-foreground">
+              1. Copiá este prompt y pegalo en una IA gratuita (ChatGPT, Gemini, etc.), seguido del texto que querés
+              convertir en fichas — pegá el texto, no subas el PDF, así funciona en cualquiera.
+            </p>
+            <Textarea value={PROMPT_IA} readOnly rows={6} className="font-mono text-[11px]" />
+            <Button variant="outline" size="sm" onClick={copiarPrompt}>
+              <Copy className="h-3.5 w-3.5" /> Copiar prompt
+            </Button>
+          </div>
+
+          <div className="space-y-2">
+            <Label>2. Pegá acá el resultado que te dio la IA</Label>
+            <Textarea
+              value={resultadoIA}
+              onChange={(e) => setResultadoIA(e.target.value)}
+              rows={6}
+              placeholder={'P: ¿Qué es...?\nR: Es...\n\nP: ¿Para qué sirve...?\nR: Sirve para...'}
+            />
+            <p className="text-[11.5px] text-faint">
+              {pares.length === 0 ? 'Todavía no detecté ninguna ficha con ese formato.' : `Detecté ${pares.length} ficha${pares.length === 1 ? '' : 's'}.`}
+            </p>
+          </div>
+
+          <div>
+            <Label>Tema para estas fichas</Label>
+            <NativeSelect value={tema} onChange={(e) => setTema(e.target.value)}>
+              <option value="">Elegí o creá un tema</option>
+              {temasExistentes.map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+              <option value="__nuevo__">+ Tema nuevo</option>
+            </NativeSelect>
+            {tema === '__nuevo__' && (
+              <Input className="mt-2" placeholder="Nombre del tema" value={temaNuevo} onChange={(e) => setTemaNuevo(e.target.value)} />
+            )}
+          </div>
+
+          <div className="flex justify-end gap-2">
+            <Button variant="ghost" onClick={onClose}>
+              Cancelar
+            </Button>
+            <Button onClick={guardar} disabled={!temaFinal || pares.length === 0}>
+              Crear {pares.length > 0 ? `${pares.length} fichas` : 'fichas'}
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }
 

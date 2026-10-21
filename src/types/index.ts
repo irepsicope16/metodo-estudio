@@ -258,3 +258,18 @@ export interface EntradaMetacognicion {
   createdAt: string
   updatedAt: string
 }
+
+// ---------- Aprendizajes de la sesión ----------
+// Tarjeta de recuperación activa donde la respuesta la escribe el profesional
+// (lo que se trabajó en la sesión), no el estudiante: éste piensa/dice su
+// respuesta en voz alta, da vuelta la tarjeta para verificarla contra la que
+// escribió el profesional, y se autoevalúa con estrellas — sin escribir nada.
+
+export interface AprendizajeSesion {
+  id: string
+  pregunta: string
+  respuesta: string
+  createdAt: string
+  updatedAt: string
+  ultimaRevision?: { fecha: string; estrellas: 1 | 2 | 3 | 4 | 5 }
+}

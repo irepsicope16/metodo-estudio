@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BookOpenCheck, ClipboardCheck, Columns3, Gamepad2, History, ListChecks, NotebookPen, PieChart, Table2, Timer, Workflow } from 'lucide-react'
+import { BookOpenCheck, Brain, ClipboardCheck, Columns3, Gamepad2, History, ListChecks, NotebookPen, PieChart, Table2, Timer, Workflow } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { FadeIn, IconBadge, PageHeader } from '@/components/shared'
 
@@ -59,6 +59,13 @@ const HERRAMIENTAS = [
     tono: 'primario',
     titulo: 'Diario de metacognición',
     descripcion: 'Después de cada sesión: qué método usaste, qué tan bien te funcionó y qué cambiarías.',
+  },
+  {
+    to: '/herramientas/aprendizajes-sesion',
+    icon: Brain,
+    tono: 'acento',
+    titulo: 'Aprendizajes de la sesión',
+    descripcion: 'El profesional carga la respuesta, el estudiante la piensa en voz alta y se autoevalúa con estrellas.',
   },
   {
     to: '/herramientas/guia-textos',
