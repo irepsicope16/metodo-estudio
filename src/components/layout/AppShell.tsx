@@ -9,6 +9,9 @@ import { useEstudiantesStore } from '@/stores/estudiantesStore'
 import { useHorarioCursadaStore } from '@/stores/horarioCursadaStore'
 import { useDistribucionActividadesStore } from '@/stores/distribucionActividadesStore'
 import { Bienvenida } from '@/features/estudiantes/SeleccionarEstudiantePage'
+import { useAuthStore } from '@/stores/authStore'
+import { useRolStore } from '@/stores/rolStore'
+import { AuthGate } from '@/features/auth/AuthGate'
 
 export function AppShell() {
   const mobileNavOpen = useUIStore((s) => s.mobileNavOpen)
@@ -17,6 +20,18 @@ export function AppShell() {
   const activoId = useEstudiantesStore((s) => s.activoId)
   const hayActivo = useEstudiantesStore((s) => s.estudiantes.some((e) => e.id === s.activoId))
   const qc = useQueryClient()
+  const cargandoAuth = useAuthStore((s) => s.cargando)
+  const session = useAuthStore((s) => s.session)
+  const perfil = useAuthStore((s) => s.perfil)
+  const rolActual = useRolStore((s) => s.rol)
+  const elegirRol = useRolStore((s) => s.elegirRol)
+
+  // El rol ya quedó elegido al registrarse (Supabase) — se refleja acá para
+  // que la app no vuelva a preguntarlo localmente.
+  useEffect(() => {
+    if (!perfil || rolActual) return
+    elegirRol(perfil.rol === 'profesional' ? 'profesional' : 'familia')
+  }, [perfil, rolActual, elegirRol])
 
   useEffect(() => {
     setMobileNavOpen(false)
@@ -32,6 +47,10 @@ export function AppShell() {
     useDistribucionActividadesStore.persist.rehydrate()
     setMobileNavOpen(false)
   }, [activoId, qc, setMobileNavOpen])
+
+  if (cargandoAuth) return null
+
+  if (!session) return <AuthGate />
 
   if (!hayActivo) {
     return (

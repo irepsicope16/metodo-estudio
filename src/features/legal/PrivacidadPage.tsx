@@ -24,12 +24,21 @@ export default function PrivacidadPage() {
 
         <div className="mt-6 space-y-6 text-[13.5px] leading-relaxed text-foreground">
           <section>
-            <h2 className="text-[14.5px] font-semibold">Dónde vive tu información</h2>
+            <h2 className="text-[14.5px] font-semibold">Tu cuenta</h2>
             <p className="mt-1.5 text-muted-foreground">
-              Método Estudio no tiene servidor ni base de datos propia. Todo lo que cargás — nombre del estudiante,
-              respuestas del autoperfil, actividades, fichas, mapas, el diario de metacognición, el progreso — queda
-              guardado únicamente en el almacenamiento local de tu navegador, en tu propio dispositivo. Nada de eso se
-              envía ni se guarda en ningún servidor nuestro.
+              Para usar Método Estudio pedimos un mail y una contraseña (si quien se registra es menor de edad, el
+              mail tiene que ser el de un adulto responsable). Ese mail, la contraseña y el rol elegido (profesional o
+              estudiante/familia) se guardan en un servidor (Supabase) — es el único dato que sale de tu dispositivo.
+              Lo usamos únicamente para identificarte, no lo compartimos con terceros ni lo usamos con otro fin.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-[14.5px] font-semibold">Dónde vive el resto de tu información</h2>
+            <p className="mt-1.5 text-muted-foreground">
+              Todo lo que cargás dentro de la app una vez que entraste — respuestas del autoperfil, actividades,
+              fichas, mapas, el diario de metacognición, el progreso — queda guardado únicamente en el almacenamiento
+              local de tu navegador, en tu propio dispositivo. Nada de eso se envía ni se guarda en ningún servidor.
             </p>
           </section>
 

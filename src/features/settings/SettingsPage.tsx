@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-import { Bell, Database, Download, Eye, Moon, Paintbrush, RefreshCcw, Sun, Trash2, Upload, Users } from 'lucide-react'
+import { Bell, Database, Download, Eye, LogOut, Moon, Paintbrush, RefreshCcw, Sun, Trash2, Upload, UserCircle, Users } from 'lucide-react'
 import { useEstudiantesStore } from '@/stores/estudiantesStore'
+import { useAuthStore } from '@/stores/authStore'
 import { useUIStore, type Theme } from '@/stores/uiStore'
 import { prepareBackup, importBackup, type PreparedBackup } from '@/services/storage/backup'
 import { resetAllData, wipeEstudiante } from '@/services/storage/db'
@@ -23,6 +24,9 @@ export default function SettingsPage() {
   const avisosNavegadorActivos = useUIStore((s) => s.avisosNavegadorActivos)
   const setAvisosNavegadorActivos = useUIStore((s) => s.setAvisosNavegadorActivos)
   const qc = useQueryClient()
+
+  const perfil = useAuthStore((s) => s.perfil)
+  const cerrarSesion = useAuthStore((s) => s.cerrarSesion)
 
   const estudiantes = useEstudiantesStore((s) => s.estudiantes)
   const activoId = useEstudiantesStore((s) => s.activoId)
@@ -186,6 +190,27 @@ export default function SettingsPage() {
                 disabled={!soportaNotificaciones() || permiso === 'denied'}
               />
             </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <IconBadge icon={UserCircle} tone="primario" /> Cuenta
+            </CardTitle>
+            {perfil && <CardDescription>{perfil.email}</CardDescription>}
+          </CardHeader>
+          <CardContent>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={async () => {
+                await cerrarSesion()
+                toast.success('Sesión cerrada')
+              }}
+            >
+              <LogOut /> Cerrar sesión
+            </Button>
           </CardContent>
         </Card>
 

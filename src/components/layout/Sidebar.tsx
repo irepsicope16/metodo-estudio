@@ -1,8 +1,10 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { BarChart3, BookOpen, CalendarDays, CalendarRange, Home, ListChecks, Sparkles, Users } from 'lucide-react'
+import { BarChart3, BookOpen, CalendarDays, CalendarRange, Home, ListChecks, ShieldCheck, Sparkles, Users } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Isotipo } from '@/branding/Logo'
 import { useEstudiantesStore } from '@/stores/estudiantesStore'
+import { useAuthStore } from '@/stores/authStore'
+import { MAIL_ADMIN } from '@/lib/supabase'
 
 const nav = [
   { to: '/', icon: Home, label: 'Inicio', end: true, color: 'var(--color-primary)', soft: 'var(--color-primary-soft)' },
@@ -15,10 +17,21 @@ const nav = [
   { to: '/progreso', icon: BarChart3, label: 'Mi progreso', color: 'var(--color-secondary)', soft: 'var(--color-secondary-soft)' },
 ]
 
+const navAdmin = {
+  to: '/admin/usuarios',
+  icon: ShieldCheck,
+  label: 'Profesionales y estudiantes',
+  end: false,
+  color: 'var(--color-accent)',
+  soft: 'var(--color-accent-soft)',
+}
+
 export function Sidebar() {
   const navigate = useNavigate()
   const activo = useEstudiantesStore((s) => s.estudiantes.find((e) => e.id === s.activoId))
   const cambiarDeEstudiante = useEstudiantesStore((s) => s.cambiarDeEstudiante)
+  const esAdmin = useAuthStore((s) => s.session?.user.email === MAIL_ADMIN)
+  const itemsNav = esAdmin ? [...nav, navAdmin] : nav
 
   return (
     <aside className="flex h-full w-[228px] shrink-0 flex-col border-r bg-gradient-to-b from-surface to-surface-2">
@@ -44,7 +57,7 @@ export function Sidebar() {
 
       <nav className="flex-1 overflow-y-auto px-2 py-3">
         <ul className="space-y-1.5">
-          {nav.map((item) => (
+          {itemsNav.map((item) => (
             <li key={item.to}>
               <NavLink
                 to={item.to}

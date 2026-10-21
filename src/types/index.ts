@@ -273,3 +273,19 @@ export interface AprendizajeSesion {
   updatedAt: string
   ultimaRevision?: { fecha: string; estrellas: 1 | 2 | 3 | 4 | 5 }
 }
+
+// ---------- Cuenta (Supabase) ----------
+// Único dato que vive fuera del dispositivo: el mail, el rol y si quien se
+// registra es menor (en cuyo caso el mail es el de un adulto responsable).
+// Los datos de estudio en sí siguen 100% locales — esto es solo la cuenta.
+
+export type RolCuenta = 'profesional' | 'estudiante_familia'
+
+export interface PerfilCuenta {
+  id: string // = auth.users.id
+  email: string
+  rol: RolCuenta
+  esMenor: boolean
+  nombre: string
+  createdAt: string
+}

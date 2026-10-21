@@ -25,6 +25,7 @@ const MemotestPage = lazy(() => import('@/features/herramientas/MemotestPage'))
 const CuadrosComparativosPage = lazy(() => import('@/features/herramientas/CuadrosComparativosPage'))
 const LineasTiempoPage = lazy(() => import('@/features/herramientas/LineasTiempoPage'))
 const DiarioPage = lazy(() => import('@/features/herramientas/DiarioPage'))
+const UsuariosPage = lazy(() => import('@/features/admin/UsuariosPage'))
 const AprendizajesSesionPage = lazy(() => import('@/features/herramientas/AprendizajesSesionPage'))
 const GuiaTextosPage = lazy(() => import('@/features/herramientas/GuiaTextosPage'))
 const HorarioCursadaPage = lazy(() => import('@/features/herramientas/HorarioCursadaPage'))
@@ -74,6 +75,7 @@ export const router = createHashRouter([
       { path: '/herramientas/cuadros', element: <Page><CuadrosComparativosPage /></Page> },
       { path: '/herramientas/lineas-tiempo', element: <Page><LineasTiempoPage /></Page> },
       { path: '/herramientas/diario', element: <Page><DiarioPage /></Page> },
+      { path: '/admin/usuarios', element: <Page><UsuariosPage /></Page> },
       { path: '/herramientas/aprendizajes-sesion', element: <Page><AprendizajesSesionPage /></Page> },
       { path: '/herramientas/guia-textos', element: <Page><GuiaTextosPage /></Page> },
       { path: '/herramientas/horario-cursada', element: <Page><HorarioCursadaPage /></Page> },
