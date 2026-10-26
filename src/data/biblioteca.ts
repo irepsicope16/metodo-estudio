@@ -29,6 +29,7 @@ import {
   HelpCircle,
   Home,
   IdCard,
+  Image,
   Layers,
   Lightbulb,
   ListChecks,
@@ -332,6 +333,15 @@ export const FICHAS_POR_RUTA: Record<string, FichaHerramienta[]> = {
       comoAplicarla: 'Antes de exponer, anotar en pocas líneas cómo arranca (de qué se va a hablar), qué 2 o 3 ideas van en el medio, y cómo cierra.',
       fraseSimple: 'Antes de hablar, anotá en 3 partes qué vas a decir: inicio, desarrollo y cierre.',
       icon: Presentation,
+    },
+    {
+      herramienta: 'Lámina de apoyo visual',
+      nivel: 1,
+      queEs: 'Una imagen, afiche o lámina con lo esencial del tema (un título, una imagen o esquema, pocos datos en letra grande) para mostrar al público mientras se expone — no para leer en voz alta.',
+      paraQue: 'Sostiene la atención de quien escucha con algo para mirar, y ayuda a recordar el orden de la exposición sin depender de leer un texto completo.',
+      comoAplicarla: 'A partir del guión, elegir solo lo esencial: un título, una imagen o esquema central, y 3 a 5 palabras clave o datos (fechas, nombres, números) en letra bien grande, legible desde lejos. Nada de oraciones completas.',
+      fraseSimple: 'Una imagen con lo esencial para mostrar, no un texto para leer.',
+      icon: Image,
     },
     {
       herramienta: 'Tarjetas de apoyo para exponer',

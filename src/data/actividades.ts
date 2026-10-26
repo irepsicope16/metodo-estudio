@@ -13,6 +13,7 @@ import {
   FolderKanban,
   HelpCircle,
   Highlighter,
+  Image,
   ListOrdered,
   ListTree,
   MessageCircle,
@@ -205,6 +206,19 @@ export const ACTIVIDADES: ActividadCatalogo[] = [
     icon: Presentation,
     ejemplo: 'Para exponer sobre el Imperio Romano: inicio ("hoy voy a hablar de cómo cayó el Imperio Romano"), desarrollo (2 causas principales) y cierre ("por eso fue un proceso gradual, no de un día para el otro").',
     ejercicio: 'Elegí un tema que tengas que exponer (o uno cualquiera de lo que estudiaste) y escribí tu guión en 3 partes: cómo arrancás, qué 2 o 3 ideas van en el medio, y cómo cerrás.',
+    fuente: 'técnicas de oratoria, reformulado',
+  },
+  {
+    id: 'escribir-lamina-apoyo',
+    rutaId: 'escribir',
+    nivel: 1,
+    titulo: 'Una lámina de apoyo para exponer',
+    descripcion: 'Armar una imagen o afiche con lo esencial de tu guión, para mostrar mientras hablás — no para leerlo.',
+    icon: Image,
+    ejemplo:
+      'Para exponer sobre el Imperio Romano, la lámina tiene un título grande, un mapa del imperio, 3 fechas clave escritas en letra grande y ninguna oración completa — todo lo que se dice en voz alta, no se lee de la lámina.',
+    ejercicio:
+      'Tomá tu guión ya armado y elegí solo lo esencial para la lámina: un título, una imagen o esquema, y 3 a 5 palabras clave o datos (fechas, nombres, números) en letra grande y legible desde lejos. Nada de oraciones completas ni párrafos — eso lo decís vos, no lo lee el público.',
     fuente: 'técnicas de oratoria, reformulado',
   },
   {
