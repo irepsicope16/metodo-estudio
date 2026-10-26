@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Briefcase, Eye, EyeOff, GraduationCap } from 'lucide-react'
+import { Briefcase, Eye, EyeOff, GraduationCap, Lock } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
 import { FadeIn } from '@/components/shared'
 import { BrandCover } from '@/branding/Logo'
@@ -320,5 +320,30 @@ function FormularioRegistro({ onIrALogin }: { onIrALogin: () => void }) {
         </button>
       </p>
     </>
+  )
+}
+
+/** Pantalla que se muestra cuando el acceso de la cuenta fue cortado manualmente (pago pendiente). */
+export function AccesoSuspendidoGate() {
+  const cerrarSesion = useAuthStore((s) => s.cerrarSesion)
+
+  return (
+    <div className="flex h-screen w-full items-center justify-center overflow-y-auto bg-background p-4">
+      <div className="w-full max-w-[460px] rounded-2xl bg-gradient-to-br from-surface-2 via-surface to-accent-soft px-6 py-8 text-center shadow-[0_2px_4px_rgba(16,24,32,0.06),0_16px_32px_-12px_rgba(16,24,32,0.18)] sm:px-10">
+        <FadeIn>
+          <BrandCover className="mx-auto max-w-[200px]" />
+          <div className="mx-auto mt-6 flex h-12 w-12 items-center justify-center rounded-full bg-danger-soft">
+            <Lock className="h-5 w-5 text-danger" />
+          </div>
+          <h1 className="font-display mt-4 text-[20px] font-semibold tracking-tight">Tu acceso está pausado</h1>
+          <p className="mt-2 text-[13.5px] leading-relaxed text-muted-foreground">
+            Contactá a la profesional a cargo para regularizar tu acceso a Método Estudio.
+          </p>
+          <Button variant="outline" className="mt-6 w-full" onClick={cerrarSesion}>
+            Cerrar sesión
+          </Button>
+        </FadeIn>
+      </div>
+    </div>
   )
 }

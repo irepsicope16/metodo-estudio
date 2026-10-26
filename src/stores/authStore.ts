@@ -9,11 +9,20 @@ interface FilaPerfil {
   rol: RolCuenta
   es_menor: boolean
   nombre: string
+  acceso_activo: boolean
   created_at: string
 }
 
 function mapearPerfil(fila: FilaPerfil): PerfilCuenta {
-  return { id: fila.id, email: fila.email, rol: fila.rol, esMenor: fila.es_menor, nombre: fila.nombre, createdAt: fila.created_at }
+  return {
+    id: fila.id,
+    email: fila.email,
+    rol: fila.rol,
+    esMenor: fila.es_menor,
+    nombre: fila.nombre,
+    accesoActivo: fila.acceso_activo,
+    createdAt: fila.created_at,
+  }
 }
 
 const MENSAJES_ERROR: Record<string, string> = {

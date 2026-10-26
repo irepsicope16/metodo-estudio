@@ -287,5 +287,6 @@ export interface PerfilCuenta {
   rol: RolCuenta
   esMenor: boolean
   nombre: string
+  accesoActivo: boolean
   createdAt: string
 }

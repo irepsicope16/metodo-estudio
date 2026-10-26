@@ -10,6 +10,7 @@ create table public.perfiles (
   rol text not null check (rol in ('profesional', 'estudiante_familia')),
   es_menor boolean not null default false,
   nombre text not null,
+  acceso_activo boolean not null default true,
   created_at timestamptz not null default now()
 );
 
@@ -29,3 +30,9 @@ create policy "ver_propio_perfil"
 create policy "admin_ve_todos_los_perfiles"
   on public.perfiles for select
   using (auth.jwt() ->> 'email' = 'irenemorbidelli@gmail.com');
+
+-- Irene puede cortar o reactivar el acceso de cualquier cuenta (pago manual).
+create policy "admin_actualiza_acceso"
+  on public.perfiles for update
+  using (auth.jwt() ->> 'email' = 'irenemorbidelli@gmail.com')
+  with check (auth.jwt() ->> 'email' = 'irenemorbidelli@gmail.com');
