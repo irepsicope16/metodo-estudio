@@ -21,7 +21,7 @@ import { ACTIVIDADES } from '@/data/actividades'
 import type { ActividadCatalogo, ActividadProbada, NivelActividad } from '@/types'
 
 const NIVEL_LABEL: Record<NivelActividad, string> = { 1: 'Principiante', 2: 'Medio', 3: 'Superior' }
-const NIVEL_BADGE_VARIANT: Record<NivelActividad, 'default' | 'primario' | 'acento'> = { 1: 'default', 2: 'primario', 3: 'acento' }
+const NIVEL_BADGE_VARIANT: Record<NivelActividad, 'celeste' | 'primario' | 'acento'> = { 1: 'celeste', 2: 'primario', 3: 'acento' }
 
 type FiltroNivel = 'todos' | NivelActividad
 

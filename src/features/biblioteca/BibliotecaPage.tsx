@@ -28,8 +28,8 @@ const NIVEL_LABEL: Record<NivelHerramienta, string> = {
   3: 'Superior',
 }
 
-const NIVEL_BADGE_VARIANT: Record<NivelHerramienta, 'default' | 'primario' | 'acento'> = {
-  1: 'default',
+const NIVEL_BADGE_VARIANT: Record<NivelHerramienta, 'celeste' | 'primario' | 'acento'> = {
+  1: 'celeste',
   2: 'primario',
   3: 'acento',
 }
@@ -184,9 +184,7 @@ export default function BibliotecaPage() {
                           <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center justify-between gap-2">
                               <p className="text-[14px] font-semibold">{ficha.herramienta}</p>
-                              <Badge variant={NIVEL_BADGE_VARIANT[ficha.nivel]} className="text-muted-foreground">
-                                {NIVEL_LABEL[ficha.nivel]}
-                              </Badge>
+                              <Badge variant={NIVEL_BADGE_VARIANT[ficha.nivel]}>{NIVEL_LABEL[ficha.nivel]}</Badge>
                             </div>
                             <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{ficha.fraseSimple}</p>
                           </div>
