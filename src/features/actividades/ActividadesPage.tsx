@@ -111,7 +111,7 @@ export default function ActividadesPage() {
                   {destacada && <Badge variant="acento">Recomendada para vos</Badge>}
                 </div>
                 <div className="grid gap-2.5 lg:grid-cols-2">
-                  {fichas.map((actividad) => {
+                  {fichas.map((actividad, idx) => {
                     const probadaActual = probadaDe(actividad.id)
                     const completada = probadaActual?.estado === 'completada'
                     const Icon = actividad.nivel === 1 ? actividad.icon : undefined
@@ -123,16 +123,33 @@ export default function ActividadesPage() {
                       >
                         <div className="flex flex-wrap items-start justify-between gap-2">
                           <button onClick={() => setDetalle(actividad)} className="flex min-w-0 flex-1 items-start gap-2.5 text-left">
-                            {Icon && (
-                              <span
-                                className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white shadow-sm"
-                                style={{ background: RUTA_COLOR[ruta.id]?.color }}
-                              >
-                                <Icon className="h-3.5 w-3.5" />
-                              </span>
-                            )}
+                            <span className="relative mt-0.5 shrink-0">
+                              {Icon ? (
+                                <span
+                                  className="flex h-7 w-7 items-center justify-center rounded-full text-white shadow-sm"
+                                  style={{ background: RUTA_COLOR[ruta.id]?.color }}
+                                >
+                                  <Icon className="h-3.5 w-3.5" />
+                                </span>
+                              ) : (
+                                <span
+                                  className="flex h-7 w-7 items-center justify-center rounded-full border-2 text-[12px] font-bold"
+                                  style={{ borderColor: RUTA_COLOR[ruta.id]?.color, color: RUTA_COLOR[ruta.id]?.color }}
+                                >
+                                  {idx + 1}
+                                </span>
+                              )}
+                              {Icon && (
+                                <span
+                                  className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full border border-surface bg-surface text-[9px] font-bold shadow-sm"
+                                  style={{ color: RUTA_COLOR[ruta.id]?.color }}
+                                >
+                                  {idx + 1}
+                                </span>
+                              )}
+                            </span>
                             <div className="min-w-0">
-                              <p className="text-[13.5px] font-medium">{actividad.titulo}</p>
+                              <p className="font-baloo text-[19px] font-bold leading-tight tracking-tight">{actividad.titulo}</p>
                               <p className="mt-1 text-[18px] leading-relaxed text-muted-foreground">{actividad.descripcion}</p>
                             </div>
                           </button>

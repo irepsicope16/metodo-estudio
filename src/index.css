@@ -13,6 +13,11 @@
 @import '@fontsource/ibm-plex-mono/latin-ext-400.css';
 @import '@fontsource/ibm-plex-mono/latin-500.css';
 @import '@fontsource/ibm-plex-mono/latin-ext-500.css';
+/* Solo para los títulos de Actividades (pedido explícito: "más llamativo,
+   que tenga que ver con los estudiantes") — el resto de la app sigue en
+   IBM Plex Sans. */
+@import '@fontsource/baloo-2/latin-700.css';
+@import '@fontsource/baloo-2/latin-ext-700.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -158,6 +163,11 @@
      para personas con dislexia — menos ornamento, formas de letra más simples. */
   --font-display: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* Solo para títulos de tarjeta en Actividades (pedido puntual, más
+     "llamativa/estudiantil") — no para títulos de página ni cuerpo de
+     texto, para no perder la simplicidad tipográfica pensada para
+     dislexia que tiene el resto de la app. */
+  --font-baloo: 'Baloo 2', ui-sans-serif, system-ui, sans-serif;
 
   --color-background: var(--background);
   --color-surface: var(--surface);
