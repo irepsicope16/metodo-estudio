@@ -97,13 +97,14 @@ export default function HerramientasPage() {
       <div className="grid gap-3 sm:grid-cols-2">
         {HERRAMIENTAS.map((h) => (
           <Link key={h.to} to={h.to}>
-            <Card className="h-full transition-colors hover:bg-surface-2">
+            <Card className="h-full transition-transform hover:-translate-y-0.5 hover:bg-surface-2 hover:shadow-md">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-[15px]">
-                  <IconBadge icon={h.icon} tone={h.tono} /> {h.titulo}
+                <CardTitle className="flex items-center gap-3">
+                  <IconBadge icon={h.icon} tone={h.tono} size="lg" />
+                  <span className="font-baloo text-[20px] font-bold leading-tight tracking-tight">{h.titulo}</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="pt-0 text-[12.5px] text-muted-foreground">{h.descripcion}</CardContent>
+              <CardContent className="pt-0 text-[16px] leading-relaxed text-muted-foreground">{h.descripcion}</CardContent>
             </Card>
           </Link>
         ))}

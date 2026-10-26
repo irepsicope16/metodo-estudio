@@ -98,18 +98,25 @@ const ICON_BADGE_TONE = {
 
 /** Ícono dentro de un círculo de color — para que los encabezados de tarjeta
  *  se sientan como "stickers" en vez de un ícono gris plano junto al texto. */
+const ICON_BADGE_SIZE = {
+  sm: { box: 'h-7 w-7', icon: 'h-3.5 w-3.5' },
+  lg: { box: 'h-11 w-11', icon: 'h-5.5 w-5.5' },
+} as const
+
 export function IconBadge({
   icon: Icon,
   tone = 'primario',
+  size = 'sm',
   className,
 }: {
   icon: LucideIcon
   tone?: keyof typeof ICON_BADGE_TONE
+  size?: keyof typeof ICON_BADGE_SIZE
   className?: string
 }) {
   return (
-    <span className={cn('flex h-7 w-7 shrink-0 items-center justify-center rounded-full shadow-sm', ICON_BADGE_TONE[tone], className)}>
-      <Icon className="h-3.5 w-3.5" />
+    <span className={cn('flex shrink-0 items-center justify-center rounded-full shadow-sm', ICON_BADGE_SIZE[size].box, ICON_BADGE_TONE[tone], className)}>
+      <Icon className={ICON_BADGE_SIZE[size].icon} />
     </span>
   )
 }
