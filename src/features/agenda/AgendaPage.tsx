@@ -182,7 +182,9 @@ export default function AgendaPage() {
         onClose={() => setNuevoAbierto(false)}
         onCrear={async (data) => {
           await crear.mutateAsync(data)
-          toast.success('Evento agregado')
+        }}
+        onListo={(cantidad) => {
+          toast.success(cantidad > 1 ? `${cantidad} eventos creados (uno por semana)` : 'Evento agregado')
           setNuevoAbierto(false)
         }}
       />
@@ -195,16 +197,20 @@ function DialogoNuevoEvento({
   fechaPrellenada,
   onClose,
   onCrear,
+  onListo,
 }: {
   open: boolean
   fechaPrellenada?: string
   onClose: () => void
   onCrear: (data: Pick<EventoAgenda, 'tipo' | 'titulo' | 'fecha' | 'nota'>) => Promise<void>
+  onListo: (cantidadCreada: number) => void
 }) {
   const [tipo, setTipo] = useState<TipoAgenda>('evaluacion')
   const [titulo, setTitulo] = useState('')
   const [fecha, setFecha] = useState(fechaPrellenada ?? diaISO(new Date()))
   const [nota, setNota] = useState('')
+  const [repetir, setRepetir] = useState(false)
+  const [repetirHasta, setRepetirHasta] = useState('')
 
   // Radix solo llama a onOpenChange ante una acción del usuario (Esc, overlay,
   // botón de cerrar) — no cuando el padre reabre el diálogo cambiando `open`
@@ -216,11 +222,28 @@ function DialogoNuevoEvento({
     setTitulo('')
     setFecha(fechaPrellenada ?? diaISO(new Date()))
     setNota('')
+    setRepetir(false)
+    setRepetirHasta('')
   }, [open, fechaPrellenada])
 
   async function guardar() {
     if (!titulo.trim() || !fecha) return
-    await onCrear({ tipo, titulo: titulo.trim(), fecha, nota: nota.trim() || undefined })
+    if (repetir && repetirHasta && repetirHasta > fecha) {
+      const fechas: string[] = []
+      let cursor = fechaLocal(fecha)
+      const limite = fechaLocal(repetirHasta)
+      while (cursor <= limite) {
+        fechas.push(diaISO(cursor))
+        cursor = addWeeks(cursor, 1)
+      }
+      for (const f of fechas) {
+        await onCrear({ tipo, titulo: titulo.trim(), fecha: f, nota: nota.trim() || undefined })
+      }
+      onListo(fechas.length)
+    } else {
+      await onCrear({ tipo, titulo: titulo.trim(), fecha, nota: nota.trim() || undefined })
+      onListo(1)
+    }
   }
 
   return (
@@ -247,6 +270,18 @@ function DialogoNuevoEvento({
           <div>
             <Label>Fecha</Label>
             <Input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
+          </div>
+          <div>
+            <label className="flex items-center gap-2 text-[13px]">
+              <input type="checkbox" checked={repetir} onChange={(e) => setRepetir(e.target.checked)} className="h-4 w-4" />
+              Repetir todas las semanas
+            </label>
+            {repetir && (
+              <div className="mt-2">
+                <Label>¿Hasta cuándo?</Label>
+                <Input type="date" value={repetirHasta} min={fecha} onChange={(e) => setRepetirHasta(e.target.value)} />
+              </div>
+            )}
           </div>
           <div>
             <Label>Nota (opcional)</Label>
