@@ -255,7 +255,7 @@ function EditorMapa({ mapa, onVolver }: { mapa: MapaConceptual; onVolver: () => 
                 e.stopPropagation()
                 eliminarNodo(n.id)
               }}
-              className="shrink-0 opacity-0 group-hover:opacity-100"
+              className="shrink-0"
               aria-label="Borrar nodo"
             >
               <Trash2 className="h-3 w-3 text-danger" />

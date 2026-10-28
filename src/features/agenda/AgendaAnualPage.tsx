@@ -121,7 +121,7 @@ export default function AgendaAnualPage() {
                       </button>
                       <Icon className="h-3.5 w-3.5 shrink-0" style={{ color: tipo.color }} />
                       <span className={cn('flex-1 text-[13px] font-medium', e.completado && 'text-faint line-through')}>{e.titulo}</span>
-                      <button onClick={() => eliminar.mutate(e.id)} className="opacity-0 group-hover:opacity-100" aria-label="Borrar evento">
+                      <button onClick={() => eliminar.mutate(e.id)} aria-label="Borrar evento">
                         <Trash2 className="h-3.5 w-3.5 text-danger" />
                       </button>
                     </div>

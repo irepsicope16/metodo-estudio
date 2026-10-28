@@ -204,11 +204,7 @@ export function PlanificadorSemanal({
                           </div>
                           {e.nota && <p className="break-words text-[10.5px] text-muted-foreground">{e.nota}</p>}
                         </div>
-                        <button
-                          onClick={() => eliminar.mutate(e.id)}
-                          className="shrink-0 opacity-0 group-hover:opacity-100"
-                          aria-label="Borrar evento"
-                        >
+                        <button onClick={() => eliminar.mutate(e.id)} className="shrink-0" aria-label="Borrar evento">
                           <Trash2 className="h-3 w-3 text-danger" />
                         </button>
                       </div>

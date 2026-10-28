@@ -124,7 +124,7 @@ export default function FichasPage() {
                         {etiquetaCaja(f.caja)}
                       </span>
                     </div>
-                    <button onClick={() => eliminar.mutate(f.id)} className="opacity-0 group-hover:opacity-100" aria-label="Borrar ficha">
+                    <button onClick={() => eliminar.mutate(f.id)} aria-label="Borrar ficha">
                       <Trash2 className="h-3.5 w-3.5 text-danger" />
                     </button>
                   </div>

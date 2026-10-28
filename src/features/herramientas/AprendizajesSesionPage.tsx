@@ -52,7 +52,7 @@ export default function AprendizajesSesionPage() {
                     <span className="text-[11px] font-semibold uppercase tracking-wide text-faint">
                       {fechaLarga(a.createdAt)}
                     </span>
-                    <button onClick={() => eliminar.mutate(a.id)} className="opacity-0 group-hover:opacity-100" aria-label="Borrar aprendizaje">
+                    <button onClick={() => eliminar.mutate(a.id)} aria-label="Borrar aprendizaje">
                       <Trash2 className="h-3.5 w-3.5 text-danger" />
                     </button>
                   </div>
