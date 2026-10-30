@@ -120,14 +120,14 @@ export default function CronometroPage() {
 
           {tecnica === 'pomodoro' ? (
             <AnilloProgreso fraccionRestante={fraccionRestante} color={colorFase} colorFondo={colorFaseFondo}>
-              <p className="text-[13px] font-medium text-muted-foreground">{enDescanso ? 'Descanso' : 'Foco'}</p>
-              <div className="font-display text-[52px] font-semibold tracking-tight tabular-nums">
+              <p className="text-[14.5px] font-medium text-muted-foreground">{enDescanso ? 'Descanso' : 'Foco'}</p>
+              <div className="font-display text-[53.5px] font-semibold tracking-tight tabular-nums">
                 {mm}:{ss}
               </div>
-              <p className="text-[11.5px] text-faint">de {enDescanso ? minutosDescanso : minutosFoco} min</p>
+              <p className="text-[13px] text-faint">de {enDescanso ? minutosDescanso : minutosFoco} min</p>
             </AnilloProgreso>
           ) : (
-            <div className="font-display text-[72px] font-semibold tracking-tight tabular-nums">
+            <div className="font-display text-[73.5px] font-semibold tracking-tight tabular-nums">
               {mm}:{ss}
             </div>
           )}
@@ -145,7 +145,7 @@ export default function CronometroPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-[14px]">Últimas sesiones</CardTitle>
+          <CardTitle className="text-[15.5px]">Últimas sesiones</CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
           {sesiones.length === 0 ? (
@@ -153,7 +153,7 @@ export default function CronometroPage() {
           ) : (
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {sesiones.slice(0, 9).map((s) => (
-                <div key={s.id} className="flex items-center justify-between rounded-lg border px-3 py-2 text-[12.5px]">
+                <div key={s.id} className="flex items-center justify-between rounded-lg border px-3 py-2 text-[14px]">
                   <span className="capitalize">{s.tecnica}</span>
                   <span className="text-muted-foreground">{s.duracionMin} min · {fechaCorta(s.fecha)}</span>
                 </div>

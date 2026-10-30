@@ -64,7 +64,7 @@ export default function AprendizajesSesionPage() {
               <Card key={a.id} className="group relative flex flex-col">
                 <CardHeader className="pb-1">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-semibold uppercase tracking-wide text-faint">
+                    <span className="text-[12.5px] font-semibold uppercase tracking-wide text-faint">
                       {fechaLarga(a.createdAt)}
                     </span>
                     <button onClick={() => eliminar.mutate(a.id)} aria-label="Borrar aprendizaje">
@@ -73,8 +73,8 @@ export default function AprendizajesSesionPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="flex flex-1 flex-col gap-3 pt-0">
-                  <p className="text-[13.5px] font-medium">{a.pregunta}</p>
-                  <p className="text-[11px] text-faint">Pensalo o decilo en voz alta — después verificá tu respuesta.</p>
+                  <p className="text-[15px] font-medium">{a.pregunta}</p>
+                  <p className="text-[12.5px] text-faint">Pensalo o decilo en voz alta — después verificá tu respuesta.</p>
 
                   {!revelada ? (
                     <Button variant="outline" size="sm" className="mt-auto w-fit" onClick={() => setReveladas((r) => ({ ...r, [a.id]: true }))}>
@@ -82,9 +82,9 @@ export default function AprendizajesSesionPage() {
                     </Button>
                   ) : (
                     <div className="mt-auto space-y-2.5 rounded-lg border bg-surface-2 p-3">
-                      <p className="text-[12.5px] leading-relaxed text-muted-foreground">{a.respuesta}</p>
+                      <p className="text-[14px] leading-relaxed text-muted-foreground">{a.respuesta}</p>
                       <div>
-                        <p className="mb-1 text-[11px] font-medium text-faint">¿Qué tan bien coincidió?</p>
+                        <p className="mb-1 text-[12.5px] font-medium text-faint">¿Qué tan bien coincidió?</p>
                         <div className="flex gap-1">
                           {([1, 2, 3, 4, 5] as const).map((n) => (
                             <button
@@ -105,7 +105,7 @@ export default function AprendizajesSesionPage() {
                         </div>
                       </div>
                       {a.ultimaRevision && (
-                        <p className="text-[10.5px] text-faint">Última revisión: {fechaLarga(a.ultimaRevision.fecha)}</p>
+                        <p className="text-[12px] text-faint">Última revisión: {fechaLarga(a.ultimaRevision.fecha)}</p>
                       )}
                     </div>
                   )}

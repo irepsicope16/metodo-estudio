@@ -248,7 +248,7 @@
     background: radial-gradient(1200px 700px at 50% -12%, rgba(255, 255, 255, 0.1), transparent 60%), var(--background);
     background-attachment: fixed;
     color: var(--foreground);
-    font-size: 16.5px;
+    font-size: 18px;
     line-height: 1.6;
     letter-spacing: 0.1px;
   }

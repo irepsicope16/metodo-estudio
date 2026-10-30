@@ -70,10 +70,10 @@ export default function UsuariosPage() {
         subtitle="Quiénes se registraron en Método Estudio. El pago se confirma por fuera de la app — acá podés cortar o reactivar el acceso de quien corresponda."
       />
 
-      {error && <p className="text-[13px] text-danger">No se pudo cargar: {error}</p>}
+      {error && <p className="text-[14.5px] text-danger">No se pudo cargar: {error}</p>}
 
       {filas === null && !error ? (
-        <p className="text-[13px] text-muted-foreground">Cargando…</p>
+        <p className="text-[14.5px] text-muted-foreground">Cargando…</p>
       ) : (
         <>
           <Seccion titulo="Profesionales" icon={Briefcase} filas={profesionales} onCambiarAcceso={cambiarAcceso} actualizando={actualizando} />
@@ -99,18 +99,18 @@ function Seccion({
 }) {
   return (
     <div>
-      <h2 className="mb-2.5 flex items-center gap-2 text-[15px] font-semibold tracking-tight">
+      <h2 className="mb-2.5 flex items-center gap-2 text-[16.5px] font-semibold tracking-tight">
         <Icon className="h-4 w-4 text-primary" /> {titulo} ({filas.length})
       </h2>
       {filas.length === 0 ? (
-        <p className="text-[12.5px] text-muted-foreground">Todavía no hay nadie en esta categoría.</p>
+        <p className="text-[14px] text-muted-foreground">Todavía no hay nadie en esta categoría.</p>
       ) : (
         <div className="grid gap-2.5 sm:grid-cols-2">
           {filas.map((f) => {
             const esElla = f.email === MAIL_ADMIN
             return (
               <Card key={f.id}>
-                <CardContent className="space-y-1.5 pt-4 text-[13px]">
+                <CardContent className="space-y-1.5 pt-4 text-[14.5px]">
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <p className="font-medium">{f.nombre}</p>
@@ -124,7 +124,7 @@ function Seccion({
                   </div>
                   <div className="flex flex-wrap items-center gap-1.5 pt-1">
                     {f.es_menor && <Badge variant="secundario">Mail de un adulto (menor)</Badge>}
-                    <span className="text-[11px] text-faint">Registrado el {fechaLarga(f.created_at)}</span>
+                    <span className="text-[12.5px] text-faint">Registrado el {fechaLarga(f.created_at)}</span>
                   </div>
                   {!esElla && (
                     <div className="pt-2">

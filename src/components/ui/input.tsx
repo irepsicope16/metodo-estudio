@@ -7,7 +7,7 @@ export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttribute
       type={type}
       ref={ref}
       className={cn(
-        'flex h-9 w-full rounded-lg border bg-surface px-3 text-sm text-foreground shadow-none transition-colors placeholder:text-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+        'flex h-9 w-full rounded-lg border bg-surface px-3 text-[15.5px] text-foreground shadow-none transition-colors placeholder:text-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}
       {...props}
@@ -23,7 +23,7 @@ export const Textarea = React.forwardRef<
   <textarea
     ref={ref}
     className={cn(
-      'flex min-h-[90px] w-full rounded-lg border bg-surface px-3 py-2 text-sm text-foreground transition-colors placeholder:text-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+      'flex min-h-[90px] w-full rounded-lg border bg-surface px-3 py-2 text-[15.5px] text-foreground transition-colors placeholder:text-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
       className,
     )}
     {...props}
@@ -32,12 +32,12 @@ export const Textarea = React.forwardRef<
 Textarea.displayName = 'Textarea'
 
 export function Label({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
-  return <label className={cn('mb-1.5 block text-[13px] font-medium text-foreground', className)} {...props} />
+  return <label className={cn('mb-1.5 block text-[14.5px] font-medium text-foreground', className)} {...props} />
 }
 
 export function FieldError({ children }: { children?: React.ReactNode }) {
   if (!children) return null
-  return <p className="mt-1 text-[12px] text-danger">{children}</p>
+  return <p className="mt-1 text-[13.5px] text-danger">{children}</p>
 }
 
 export const NativeSelect = React.forwardRef<
@@ -47,7 +47,7 @@ export const NativeSelect = React.forwardRef<
   <select
     ref={ref}
     className={cn(
-      'flex h-9 w-full appearance-none rounded-lg border bg-surface px-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50',
+      'flex h-9 w-full appearance-none rounded-lg border bg-surface px-3 text-[15.5px] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50',
       className,
     )}
     {...props}

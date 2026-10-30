@@ -43,7 +43,7 @@ const PrivacidadPage = lazy(() => import('@/features/legal/PrivacidadPage'))
 
 function Page({ children }: { children: React.ReactNode }) {
   return (
-    <Suspense fallback={<div className="flex h-[60vh] items-center justify-center text-sm text-faint">Cargando…</div>}>
+    <Suspense fallback={<div className="flex h-[60vh] items-center justify-center text-[15.5px] text-faint">Cargando…</div>}>
       {children}
     </Suspense>
   )

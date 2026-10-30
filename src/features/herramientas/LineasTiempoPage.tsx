@@ -25,7 +25,7 @@ function MiniLinea({ eventos }: { eventos: Evento[] }) {
       {eventos.map((e, i) => (
         <div key={i} className="relative z-10 flex flex-col items-center gap-1">
           <span className="h-2.5 w-2.5 rounded-full border-2" style={{ background: 'var(--surface)', borderColor: 'var(--color-mod-regular)' }} />
-          <span className="max-w-[70px] truncate text-[10px] font-medium text-muted-foreground">{e.fecha || '—'}</span>
+          <span className="max-w-[70px] truncate text-[11.5px] font-medium text-muted-foreground">{e.fecha || '—'}</span>
         </div>
       ))}
     </div>
@@ -177,7 +177,7 @@ export default function LineasTiempoPage() {
             <Card key={l.id}>
               <CardHeader>
                 <div className="flex items-start justify-between gap-2">
-                  <CardTitle className="text-[14px]">{l.titulo}</CardTitle>
+                  <CardTitle className="text-[15.5px]">{l.titulo}</CardTitle>
                   <div className="flex shrink-0 gap-1">
                     <Button variant="outline" size="sm" asChild>
                       <a href={`#/print/linea-tiempo/${l.id}`} target="_blank" rel="noopener noreferrer">
@@ -191,7 +191,7 @@ export default function LineasTiempoPage() {
                 </div>
               </CardHeader>
               <CardContent className="cursor-pointer pt-0" onClick={() => setEditando(l.id)}>
-                <p className="text-[12px] text-muted-foreground">{l.eventos.length} eventos</p>
+                <p className="text-[13.5px] text-muted-foreground">{l.eventos.length} eventos</p>
                 <MiniLinea eventos={l.eventos.slice(0, 5)} />
               </CardContent>
             </Card>

@@ -45,8 +45,8 @@ export default function DistribucionActividadesPage() {
             style={{ background: `conic-gradient(${stops.join(', ')})` }}
           >
             <div className="flex h-36 w-36 flex-col items-center justify-center rounded-full bg-surface text-center">
-              <span className="text-[26px] font-bold tracking-tight">{total}%</span>
-              <span className="text-[11px] text-muted-foreground">{total === 100 ? 'completo' : 'asignado'}</span>
+              <span className="text-[27.5px] font-bold tracking-tight">{total}%</span>
+              <span className="text-[12.5px] text-muted-foreground">{total === 100 ? 'completo' : 'asignado'}</span>
             </div>
           </div>
         </div>
@@ -66,10 +66,10 @@ export default function DistribucionActividadesPage() {
                   className="h-1.5 flex-1 cursor-pointer"
                   style={{ accentColor: c.color }}
                 />
-                <span className="w-12 shrink-0 text-right text-[13px] font-semibold tabular-nums">{valores[c.key]}%</span>
+                <span className="w-12 shrink-0 text-right text-[14.5px] font-semibold tabular-nums">{valores[c.key]}%</span>
               </div>
             ))}
-            <p className={cn('pt-1 text-[12px]', total > 100 ? 'text-danger' : 'text-muted-foreground')}>
+            <p className={cn('pt-1 text-[13.5px]', total > 100 ? 'text-danger' : 'text-muted-foreground')}>
               {total > 100
                 ? `Te pasaste por ${total - 100} puntos — ajustá alguna categoría.`
                 : total === 100

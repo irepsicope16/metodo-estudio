@@ -71,14 +71,14 @@ export default function GuiaTextosPage() {
         <EmptyState icon={BookOpenCheck} title="Todavía no agregaste ningún texto" description="Escribí el título de lo que estás leyendo y agregalo." />
       ) : (
         <>
-          <p className="text-[12.5px] text-muted-foreground">
+          <p className="text-[14px] text-muted-foreground">
             {completados} de {textos.length} {textos.length === 1 ? 'texto completo' : 'textos completos'}
           </p>
           <div className="space-y-2.5">
             {textos.map((t) => (
               <Card key={t.id} className="group">
                 <CardContent className="flex flex-wrap items-center justify-between gap-3 py-3.5">
-                  <p className={cn('flex-1 text-[14px] font-medium', t.leido && t.subrayado && t.resumido && 'text-muted-foreground line-through')}>
+                  <p className={cn('flex-1 text-[15.5px] font-medium', t.leido && t.subrayado && t.resumido && 'text-muted-foreground line-through')}>
                     {t.titulo}
                   </p>
                   <div className="flex items-center gap-1.5">
@@ -90,7 +90,7 @@ export default function GuiaTextosPage() {
                           key={p.key}
                           onClick={() => actualizar.mutate({ id: t.id, [p.key]: !activo })}
                           className={cn(
-                            'flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11.5px] font-medium transition-colors',
+                            'flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[13px] font-medium transition-colors',
                             activo
                               ? 'border-transparent bg-primary text-primary-foreground shadow-[0_4px_10px_-4px_var(--color-primary)]'
                               : 'border-border text-muted-foreground hover:bg-surface-2',

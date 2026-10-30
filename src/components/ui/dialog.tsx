@@ -31,9 +31,9 @@ export function DialogHeader({ className, ...props }: React.HTMLAttributes<HTMLD
 }
 
 export function DialogTitle({ className, ...props }: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>) {
-  return <DialogPrimitive.Title className={cn('text-base font-semibold tracking-tight', className)} {...props} />
+  return <DialogPrimitive.Title className={cn('text-[17.5px] font-semibold tracking-tight', className)} {...props} />
 }
 
 export function DialogDescription({ className, ...props }: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>) {
-  return <DialogPrimitive.Description className={cn('text-[13px] text-muted-foreground', className)} {...props} />
+  return <DialogPrimitive.Description className={cn('text-[14.5px] text-muted-foreground', className)} {...props} />
 }

@@ -62,7 +62,7 @@ export default function MapasPage() {
             <Card key={m.id} className="cursor-pointer transition-colors hover:bg-surface-2" onClick={() => setAbiertoId(m.id)}>
               <CardHeader>
                 <div className="flex items-center justify-between gap-2">
-                  <CardTitle className="truncate text-[14px]">{m.titulo}</CardTitle>
+                  <CardTitle className="truncate text-[15.5px]">{m.titulo}</CardTitle>
                   <Button
                     variant="ghost"
                     size="iconSm"
@@ -75,7 +75,7 @@ export default function MapasPage() {
                   </Button>
                 </div>
               </CardHeader>
-              <CardContent className="pt-0 text-[12px] text-muted-foreground">
+              <CardContent className="pt-0 text-[13.5px] text-muted-foreground">
                 {m.nodos.length} {m.nodos.length === 1 ? 'nodo' : 'nodos'} · {m.conexiones.length} {m.conexiones.length === 1 ? 'conexión' : 'conexiones'}
               </CardContent>
             </Card>
@@ -213,7 +213,7 @@ function EditorMapa({ mapa, onVolver }: { mapa: MapaConceptual; onVolver: () => 
         </div>
       </div>
 
-      <p className="text-[12px] text-faint">
+      <p className="text-[13.5px] text-faint">
         Arrastrá los nodos para moverlos. Para conectar dos ideas: "Conectar nodos" → tocá el primero → tocá el segundo.
       </p>
 
@@ -262,7 +262,7 @@ function EditorMapa({ mapa, onVolver }: { mapa: MapaConceptual; onVolver: () => 
               onChange={(e) => actualizarTexto(n.id, e.target.value)}
               onBlur={() => persistir({ nodos })}
               onPointerDown={(e) => e.stopPropagation()}
-              className="w-full bg-transparent text-[12px] font-medium outline-none"
+              className="w-full bg-transparent text-[13.5px] font-medium outline-none"
             />
             <button
               onClick={(e) => {

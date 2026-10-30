@@ -115,7 +115,7 @@ export default function ActividadesPage() {
                 className={destacada ? 'scroll-mt-4 rounded-xl p-2 ring-2 ring-accent ring-offset-4 ring-offset-background' : 'scroll-mt-4'}
               >
                 <div className="mb-3 flex flex-wrap items-center gap-2">
-                  <h3 className="text-[13.5px] font-semibold tracking-tight">{ruta.nombre}</h3>
+                  <h3 className="text-[15px] font-semibold tracking-tight">{ruta.nombre}</h3>
                   {destacada && <Badge variant="acento">Recomendada para vos</Badge>}
                 </div>
                 {(() => {
@@ -143,14 +143,14 @@ export default function ActividadesPage() {
                                   <div className="flex flex-wrap items-start justify-between gap-2">
                                     <button onClick={() => setDetalle(actividad)} className="flex min-w-0 flex-1 items-start gap-3 text-left">
                                       <span
-                                        className="font-baloo flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[19px] font-extrabold shadow-sm"
+                                        className="font-baloo flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[20.5px] font-extrabold shadow-sm"
                                         style={{ background: estilo.circuloFondo, color: estilo.circuloTexto }}
                                       >
                                         {numero}
                                       </span>
                                       <div className="min-w-0">
-                                        <p className="font-baloo text-[19px] font-bold leading-tight tracking-tight">{actividad.titulo}</p>
-                                        <p className="mt-1 text-[16px] leading-relaxed text-muted-foreground">{actividad.descripcion}</p>
+                                        <p className="font-baloo text-[20.5px] font-bold leading-tight tracking-tight">{actividad.titulo}</p>
+                                        <p className="mt-1 text-[17.5px] leading-relaxed text-muted-foreground">{actividad.descripcion}</p>
                                       </div>
                                     </button>
                                     <div className="flex shrink-0 items-center gap-1.5">
@@ -169,7 +169,7 @@ export default function ActividadesPage() {
                                   </div>
                                   {probadaActual && !completada && (
                                     <div className="mt-3">
-                                      <span className="inline-flex items-center gap-1 rounded-full bg-surface px-2 py-0.5 text-[10.5px] font-medium text-primary">
+                                      <span className="inline-flex items-center gap-1 rounded-full bg-surface px-2 py-0.5 text-[12px] font-medium text-primary">
                                         En curso
                                       </span>
                                     </div>
@@ -245,15 +245,15 @@ function DetalleActividad({
             <Badge variant={NIVEL_BADGE_VARIANT[actividad.nivel]}>{NIVEL_LABEL[actividad.nivel]}</Badge>
             {probada?.estado === 'completada' && <Badge variant="primario">Completada ✓</Badge>}
           </div>
-          <p className="text-[13.5px] leading-relaxed text-muted-foreground">{actividad.descripcion}</p>
+          <p className="text-[15px] leading-relaxed text-muted-foreground">{actividad.descripcion}</p>
 
           {actividad.ejercicio && (
             <div className="rounded-lg border border-accent/30 bg-accent-soft/40 p-3.5">
-              <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-accent-strong">
+              <p className="flex items-center gap-1.5 text-[12.5px] font-semibold uppercase tracking-wide text-accent-strong">
                 <PenLine className="h-3.5 w-3.5" /> Ejercicio para practicar
               </p>
-              <p className="mt-1.5 text-[13px] leading-relaxed">{actividad.ejercicio}</p>
-              {!mostrarEjemplo && <p className="mt-2 text-[11.5px] text-faint">Pensalo o hacelo en voz alta — después revisá tu respuesta.</p>}
+              <p className="mt-1.5 text-[14.5px] leading-relaxed">{actividad.ejercicio}</p>
+              {!mostrarEjemplo && <p className="mt-2 text-[13px] text-faint">Pensalo o hacelo en voz alta — después revisá tu respuesta.</p>}
             </div>
           )}
 
@@ -264,10 +264,10 @@ function DetalleActividad({
           ) : (
             actividad.ejemplo && (
               <div className="rounded-lg border bg-surface-2 p-3.5">
-                <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-primary">
+                <p className="flex items-center gap-1.5 text-[12.5px] font-semibold uppercase tracking-wide text-primary">
                   <Lightbulb className="h-3.5 w-3.5" /> Ejemplo
                 </p>
-                <p className="mt-1.5 text-[13px] leading-relaxed">{actividad.ejemplo}</p>
+                <p className="mt-1.5 text-[14.5px] leading-relaxed">{actividad.ejemplo}</p>
               </div>
             )
           )}
@@ -337,8 +337,8 @@ function MisActividades({
                   )}
                 </button>
                 <button className="min-w-0 flex-1 text-left" onClick={() => { const cat = ACTIVIDADES.find((c) => c.id === a.actividadId); if (cat) onAbrir(cat) }}>
-                  <p className={`text-[13.5px] font-medium ${a.estado === 'completada' ? 'text-faint line-through' : ''}`}>{a.titulo}</p>
-                  <p className="text-[11.5px] text-faint">
+                  <p className={`text-[15px] font-medium ${a.estado === 'completada' ? 'text-faint line-through' : ''}`}>{a.titulo}</p>
+                  <p className="text-[13px] text-faint">
                     Empezada {fechaCorta(a.fechaInicio)}
                     {a.calificacion && (
                       <span className="ml-1.5 inline-flex items-center gap-0.5 text-warning">
@@ -348,8 +348,8 @@ function MisActividades({
                       </span>
                     )}
                   </p>
-                  {a.aplicacionPropia && <p className="mt-0.5 text-[11.5px] text-primary">Tu aplicación: {a.aplicacionPropia}</p>}
-                  {a.nota && <p className="mt-0.5 text-[11.5px] text-muted-foreground">{a.nota}</p>}
+                  {a.aplicacionPropia && <p className="mt-0.5 text-[13px] text-primary">Tu aplicación: {a.aplicacionPropia}</p>}
+                  {a.nota && <p className="mt-0.5 text-[13px] text-muted-foreground">{a.nota}</p>}
                 </button>
                 <Button variant="ghost" size="iconSm" onClick={() => eliminar.mutate(a.id)} aria-label="Quitar">
                   <Trash2 className="text-danger" />
@@ -405,7 +405,7 @@ function DialogoCalificar({ actividad, onClose }: { actividad: ActividadProbada 
             <DialogTitle>¿Creamos una ficha de repaso sobre esto?</DialogTitle>
           </DialogHeader>
           <div className="space-y-3">
-            <p className="text-[13px] text-muted-foreground">
+            <p className="text-[14.5px] text-muted-foreground">
               Así la tenés lista para repasar más adelante con «{guardada.titulo}».
             </p>
             <div className="flex justify-end gap-2">

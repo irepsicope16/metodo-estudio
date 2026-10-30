@@ -90,8 +90,8 @@ export default function BibliotecaPage() {
         >
           <BookOpen className="h-7 w-7 shrink-0" />
           <div>
-            <p className="text-[17px] font-bold leading-tight">Por ruta</p>
-            <p className="text-[12.5px] opacity-85">Las fichas agrupadas en las 8 rutas de estudio</p>
+            <p className="text-[18.5px] font-bold leading-tight">Por ruta</p>
+            <p className="text-[14px] opacity-85">Las fichas agrupadas en las 8 rutas de estudio</p>
           </div>
         </button>
         <button
@@ -106,15 +106,15 @@ export default function BibliotecaPage() {
         >
           <Sparkles className="h-7 w-7 shrink-0" />
           <div>
-            <p className="text-[17px] font-bold leading-tight">Técnicas visuales</p>
-            <p className="text-[12.5px] opacity-85">Técnicas con un ejemplo gráfico para probar</p>
+            <p className="text-[18.5px] font-bold leading-tight">Técnicas visuales</p>
+            <p className="text-[14px] opacity-85">Técnicas con un ejemplo gráfico para probar</p>
           </div>
         </button>
       </div>
 
       {vista === 'visuales' && (
         <div className="space-y-5">
-          <p className="text-[12.5px] text-muted-foreground">
+          <p className="text-[14px] text-muted-foreground">
             Técnicas con un ejemplo gráfico además de la explicación — probalas y quedate con las que te sirvan.
           </p>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -123,12 +123,12 @@ export default function BibliotecaPage() {
               return (
                 <Card key={t.id} className="flex flex-col border-t-[3px]" style={{ borderTopColor: c.color, boxShadow: `0 10px 20px -14px ${c.color}` }}>
                   <CardHeader>
-                    <CardTitle className="text-[16px]">{t.titulo}</CardTitle>
+                    <CardTitle className="text-[17.5px]">{t.titulo}</CardTitle>
                   </CardHeader>
                   <CardContent className="flex flex-1 flex-col gap-3 pt-0">
                     <VistaPreviaTecnica id={t.id} />
-                    <p className="text-[12.5px] leading-relaxed text-muted-foreground">{t.resumen}</p>
-                    <ol className="space-y-1 text-[12px] leading-relaxed text-muted-foreground">
+                    <p className="text-[14px] leading-relaxed text-muted-foreground">{t.resumen}</p>
+                    <ol className="space-y-1 text-[13.5px] leading-relaxed text-muted-foreground">
                       {t.pasos.map((p, j) => (
                         <li key={j} className="flex gap-1.5">
                           <span className="shrink-0 font-semibold" style={{ color: c.color }}>
@@ -149,7 +149,7 @@ export default function BibliotecaPage() {
       {vista === 'rutas' && (
       <>
       <div className="mb-6 rounded-xl border bg-surface p-4">
-        <p className="mb-2.5 text-[12.5px] text-muted-foreground">
+        <p className="mb-2.5 text-[14px] text-muted-foreground">
           El nivel es una complejidad orientativa, no una edad — depende de dónde estás vos ahora, no de cuántos años
           tenés. Si estás en el nivel Superior igual podés necesitar arrancar por Principiante.
         </p>
@@ -165,7 +165,7 @@ export default function BibliotecaPage() {
                 key={n}
                 type="button"
                 onClick={() => setFiltro(n)}
-                className="h-8 rounded-lg px-3.5 text-[13.5px] font-semibold shadow-sm transition-all"
+                className="h-8 rounded-lg px-3.5 text-[15px] font-semibold shadow-sm transition-all"
                 style={{
                   background: c.fondo,
                   color: c.texto,
@@ -198,7 +198,7 @@ export default function BibliotecaPage() {
             >
               <div className="mb-3 flex flex-wrap items-center gap-2">
                 <BookOpen className="h-4 w-4" style={{ color: RUTA_COLOR[ruta.id]?.color }} />
-                <h2 className="text-[18px] font-bold tracking-tight">{ruta.nombre}</h2>
+                <h2 className="text-[19.5px] font-bold tracking-tight">{ruta.nombre}</h2>
                 {destacada && <Badge variant="acento">Recomendada para vos</Badge>}
                 <div className="flex flex-wrap gap-1">
                   {ruta.dimensiones.map((d) => (
@@ -234,8 +234,8 @@ export default function BibliotecaPage() {
                                     </span>
                                   )}
                                   <div className="min-w-0 flex-1">
-                                    <p className="text-[16px] font-semibold">{ficha.herramienta}</p>
-                                    <p className="mt-1 text-[13.5px] leading-relaxed text-muted-foreground">{ficha.fraseSimple}</p>
+                                    <p className="text-[17.5px] font-semibold">{ficha.herramienta}</p>
+                                    <p className="mt-1 text-[15px] leading-relaxed text-muted-foreground">{ficha.fraseSimple}</p>
                                   </div>
                                 </CardContent>
                               </Card>
@@ -244,9 +244,9 @@ export default function BibliotecaPage() {
                           return (
                             <Card key={ficha.herramienta} className="border-t-[3px]" style={moduleCardStyle(ruta.id)}>
                               <CardHeader>
-                                <CardTitle className="text-[16px]">{ficha.herramienta}</CardTitle>
+                                <CardTitle className="text-[17.5px]">{ficha.herramienta}</CardTitle>
                               </CardHeader>
-                              <CardContent className="space-y-2 pt-0 text-[12.5px] leading-relaxed">
+                              <CardContent className="space-y-2 pt-0 text-[14px] leading-relaxed">
                                 <p>
                                   <span className="font-semibold text-foreground">Qué es: </span>
                                   <span className="text-muted-foreground">{ficha.queEs}</span>
@@ -274,10 +274,10 @@ export default function BibliotecaPage() {
                     <div key={v.id} className="flex flex-col gap-2 rounded-xl border bg-surface-2 p-3.5">
                       <div className="flex items-center gap-1.5 text-faint">
                         <Clapperboard className="h-3.5 w-3.5" />
-                        <span className="text-[11px] font-semibold uppercase tracking-wide">Video</span>
+                        <span className="text-[12.5px] font-semibold uppercase tracking-wide">Video</span>
                       </div>
-                      <p className="text-[13px] font-medium leading-snug">{v.titulo}</p>
-                      <p className="text-[12px] text-muted-foreground">{v.descripcion}</p>
+                      <p className="text-[14.5px] font-medium leading-snug">{v.titulo}</p>
+                      <p className="text-[13.5px] text-muted-foreground">{v.descripcion}</p>
                       <Button variant="outline" size="sm" className="mt-1 w-fit" asChild>
                         <a href={v.url} target="_blank" rel="noopener noreferrer">
                           Ver video <ExternalLink className="h-3.5 w-3.5" />
@@ -295,9 +295,9 @@ export default function BibliotecaPage() {
       <div className="mt-8 rounded-xl border bg-surface p-4">
         <div className="mb-2.5 flex items-center gap-2">
           <Printer className="h-4 w-4 text-primary" />
-          <h2 className="text-[14px] font-semibold tracking-tight">Imprimibles</h2>
+          <h2 className="text-[15.5px] font-semibold tracking-tight">Imprimibles</h2>
         </div>
-        <p className="mb-3 text-[12.5px] text-muted-foreground">
+        <p className="mb-3 text-[14px] text-muted-foreground">
           Materiales en blanco para imprimir y usar donde estudiás.
         </p>
         <div className="flex flex-wrap gap-2">
@@ -314,7 +314,7 @@ export default function BibliotecaPage() {
         </div>
       </div>
 
-      <p className="mt-8 text-[11.5px] text-faint">
+      <p className="mt-8 text-[13px] text-faint">
         Estas fichas son una guía rápida — probá, quedate con lo que te sirve y descartá lo que no. No hay una
         combinación "correcta" de herramientas, cada quien arma la propia.
       </p>

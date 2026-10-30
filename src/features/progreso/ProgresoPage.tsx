@@ -73,7 +73,7 @@ export default function ProgresoPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-[14px]">Qué fue haciendo</CardTitle>
+          <CardTitle className="text-[15.5px]">Qué fue haciendo</CardTitle>
           <CardDescription>Para repasar juntos, en familia, qué técnicas probó y cuándo.</CardDescription>
         </CardHeader>
         <CardContent className="pt-0">
@@ -95,8 +95,8 @@ export default function ProgresoPage() {
                       <Circle className="h-4.5 w-4.5 shrink-0 text-faint" />
                     )}
                     <div className="min-w-0 flex-1">
-                      <p className="text-[13px] font-medium">{a.titulo}</p>
-                      <p className="text-[11.5px] text-faint">
+                      <p className="text-[14.5px] font-medium">{a.titulo}</p>
+                      <p className="text-[13px] text-faint">
                         {ruta?.nombre ?? a.rutaId} ·{' '}
                         {a.estado === 'completada' && a.fechaCompletada
                           ? `Completada el ${fechaCorta(a.fechaCompletada)}`
@@ -109,7 +109,7 @@ export default function ProgresoPage() {
                           </span>
                         )}
                       </p>
-                      {a.nota && <p className="mt-0.5 text-[11.5px] text-muted-foreground">{a.nota}</p>}
+                      {a.nota && <p className="mt-0.5 text-[13px] text-muted-foreground">{a.nota}</p>}
                     </div>
                   </div>
                 )
@@ -121,7 +121,7 @@ export default function ProgresoPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-[14px]">Insignias</CardTitle>
+          <CardTitle className="text-[15.5px]">Insignias</CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
           <InsigniasRow insignias={insignias} />
@@ -130,7 +130,7 @@ export default function ProgresoPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-[14px]">Últimos 28 días</CardTitle>
+          <CardTitle className="text-[15.5px]">Últimos 28 días</CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
           <CalendarioHabito diasActivos={diasActivos} />
@@ -140,7 +140,7 @@ export default function ProgresoPage() {
       {snapshots.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-[14px]">Tu autoperfil, por área</CardTitle>
+            <CardTitle className="text-[15.5px]">Tu autoperfil, por área</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 pt-0">
             {[...snapshots]
@@ -148,8 +148,8 @@ export default function ProgresoPage() {
               .map((s) => (
                 <div key={s.dimension} className="flex items-center justify-between gap-2 rounded-lg border px-3 py-2">
                   <div>
-                    <p className="text-[12.5px] font-medium">{s.dimension} · {DIMENSIONES[s.dimension].nombre}</p>
-                    {s.banda && <p className="text-[11px] text-muted-foreground">{ETIQUETA_BANDA[s.banda]}</p>}
+                    <p className="text-[14px] font-medium">{s.dimension} · {DIMENSIONES[s.dimension].nombre}</p>
+                    {s.banda && <p className="text-[12.5px] text-muted-foreground">{ETIQUETA_BANDA[s.banda]}</p>}
                   </div>
                   {s.banda && <Badge variant={BADGE_POR_BANDA[s.banda]}>{s.banda}</Badge>}
                 </div>
@@ -161,7 +161,7 @@ export default function ProgresoPage() {
       <div className="grid gap-3 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle className="text-[14px]">Actividades completadas por ruta</CardTitle>
+            <CardTitle className="text-[15.5px]">Actividades completadas por ruta</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 pt-0">
             {porRuta.size === 0 ? (
@@ -171,7 +171,7 @@ export default function ProgresoPage() {
                 const cantidad = porRuta.get(r.id) ?? 0
                 return (
                   <div key={r.id}>
-                    <div className="mb-1 flex items-center justify-between text-[12px]">
+                    <div className="mb-1 flex items-center justify-between text-[13.5px]">
                       <span className="font-medium">{r.nombre}</span>
                       <span className="text-faint">{cantidad}</span>
                     </div>
@@ -190,7 +190,7 @@ export default function ProgresoPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-[14px]">Tus técnicas mejor calificadas</CardTitle>
+            <CardTitle className="text-[15.5px]">Tus técnicas mejor calificadas</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 pt-0">
             {mejorCalificadas.length === 0 ? (
@@ -198,7 +198,7 @@ export default function ProgresoPage() {
             ) : (
               mejorCalificadas.map((a) => (
                 <div key={a.id} className="flex items-center justify-between gap-2 rounded-lg border px-3 py-2">
-                  <span className="truncate text-[12.5px] font-medium">{a.titulo}</span>
+                  <span className="truncate text-[14px] font-medium">{a.titulo}</span>
                   <span className="flex shrink-0 items-center gap-0.5 text-warning">
                     {Array.from({ length: a.calificacion ?? 0 }).map((_, i) => (
                       <Star key={i} className="h-3 w-3 fill-current" />

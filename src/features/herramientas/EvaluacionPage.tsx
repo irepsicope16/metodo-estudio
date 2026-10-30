@@ -105,7 +105,7 @@ export default function EvaluacionPage() {
     const actual = cola[indice]
     return (
       <FadeIn className="mx-auto max-w-xl space-y-4">
-        <div className="flex items-center justify-between text-[12.5px] text-muted-foreground">
+        <div className="flex items-center justify-between text-[14px] text-muted-foreground">
           <span>
             Pregunta {indice + 1} de {cola.length}
           </span>
@@ -121,9 +121,9 @@ export default function EvaluacionPage() {
         </div>
         <Card className="min-h-[220px]">
           <CardContent className="flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-4 pt-6 text-center" onClick={() => setVuelta(true)}>
-            <span className="text-[11px] font-semibold uppercase tracking-wide text-faint">{vuelta ? 'Respuesta' : 'Pregunta'}</span>
-            <p className="text-[16px] font-medium leading-relaxed">{vuelta ? actual.respuesta : actual.pregunta}</p>
-            {!vuelta && <p className="text-[11.5px] text-faint">Tocá para ver la respuesta</p>}
+            <span className="text-[12.5px] font-semibold uppercase tracking-wide text-faint">{vuelta ? 'Respuesta' : 'Pregunta'}</span>
+            <p className="text-[17.5px] font-medium leading-relaxed">{vuelta ? actual.respuesta : actual.pregunta}</p>
+            {!vuelta && <p className="text-[13px] text-faint">Tocá para ver la respuesta</p>}
           </CardContent>
         </Card>
         {vuelta ? (
@@ -153,8 +153,8 @@ export default function EvaluacionPage() {
       <FadeIn className="mx-auto max-w-md space-y-5 text-center">
         <Trophy className="mx-auto h-10 w-10" style={{ color: 'var(--color-accent)' }} />
         <div>
-          <p className="text-[36px] font-bold leading-none tracking-tight">{porcentaje}%</p>
-          <p className="mt-1 text-[13px] text-muted-foreground">
+          <p className="text-[37.5px] font-bold leading-none tracking-tight">{porcentaje}%</p>
+          <p className="mt-1 text-[14.5px] text-muted-foreground">
             {resultado.correctas} de {resultado.total} correctas · {mmss(resultado.segundos)}
           </p>
         </div>
@@ -190,7 +190,7 @@ export default function EvaluacionPage() {
       <Card>
         <CardContent className="space-y-4 pt-5">
           <div>
-            <p className="mb-1.5 text-[12.5px] font-medium">Tema</p>
+            <p className="mb-1.5 text-[14px] font-medium">Tema</p>
             <NativeSelect value={temaElegido} onChange={(e) => setTemaElegido(e.target.value)}>
               <option value="todos">Todos los temas ({fichas.length} fichas)</option>
               {temas.map((t) => (
@@ -203,7 +203,7 @@ export default function EvaluacionPage() {
 
           {disponibles.length > 0 && (
             <div>
-              <p className="mb-1.5 text-[12.5px] font-medium">Cantidad de preguntas</p>
+              <p className="mb-1.5 text-[14px] font-medium">Cantidad de preguntas</p>
               <div className="flex flex-wrap gap-1.5">
                 {opcionesCantidad.map((n) => (
                   <Button
@@ -227,14 +227,14 @@ export default function EvaluacionPage() {
 
       {evaluaciones.length > 0 && (
         <div>
-          <div className="mb-2 flex items-center gap-1.5 text-[13px] font-semibold">
+          <div className="mb-2 flex items-center gap-1.5 text-[14.5px] font-semibold">
             <History className="h-4 w-4" /> Evaluaciones anteriores
           </div>
           <div className="space-y-1.5">
             {evaluaciones.slice(0, 8).map((e) => {
               const pct = Math.round((e.correctas / e.totalPreguntas) * 100)
               return (
-                <div key={e.id} className="flex items-center gap-3 rounded-lg border bg-surface px-3 py-2 text-[12.5px]">
+                <div key={e.id} className="flex items-center gap-3 rounded-lg border bg-surface px-3 py-2 text-[14px]">
                   <span className="w-[76px] shrink-0 text-faint">
                     {new Date(e.fecha).toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit' })}
                   </span>

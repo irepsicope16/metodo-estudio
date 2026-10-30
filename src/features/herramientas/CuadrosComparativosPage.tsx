@@ -85,10 +85,10 @@ export default function CuadrosComparativosPage() {
         <Input placeholder="Título (ej. Personajes de la novela)" value={titulo} onChange={(e) => setTitulo(e.target.value)} />
 
         <div className="overflow-x-auto rounded-xl border">
-          <table className="w-full min-w-[480px] border-collapse text-[13px]">
+          <table className="w-full min-w-[480px] border-collapse text-[14.5px]">
             <thead>
               <tr className="bg-accent-soft">
-                <th className="w-[150px] border-b p-2 text-left text-[11.5px] font-semibold text-faint">Criterio</th>
+                <th className="w-[150px] border-b p-2 text-left text-[13px] font-semibold text-faint">Criterio</th>
                 {columnas.map((col, i) => (
                   <th key={i} className="border-b p-1.5">
                     <div className="flex items-center gap-1">
@@ -96,7 +96,7 @@ export default function CuadrosComparativosPage() {
                         value={col}
                         onChange={(e) => setColumnas((c) => c.map((x, idx) => (idx === i ? e.target.value : x)))}
                         placeholder={`Elemento ${i + 1}`}
-                        className="h-8 text-[12.5px]"
+                        className="h-8 text-[14px]"
                       />
                       {columnas.length > 2 && (
                         <button onClick={() => quitarColumna(i)} aria-label="Quitar columna" className="shrink-0 text-faint hover:text-danger">
@@ -117,7 +117,7 @@ export default function CuadrosComparativosPage() {
                       value={fila.criterio}
                       onChange={(e) => setFilas((f) => f.map((x, idx) => (idx === i ? { ...x, criterio: e.target.value } : x)))}
                       placeholder="Criterio"
-                      className="h-8 text-[12.5px]"
+                      className="h-8 text-[14px]"
                     />
                   </td>
                   {fila.valores.map((v, j) => (
@@ -129,7 +129,7 @@ export default function CuadrosComparativosPage() {
                             f.map((x, idx) => (idx === i ? { ...x, valores: x.valores.map((vv, vj) => (vj === j ? e.target.value : vv)) } : x)),
                           )
                         }
-                        className="h-8 text-[12.5px]"
+                        className="h-8 text-[14px]"
                       />
                     </td>
                   ))}
@@ -198,7 +198,7 @@ export default function CuadrosComparativosPage() {
             <Card key={c.id}>
               <CardHeader>
                 <div className="flex items-start justify-between gap-2">
-                  <CardTitle className="text-[14px]">{c.titulo}</CardTitle>
+                  <CardTitle className="text-[15.5px]">{c.titulo}</CardTitle>
                   <div className="flex shrink-0 gap-1">
                     <Button variant="outline" size="sm" asChild>
                       <a href={`#/print/cuadro/${c.id}`} target="_blank" rel="noopener noreferrer">
@@ -212,7 +212,7 @@ export default function CuadrosComparativosPage() {
                 </div>
               </CardHeader>
               <CardContent className="cursor-pointer pt-0" onClick={() => setEditando(c.id)}>
-                <div className="overflow-hidden rounded-lg border text-[11px]">
+                <div className="overflow-hidden rounded-lg border text-[12.5px]">
                   <div className="grid" style={{ gridTemplateColumns: `100px repeat(${c.columnas.length}, 1fr)`, background: 'var(--color-accent-soft)' }}>
                     <div className="p-1.5" />
                     {c.columnas.map((col, i) => (
@@ -232,7 +232,7 @@ export default function CuadrosComparativosPage() {
                     </div>
                   ))}
                 </div>
-                {c.filas.length > 3 && <p className="mt-1.5 text-[11px] text-faint">+{c.filas.length - 3} filas más</p>}
+                {c.filas.length > 3 && <p className="mt-1.5 text-[12.5px] text-faint">+{c.filas.length - 3} filas más</p>}
               </CardContent>
             </Card>
           ))}

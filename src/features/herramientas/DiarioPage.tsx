@@ -48,7 +48,7 @@ export default function DiarioPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-[14px]">Nueva entrada</CardTitle>
+          <CardTitle className="text-[15.5px]">Nueva entrada</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 pt-0">
           <div>
@@ -82,14 +82,14 @@ export default function DiarioPage() {
           {entradas.map((e) => (
             <div key={e.id} className="flex items-start justify-between gap-3 rounded-xl border bg-surface p-3.5">
               <div className="min-w-0">
-                <p className="text-[13px] font-medium">{e.metodoUsado}</p>
+                <p className="text-[14.5px] font-medium">{e.metodoUsado}</p>
                 <div className="mt-0.5 flex items-center gap-1 text-warning">
                   {Array.from({ length: e.efectividad }).map((_, i) => (
                     <Star key={i} className="h-3 w-3 fill-current" />
                   ))}
                 </div>
-                {e.queCambiaria && <p className="mt-1 text-[12px] text-muted-foreground">{e.queCambiaria}</p>}
-                <p className="mt-1 text-[11px] text-faint">{fechaLarga(e.fecha)}</p>
+                {e.queCambiaria && <p className="mt-1 text-[13.5px] text-muted-foreground">{e.queCambiaria}</p>}
+                <p className="mt-1 text-[12.5px] text-faint">{fechaLarga(e.fecha)}</p>
               </div>
               <Button variant="ghost" size="iconSm" onClick={() => eliminar.mutate(e.id)} aria-label="Borrar entrada">
                 <Trash2 className="text-danger" />

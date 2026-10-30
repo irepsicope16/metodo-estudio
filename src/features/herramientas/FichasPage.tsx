@@ -134,8 +134,8 @@ export default function FichasPage() {
                 <CardHeader className="pb-1">
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-[11px] font-semibold uppercase tracking-wide text-faint">{f.tema}</span>
-                      <span className="rounded-full bg-surface-2 px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                      <span className="text-[12.5px] font-semibold uppercase tracking-wide text-faint">{f.tema}</span>
+                      <span className="rounded-full bg-surface-2 px-1.5 py-0.5 text-[11.5px] text-muted-foreground">
                         {etiquetaCaja(f.caja)}
                       </span>
                     </div>
@@ -148,10 +148,10 @@ export default function FichasPage() {
                   className="cursor-pointer select-none pt-0"
                   onClick={() => setVueltas((v) => ({ ...v, [f.id]: !v[f.id] }))}
                 >
-                  <p className={cn('text-[13.5px]', vuelta ? 'text-muted-foreground' : 'font-medium')}>
+                  <p className={cn('text-[15px]', vuelta ? 'text-muted-foreground' : 'font-medium')}>
                     {vuelta ? f.respuesta : f.pregunta}
                   </p>
-                  <p className="mt-3 text-[11px] text-faint">{vuelta ? 'Respuesta' : 'Pregunta'} · tocá para dar vuelta</p>
+                  <p className="mt-3 text-[12.5px] text-faint">{vuelta ? 'Respuesta' : 'Pregunta'} · tocá para dar vuelta</p>
                 </CardContent>
                 {vuelta && (
                   <div className="flex gap-2 border-t px-5 py-3">
@@ -271,11 +271,11 @@ function DialogoGenerarConIA({
         </DialogHeader>
         <div className="space-y-4">
           <div className="space-y-2 rounded-lg border bg-surface-2 p-3">
-            <p className="text-[12.5px] text-muted-foreground">
+            <p className="text-[14px] text-muted-foreground">
               1. Copiá este prompt y pegalo en una IA gratuita (ChatGPT, Gemini, etc.), seguido del texto que querés
               convertir en fichas — pegá el texto, no subas el PDF, así funciona en cualquiera.
             </p>
-            <Textarea value={PROMPT_IA} readOnly rows={6} className="font-mono text-[11px]" />
+            <Textarea value={PROMPT_IA} readOnly rows={6} className="font-mono text-[12.5px]" />
             <Button variant="outline" size="sm" onClick={copiarPrompt}>
               <Copy className="h-3.5 w-3.5" /> Copiar prompt
             </Button>
@@ -289,7 +289,7 @@ function DialogoGenerarConIA({
               rows={6}
               placeholder={'P: ¿Qué es...?\nR: Es...\n\nP: ¿Para qué sirve...?\nR: Sirve para...'}
             />
-            <p className="text-[11.5px] text-faint">
+            <p className="text-[13px] text-faint">
               {pares.length === 0 ? 'Todavía no detecté ninguna ficha con ese formato.' : `Detecté ${pares.length} ficha${pares.length === 1 ? '' : 's'}.`}
             </p>
           </div>

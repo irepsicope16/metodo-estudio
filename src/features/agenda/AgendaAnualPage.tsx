@@ -68,7 +68,7 @@ export default function AgendaAnualPage() {
         <Button variant="outline" size="sm" onClick={() => setAnioBase((a) => addYears(a, -1))}>
           ← {anioBase.getFullYear() - 1}
         </Button>
-        <span className="text-[16px] font-bold">{anioBase.getFullYear()}</span>
+        <span className="text-[17.5px] font-bold">{anioBase.getFullYear()}</span>
         <Button variant="outline" size="sm" onClick={() => setAnioBase((a) => addYears(a, 1))}>
           {anioBase.getFullYear() + 1} →
         </Button>
@@ -94,7 +94,7 @@ export default function AgendaAnualPage() {
       {diaSeleccionado && (
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center justify-between text-[15px]">
+            <CardTitle className="flex items-center justify-between text-[16.5px]">
               <span>{format(diaSeleccionado, "EEEE d 'de' MMMM", { locale: es })}</span>
               <Button variant="ghost" size="sm" onClick={() => setDiaSeleccionado(null)}>
                 Cerrar
@@ -120,7 +120,7 @@ export default function AgendaAnualPage() {
                         {e.completado && <Check className="h-3 w-3 text-white" />}
                       </button>
                       <Icon className="h-3.5 w-3.5 shrink-0" style={{ color: tipo.color }} />
-                      <span className={cn('flex-1 text-[13px] font-medium', e.completado && 'text-faint line-through')}>{e.titulo}</span>
+                      <span className={cn('flex-1 text-[14.5px] font-medium', e.completado && 'text-faint line-through')}>{e.titulo}</span>
                       <button onClick={() => eliminar.mutate(e.id)} aria-label="Borrar evento">
                         <Trash2 className="h-3.5 w-3.5 text-danger" />
                       </button>
@@ -152,10 +152,10 @@ function MiniCalendario({
   const dias = diasDelMes(mes)
   return (
     <div className="rounded-xl border bg-surface p-3">
-      <p className="mb-2 text-center text-[13px] font-bold capitalize">
+      <p className="mb-2 text-center text-[14.5px] font-bold capitalize">
         {MESES_ABBR[mes.getMonth()]} · {mes.getFullYear()}
       </p>
-      <div className="grid grid-cols-7 gap-0.5 text-center text-[9px] font-semibold uppercase text-faint">
+      <div className="grid grid-cols-7 gap-0.5 text-center text-[10.5px] font-semibold uppercase text-faint">
         {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d, i) => (
           <span key={i}>{d}</span>
         ))}
@@ -172,7 +172,7 @@ function MiniCalendario({
               onClick={() => onSeleccionar(dia)}
               disabled={!enEsteMes}
               className={cn(
-                'relative flex h-7 flex-col items-center justify-center rounded-md text-[10.5px]',
+                'relative flex h-7 flex-col items-center justify-center rounded-md text-[12px]',
                 !enEsteMes && 'invisible',
                 enEsteMes && !seleccionado && !hoy && 'hover:bg-surface-2',
                 hoy && !seleccionado && 'bg-accent-soft font-bold text-accent-strong',

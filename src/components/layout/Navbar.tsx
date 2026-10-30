@@ -55,7 +55,7 @@ export function Navbar() {
         {corriendo && !enCronometro && (
           <Link
             to="/herramientas/cronometro"
-            className="flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-semibold tabular-nums transition-colors hover:opacity-80"
+            className="flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[13.5px] font-semibold tabular-nums transition-colors hover:opacity-80"
             style={{ background: 'var(--color-primary-soft)', color: 'var(--color-primary-strong)' }}
           >
             <Timer className="h-3.5 w-3.5 animate-pulse" />
@@ -64,7 +64,7 @@ export function Navbar() {
           </Link>
         )}
         {racha > 0 && (
-          <span className="flex items-center gap-1 rounded-full bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-strong">
+          <span className="flex items-center gap-1 rounded-full bg-accent-soft px-2.5 py-1 text-[13.5px] font-semibold text-accent-strong">
             <Flame className="h-3.5 w-3.5" />
             {racha} {racha === 1 ? 'día' : 'días'}
           </span>
@@ -77,7 +77,7 @@ export function Navbar() {
         >
           {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
         </button>
-        {nombre && <span className="hidden text-[13px] font-medium sm:block">{nombre}</span>}
+        {nombre && <span className="hidden text-[14.5px] font-medium sm:block">{nombre}</span>}
       </div>
     </header>
   )

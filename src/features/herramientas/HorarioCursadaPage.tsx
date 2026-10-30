@@ -32,7 +32,7 @@ export default function HorarioCursadaPage() {
               <tr>
                 <th className="w-24"></th>
                 {DIAS_CURSADA.map((dia) => (
-                  <th key={dia} className="pb-1.5 text-[11.5px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  <th key={dia} className="pb-1.5 text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
                     {dia}
                   </th>
                 ))}
@@ -41,14 +41,14 @@ export default function HorarioCursadaPage() {
             <tbody>
               {BLOQUES_CURSADA.map((bloque, bi) => (
                 <tr key={bloque}>
-                  <td className="whitespace-nowrap pr-2 text-right text-[11px] font-medium text-faint">{bloque}</td>
+                  <td className="whitespace-nowrap pr-2 text-right text-[12.5px] font-medium text-faint">{bloque}</td>
                   {DIAS_CURSADA.map((_, di) => (
                     <td key={di}>
                       <input
                         value={celdas[`${di}-${bi}`] ?? ''}
                         onChange={(e) => setCelda(di, bi, e.target.value)}
                         placeholder="—"
-                        className="h-9 w-full rounded-lg border bg-surface-2 px-2 text-center text-[12px] placeholder:text-faint focus:border-accent focus:outline-none"
+                        className="h-9 w-full rounded-lg border bg-surface-2 px-2 text-center text-[13.5px] placeholder:text-faint focus:border-accent focus:outline-none"
                       />
                     </td>
                   ))}

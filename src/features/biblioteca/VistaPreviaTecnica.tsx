@@ -17,7 +17,7 @@ function SubrayadoColores() {
         <div key={c.label} className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: c.color }} />
           <span
-            className="truncate rounded px-1.5 py-0.5 text-[11px] font-medium"
+            className="truncate rounded px-1.5 py-0.5 text-[12.5px] font-medium"
             style={{ background: c.soft, color: c.color }}
           >
             {c.label}
@@ -40,7 +40,7 @@ function AnotacionesMargen() {
         <div key={i} className="flex items-center gap-2">
           <span className="h-1.5 flex-1 rounded-full bg-border-strong" style={{ maxWidth: n.ancho }} />
           <span
-            className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold"
+            className="shrink-0 rounded px-1.5 py-0.5 text-[11.5px] font-semibold"
             style={{ color: n.color, border: `1px solid ${n.color}` }}
           >
             {n.nota}
@@ -55,7 +55,7 @@ function MapaMental() {
   const ramas = ['Subtema 1', 'Subtema 2', 'Subtema 3']
   return (
     <div className="flex flex-col items-center">
-      <span className="rounded-full px-3 py-1 text-[11px] font-semibold text-white" style={{ background: 'var(--color-primary)' }}>
+      <span className="rounded-full px-3 py-1 text-[12.5px] font-semibold text-white" style={{ background: 'var(--color-primary)' }}>
         Tema
       </span>
       <div className="mt-1.5 flex w-full items-start justify-center gap-3">
@@ -63,7 +63,7 @@ function MapaMental() {
           <div key={r} className="flex flex-1 flex-col items-center">
             <span className="h-3 w-px bg-border-strong" />
             <span
-              className="mt-0.5 w-full truncate rounded px-1.5 py-0.5 text-center text-[10px] font-medium"
+              className="mt-0.5 w-full truncate rounded px-1.5 py-0.5 text-center text-[11.5px] font-medium"
               style={{ background: 'var(--color-secondary-soft)', color: 'var(--color-secondary)' }}
             >
               {r}
@@ -79,7 +79,7 @@ function CuadroComparativo() {
   const columnas = ['A', 'B']
   const filas = ['Criterio 1', 'Criterio 2']
   return (
-    <div className="overflow-hidden rounded-lg border text-[10px]">
+    <div className="overflow-hidden rounded-lg border text-[11.5px]">
       <div className="grid grid-cols-3" style={{ background: 'var(--color-accent-soft)' }}>
         <div className="p-1.5" />
         {columnas.map((c) => (
@@ -107,7 +107,7 @@ function LineaTiempo() {
       {puntos.map((p) => (
         <div key={p} className="relative z-10 flex flex-col items-center gap-1">
           <span className="h-2.5 w-2.5 rounded-full border-2" style={{ background: 'var(--surface)', borderColor: 'var(--color-mod-regular)' }} />
-          <span className="text-[10px] font-medium text-muted-foreground">{p}</span>
+          <span className="text-[11.5px] font-medium text-muted-foreground">{p}</span>
         </div>
       ))}
     </div>
@@ -116,7 +116,7 @@ function LineaTiempo() {
 
 function EsquemaLlaves() {
   return (
-    <div className="flex items-stretch gap-2 text-[10px]">
+    <div className="flex items-stretch gap-2 text-[11.5px]">
       <span className="font-semibold" style={{ color: 'var(--color-mod-aprender)' }}>
         Tema
       </span>

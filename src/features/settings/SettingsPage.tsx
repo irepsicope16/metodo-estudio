@@ -107,10 +107,10 @@ export default function SettingsPage() {
 
             {estudiantes.length > 1 && (
               <div className="mt-2 space-y-1.5 border-t pt-3">
-                <p className="text-[12px] font-medium text-muted-foreground">Todos los estudiantes en este dispositivo</p>
+                <p className="text-[13.5px] font-medium text-muted-foreground">Todos los estudiantes en este dispositivo</p>
                 {estudiantes.map((e) => (
                   <div key={e.id} className="flex items-center justify-between gap-2 rounded-lg border bg-surface-2 px-3 py-2">
-                    <span className="flex items-center gap-2 text-[13px]">
+                    <span className="flex items-center gap-2 text-[14.5px]">
                       {e.nombre}
                       {e.id === activoId && <Badge variant="primario">Activo</Badge>}
                     </span>
@@ -154,7 +154,7 @@ export default function SettingsPage() {
                   )}
                 >
                   <opt.icon className="h-4 w-4" />
-                  <span className="text-[12.5px] font-medium">{opt.label}</span>
+                  <span className="text-[14px] font-medium">{opt.label}</span>
                 </button>
               ))}
             </div>
@@ -175,8 +175,8 @@ export default function SettingsPage() {
           <CardContent>
             <div className="flex items-center justify-between gap-3 rounded-lg border bg-surface-2 p-3">
               <div>
-                <p className="text-[13px] font-medium">Aviso del navegador</p>
-                <p className="text-[11.5px] text-muted-foreground">
+                <p className="text-[14.5px] font-medium">Aviso del navegador</p>
+                <p className="text-[13px] text-muted-foreground">
                   {!soportaNotificaciones()
                     ? 'Tu navegador no admite este tipo de aviso.'
                     : permiso === 'denied'

@@ -127,7 +127,7 @@ export default function MemotestPage() {
     const cols = cartas.length <= 8 ? 4 : cartas.length <= 12 ? 4 : 6
     return (
       <FadeIn className="space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-2 text-[12.5px] text-muted-foreground">
+        <div className="flex flex-wrap items-center justify-between gap-2 text-[14px] text-muted-foreground">
           <span>
             {resueltas.size} de {totalPares} pares
           </span>
@@ -146,7 +146,7 @@ export default function MemotestPage() {
                 onClick={() => tocarCarta(c)}
                 disabled={resuelta}
                 className={cn(
-                  'flex min-h-[92px] items-center justify-center rounded-xl border p-2 text-center text-[11.5px] leading-snug transition-all sm:min-h-[110px] sm:text-[12.5px]',
+                  'flex min-h-[92px] items-center justify-center rounded-xl border p-2 text-center text-[13px] leading-snug transition-all sm:min-h-[110px] sm:text-[14px]',
                   resuelta
                     ? 'border-mod-regular bg-mod-regular-soft text-foreground'
                     : volteada
@@ -171,8 +171,8 @@ export default function MemotestPage() {
       <FadeIn className="mx-auto max-w-md space-y-5 text-center">
         <PartyPopper className="mx-auto h-10 w-10" style={{ color: 'var(--color-accent)' }} />
         <div>
-          <p className="text-[22px] font-semibold">¡Completado!</p>
-          <p className="mt-1 text-[13px] text-muted-foreground">
+          <p className="text-[23.5px] font-semibold">¡Completado!</p>
+          <p className="mt-1 text-[14.5px] text-muted-foreground">
             {intentos} intentos · {mmss(tiempoFinal)}
           </p>
         </div>
@@ -206,7 +206,7 @@ export default function MemotestPage() {
       <Card>
         <CardContent className="space-y-4 pt-5">
           <div>
-            <p className="mb-1.5 text-[12.5px] font-medium">Tema</p>
+            <p className="mb-1.5 text-[14px] font-medium">Tema</p>
             <NativeSelect value={temaElegido} onChange={(e) => setTemaElegido(e.target.value)}>
               <option value="todos">Todos los temas ({fichas.length} fichas)</option>
               {temas.map((t) => (
@@ -219,7 +219,7 @@ export default function MemotestPage() {
 
           {disponibles.length > 0 && (
             <div>
-              <p className="mb-1.5 text-[12.5px] font-medium">Cantidad de pares</p>
+              <p className="mb-1.5 text-[14px] font-medium">Cantidad de pares</p>
               <div className="flex flex-wrap gap-1.5">
                 {opcionesPares.map((n) => (
                   <Button key={n} size="sm" variant={paresElegidos === n ? 'default' : 'outline'} onClick={() => setParesElegidos(n)}>
@@ -228,7 +228,7 @@ export default function MemotestPage() {
                 ))}
               </div>
               {disponibles.length < 4 && (
-                <p className="mt-1.5 text-[11.5px] text-faint">Con menos de 4 fichas el juego es muy corto — creá alguna más si querés.</p>
+                <p className="mt-1.5 text-[13px] text-faint">Con menos de 4 fichas el juego es muy corto — creá alguna más si querés.</p>
               )}
             </div>
           )}

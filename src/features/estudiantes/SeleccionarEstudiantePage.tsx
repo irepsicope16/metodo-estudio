@@ -18,8 +18,8 @@ function SelectorDeRol({ onElegir }: { onElegir: (rol: Rol) => void }) {
     <FadeIn className="flex min-h-[70vh] items-center justify-center">
       <div className="w-full max-w-md text-center">
         <BrandCover className="mx-auto max-w-[220px]" />
-        <h1 className="font-display mt-6 text-[20px] font-semibold tracking-tight">¿Cómo vas a usar Método Estudio?</h1>
-        <p className="mt-2 text-[13.5px] leading-relaxed text-muted-foreground">
+        <h1 className="font-display mt-6 text-[21.5px] font-semibold tracking-tight">¿Cómo vas a usar Método Estudio?</h1>
+        <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
           Para conocer quién usa la app. No pedimos ningún dato personal.
         </p>
         <div className="mt-6 space-y-2.5 text-left">
@@ -33,7 +33,7 @@ function SelectorDeRol({ onElegir }: { onElegir: (rol: Rol) => void }) {
               <o.icon className="h-5 w-5 shrink-0 text-primary" />
               <span className="min-w-0 flex-1">
                 <span className="block font-medium">{o.label}</span>
-                <span className="block text-[12px] text-muted-foreground">{o.detalle}</span>
+                <span className="block text-[13.5px] text-muted-foreground">{o.detalle}</span>
               </span>
             </button>
           ))}
@@ -73,10 +73,10 @@ export function Bienvenida({ preview = false }: { preview?: boolean }) {
     <FadeIn className="flex min-h-[70vh] items-center justify-center">
       <div className="w-full max-w-md text-center">
         <BrandCover className="mx-auto max-w-[260px]" />
-        <h1 className="font-display mt-6 text-[22px] font-semibold tracking-tight">
+        <h1 className="font-display mt-6 text-[23.5px] font-semibold tracking-tight">
           {estudiantes.length === 0 ? 'Descubrí cómo estudiás mejor' : '¿Con quién vas a trabajar ahora?'}
         </h1>
-        <p className="mt-2 text-[14px] leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-[15.5px] leading-relaxed text-muted-foreground">
           Un autoperfil, una biblioteca de técnicas y herramientas para probar qué funciona — cada estudiante
           con su propio espacio, sin mezclar datos entre sí. Todo queda guardado en este dispositivo.
         </p>
@@ -124,8 +124,8 @@ export function Bienvenida({ preview = false }: { preview?: boolean }) {
           </div>
         )}
 
-        <p className="mt-5 text-[12px] text-faint">{MENSAJES.emergencia}</p>
-        <p className="mt-3 text-[11px] leading-relaxed text-faint">
+        <p className="mt-5 text-[13.5px] text-faint">{MENSAJES.emergencia}</p>
+        <p className="mt-3 text-[12.5px] leading-relaxed text-faint">
           Método Estudio es una herramienta creada por la Lic. Irene Morbidelli (Psicopedagoga).
           <br />
           Prohibida su venta o copia sin autorización. ·{' '}

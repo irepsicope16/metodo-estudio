@@ -38,7 +38,7 @@ export function Sidebar() {
       <div className="flex h-14 items-center gap-2 border-b px-4">
         <button onClick={() => navigate('/')} className="flex cursor-pointer items-center gap-2" aria-label="Ir al inicio">
           <Isotipo size={28} />
-          <span className="font-display text-[14.5px] font-semibold tracking-tight">Método Estudio</span>
+          <span className="font-display text-[16px] font-semibold tracking-tight">Método Estudio</span>
         </button>
       </div>
 
@@ -49,7 +49,7 @@ export function Sidebar() {
           className="flex w-full cursor-pointer items-center gap-2 border-b px-4 py-2.5 text-left transition-colors hover:bg-surface-2"
         >
           <Users className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-          <span className="min-w-0 flex-1 truncate text-[12.5px] text-muted-foreground">
+          <span className="min-w-0 flex-1 truncate text-[14px] text-muted-foreground">
             <span className="font-medium text-foreground">{activo.nombre}</span> · cambiar
           </span>
         </button>
@@ -64,7 +64,7 @@ export function Sidebar() {
                 end={item.end}
                 className={({ isActive }) =>
                   cn(
-                    'flex items-center gap-2.5 rounded-lg border-l-[3px] px-2.5 py-1.5 text-[13px] font-medium transition-all',
+                    'flex items-center gap-2.5 rounded-lg border-l-[3px] px-2.5 py-1.5 text-[14.5px] font-medium transition-all',
                     isActive ? 'font-semibold shadow-[0_1px_2px_rgba(16,24,32,0.03)]' : 'text-muted-foreground hover:bg-surface-2',
                   )
                 }
@@ -87,7 +87,7 @@ export function Sidebar() {
           to="/ajustes"
           className={({ isActive }) =>
             cn(
-              'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors',
+              'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-[14.5px] font-medium transition-colors',
               isActive ? 'bg-surface-2 text-foreground' : 'text-muted-foreground hover:bg-surface-2 hover:text-foreground',
             )
           }

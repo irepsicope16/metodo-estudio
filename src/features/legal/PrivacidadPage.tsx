@@ -10,7 +10,7 @@ export default function PrivacidadPage() {
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <Isotipo size={28} />
-            <span className="font-display text-[15px] font-semibold tracking-tight">Método Estudio</span>
+            <span className="font-display text-[16.5px] font-semibold tracking-tight">Método Estudio</span>
           </div>
           <Button asChild variant="outline" size="sm">
             <Link to="/">
@@ -19,12 +19,12 @@ export default function PrivacidadPage() {
           </Button>
         </div>
 
-        <h1 className="font-display text-[22px] font-semibold tracking-tight">Privacidad y términos de uso</h1>
-        <p className="mt-1 text-[12.5px] text-faint">Última actualización: octubre de 2026.</p>
+        <h1 className="font-display text-[23.5px] font-semibold tracking-tight">Privacidad y términos de uso</h1>
+        <p className="mt-1 text-[14px] text-faint">Última actualización: octubre de 2026.</p>
 
-        <div className="mt-6 space-y-6 text-[13.5px] leading-relaxed text-foreground">
+        <div className="mt-6 space-y-6 text-[15px] leading-relaxed text-foreground">
           <section>
-            <h2 className="text-[14.5px] font-semibold">Tu cuenta</h2>
+            <h2 className="text-[16px] font-semibold">Tu cuenta</h2>
             <p className="mt-1.5 text-muted-foreground">
               Para usar Método Estudio pedimos un mail y una contraseña (si quien se registra es menor de edad, el
               mail tiene que ser el de un adulto responsable). Ese mail, la contraseña y el rol elegido (profesional o
@@ -34,7 +34,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section>
-            <h2 className="text-[14.5px] font-semibold">Dónde vive el resto de tu información</h2>
+            <h2 className="text-[16px] font-semibold">Dónde vive el resto de tu información</h2>
             <p className="mt-1.5 text-muted-foreground">
               Todo lo que cargás dentro de la app una vez que entraste — respuestas del autoperfil, actividades,
               fichas, mapas, el diario de metacognición, el progreso — queda guardado únicamente en el almacenamiento
@@ -43,7 +43,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section>
-            <h2 className="text-[14.5px] font-semibold">Qué implica esto en la práctica</h2>
+            <h2 className="text-[16px] font-semibold">Qué implica esto en la práctica</h2>
             <ul className="mt-1.5 list-disc space-y-1.5 pl-5 text-muted-foreground">
               <li>Nadie más que vos (ni siquiera nosotros) puede ver lo que cargaste.</li>
               <li>
@@ -58,7 +58,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section>
-            <h2 className="text-[14.5px] font-semibold">Analítica de uso</h2>
+            <h2 className="text-[16px] font-semibold">Analítica de uso</h2>
             <p className="mt-1.5 text-muted-foreground">
               Para saber de forma agregada cuánta gente usa la app, registramos un único evento anónimo la primera vez
               que se abre en un dispositivo nuevo: si quien la usa se identificó como "profesional" o "estudiante o
@@ -69,7 +69,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section>
-            <h2 className="text-[14.5px] font-semibold">Uso por menores de edad</h2>
+            <h2 className="text-[16px] font-semibold">Uso por menores de edad</h2>
             <p className="mt-1.5 text-muted-foreground">
               Método Estudio puede ser usada por estudiantes menores de edad. Recomendamos que su uso esté acompañado
               o supervisado por un adulto responsable o por el profesional a cargo del seguimiento. La app es una
@@ -79,7 +79,7 @@ export default function PrivacidadPage() {
           </section>
 
           <section>
-            <h2 className="text-[14.5px] font-semibold">Propiedad y uso del contenido</h2>
+            <h2 className="text-[16px] font-semibold">Propiedad y uso del contenido</h2>
             <p className="mt-1.5 text-muted-foreground">
               Método Estudio es una herramienta creada por la Lic. Irene Morbidelli (Psicopedagoga). Está prohibida su
               reventa, redistribución o copia sin autorización.

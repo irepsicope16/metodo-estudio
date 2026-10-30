@@ -101,10 +101,10 @@ export default function HerramientasPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-3">
                   <IconBadge icon={h.icon} tone={h.tono} size="lg" />
-                  <span className="font-baloo text-[20px] font-bold leading-tight tracking-tight">{h.titulo}</span>
+                  <span className="font-baloo text-[21.5px] font-bold leading-tight tracking-tight">{h.titulo}</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="pt-0 text-[16px] leading-relaxed text-muted-foreground">{h.descripcion}</CardContent>
+              <CardContent className="pt-0 text-[17.5px] leading-relaxed text-muted-foreground">{h.descripcion}</CardContent>
             </Card>
           </Link>
         ))}

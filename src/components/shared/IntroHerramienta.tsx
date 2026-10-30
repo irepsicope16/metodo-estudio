@@ -48,7 +48,7 @@ export function IntroHerramienta({
       <button
         type="button"
         onClick={alternar}
-        className="flex w-full items-center justify-between rounded-xl border border-dashed bg-surface-2 px-4 py-2.5 text-[12.5px] font-medium text-muted-foreground transition-colors hover:bg-surface"
+        className="flex w-full items-center justify-between rounded-xl border border-dashed bg-surface-2 px-4 py-2.5 text-[14px] font-medium text-muted-foreground transition-colors hover:bg-surface"
       >
         ¿Qué es esto y cómo se usa?
         <ChevronDown className="h-4 w-4" />
@@ -61,10 +61,10 @@ export function IntroHerramienta({
       <CardContent className="flex flex-col gap-4 pt-5 sm:flex-row sm:items-start">
         <div className="flex justify-center sm:justify-start">{ilustracion}</div>
         <div className="min-w-0 flex-1 space-y-3">
-          <p className="text-[13.5px] leading-relaxed">{queEs}</p>
+          <p className="text-[15px] leading-relaxed">{queEs}</p>
           <div>
-            <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-faint">Cómo se hace</p>
-            <ol className="space-y-1 text-[12.5px] leading-relaxed text-muted-foreground">
+            <p className="mb-1 text-[12.5px] font-semibold uppercase tracking-wide text-faint">Cómo se hace</p>
+            <ol className="space-y-1 text-[14px] leading-relaxed text-muted-foreground">
               {comoSeHace.map((paso, i) => (
                 <li key={i} className="flex gap-1.5">
                   <span className="shrink-0 font-semibold text-primary">{i + 1}.</span>
@@ -75,14 +75,14 @@ export function IntroHerramienta({
           </div>
           {ejemplo && (
             <div className="rounded-lg border bg-surface-2 px-3 py-2">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">Ejemplo</p>
-              <p className="mt-0.5 text-[12.5px] leading-relaxed text-muted-foreground">{ejemplo}</p>
+              <p className="text-[12.5px] font-semibold uppercase tracking-wide text-faint">Ejemplo</p>
+              <p className="mt-0.5 text-[14px] leading-relaxed text-muted-foreground">{ejemplo}</p>
             </div>
           )}
           <button
             type="button"
             onClick={alternar}
-            className="flex items-center gap-1 text-[11.5px] font-medium text-faint hover:text-foreground"
+            className="flex items-center gap-1 text-[13px] font-medium text-faint hover:text-foreground"
           >
             <ChevronUp className="h-3.5 w-3.5" /> Ocultar
           </button>

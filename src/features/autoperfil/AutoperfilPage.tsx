@@ -97,7 +97,7 @@ export default function AutoperfilPage() {
               <CardTitle>
                 {dimension} · {DIMENSIONES[dimension].nombre}
               </CardTitle>
-              <span className="text-[12px] text-faint">{step + 1} / {totalSteps}</span>
+              <span className="text-[13.5px] text-faint">{step + 1} / {totalSteps}</span>
             </div>
             <Progress value={(completosEnDimension / items.length) * 100} className="mt-2" />
             <CardDescription className="mt-1">
@@ -113,7 +113,7 @@ export default function AutoperfilPage() {
                   className="rounded-lg border-l-[3px] bg-surface p-3 shadow-[0_1px_2px_rgba(16,24,32,0.04)]"
                   style={{ borderLeftColor: colorArea?.color }}
                 >
-                  <p className="mb-2.5 text-[15.5px] font-semibold leading-snug" style={{ color: colorArea?.color }}>
+                  <p className="mb-2.5 text-[17px] font-semibold leading-snug" style={{ color: colorArea?.color }}>
                     {item.enunciado}
                   </p>
                   <div className="flex flex-wrap gap-1.5">
@@ -123,7 +123,7 @@ export default function AutoperfilPage() {
                         type="button"
                         onClick={() => responder(item.codigo, op.valor)}
                         className={cn(
-                          'rounded-full border px-3 py-1 text-[12px] font-medium transition-colors',
+                          'rounded-full border px-3 py-1 text-[13.5px] font-medium transition-colors',
                           r?.valor === op.valor ? 'border-primary bg-primary-soft text-primary-strong' : 'hover:bg-surface-2',
                         )}
                       >
@@ -142,7 +142,7 @@ export default function AutoperfilPage() {
           </Button>
           <Button onClick={() => setStep((s) => s + 1)}>{step === DIMENSION_IDS.length - 1 ? 'Ir a preguntas abiertas' : 'Siguiente área'}</Button>
         </div>
-        <p className="text-[12px] text-faint">Progreso global: {progresoGlobal}%. Se guarda automáticamente.</p>
+        <p className="text-[13.5px] text-faint">Progreso global: {progresoGlobal}%. Se guarda automáticamente.</p>
       </FadeIn>
     )
   }
@@ -207,7 +207,7 @@ function PreguntasAbiertasStep({
         <CardContent className="space-y-4 pt-0">
           {PREGUNTAS_ABIERTAS.map((p) => (
             <div key={p.id}>
-              <label className="mb-1.5 block text-[13px] font-medium">{p.texto}</label>
+              <label className="mb-1.5 block text-[14.5px] font-medium">{p.texto}</label>
               <Textarea
                 value={textos[p.id] ?? ''}
                 onChange={(e) => setTextos((prev) => ({ ...prev, [p.id]: e.target.value }))}
@@ -237,7 +237,7 @@ function PreguntasAbiertasStep({
             </div>
           </div>
           {!completo && (
-            <p className="text-[12px] text-faint">
+            <p className="text-[13.5px] text-faint">
               Todavía te faltan preguntas en alguna área para poder ver los resultados — volvé a las áreas y completalas.
             </p>
           )}
@@ -267,10 +267,10 @@ function ResultadosAutoperfil({ onVolver }: { onVolver: () => void }) {
       {rutaPrioritaria && prioritaria && (
         <Card className="border-t-[3px]" style={dimensionCardStyle(prioritaria.dimension)}>
           <CardHeader>
-            <CardTitle className="text-[15px]">
+            <CardTitle className="text-[16.5px]">
               Tu primer paso: {DIMENSIONES[prioritaria.dimension].nombre}
             </CardTitle>
-            <CardDescription className="text-[12.5px]">
+            <CardDescription className="text-[14px]">
               {ETIQUETA_BANDA[prioritaria.banda!]} — empezá por acá, no hace falta leer todo lo demás todavía.
             </CardDescription>
           </CardHeader>
@@ -292,14 +292,14 @@ function ResultadosAutoperfil({ onVolver }: { onVolver: () => void }) {
             <Card key={snap.dimension} className="border-t-[3px]" style={dimensionCardStyle(snap.dimension)}>
               <CardHeader>
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <CardTitle className="text-[14px]">
+                  <CardTitle className="text-[15.5px]">
                     {snap.dimension} · {DIMENSIONES[snap.dimension].nombre}
                   </CardTitle>
                   {snap.banda && <Badge variant={BADGE_POR_BANDA[snap.banda]}>{snap.banda}</Badge>}
                 </div>
               </CardHeader>
               <CardContent className="space-y-2.5 pt-0">
-                <p className="text-[12.5px] text-muted-foreground">
+                <p className="text-[14px] text-muted-foreground">
                   {snap.banda ? ETIQUETA_BANDA[snap.banda] : 'Te faltó completar suficientes preguntas de esta área.'}
                 </p>
                 {rutasSugeridas.length > 0 && (
@@ -308,7 +308,7 @@ function ResultadosAutoperfil({ onVolver }: { onVolver: () => void }) {
                       <Link
                         key={r.id}
                         to={`/biblioteca?ruta=${r.id}`}
-                        className="rounded-full border px-2.5 py-1 text-[11.5px] font-medium transition-colors hover:bg-surface-2"
+                        className="rounded-full border px-2.5 py-1 text-[13px] font-medium transition-colors hover:bg-surface-2"
                         style={{ borderTopColor: RUTA_COLOR[r.id]?.color, borderTopWidth: 2 }}
                       >
                         {r.nombre}

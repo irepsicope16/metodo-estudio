@@ -18,8 +18,8 @@ export function PageHeader({
   return (
     <div className={cn('mb-6 flex flex-wrap items-end justify-between gap-3', className)}>
       <div>
-        <h1 className="font-display text-[35px] font-bold leading-tight tracking-tight">{title}</h1>
-        {subtitle && <p className="mt-1.5 text-[15.5px] leading-relaxed text-muted-foreground">{subtitle}</p>}
+        <h1 className="font-display text-[36.5px] font-bold leading-tight tracking-tight">{title}</h1>
+        {subtitle && <p className="mt-1.5 text-[17px] leading-relaxed text-muted-foreground">{subtitle}</p>}
       </div>
       {actions && <div className="flex items-center gap-2">{actions}</div>}
     </div>
@@ -44,8 +44,8 @@ export function EmptyState({
       <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-surface-2">
         <Icon className="h-5 w-5 text-faint" />
       </div>
-      <p className="text-sm font-medium">{title}</p>
-      {description && <p className="mt-1 max-w-sm text-[13px] text-muted-foreground">{description}</p>}
+      <p className="text-[15.5px] font-medium">{title}</p>
+      {description && <p className="mt-1 max-w-sm text-[14.5px] text-muted-foreground">{description}</p>}
       {action && <div className="mt-4">{action}</div>}
     </div>
   )
@@ -81,10 +81,10 @@ export function StatCard({
         <div className={cn('flex h-8 w-8 items-center justify-center rounded-lg', t.badge)}>
           <Icon className="h-4 w-4" />
         </div>
-        <span className="text-[12.5px] font-medium">{label}</span>
+        <span className="text-[14px] font-medium">{label}</span>
       </div>
-      <div className="mt-2 text-[30px] font-semibold tracking-tight">{value}</div>
-      {hint && <p className="mt-0.5 text-[12px] text-faint">{hint}</p>}
+      <div className="mt-2 text-[31.5px] font-semibold tracking-tight">{value}</div>
+      {hint && <p className="mt-0.5 text-[13.5px] text-faint">{hint}</p>}
     </div>
   )
 }
@@ -142,7 +142,7 @@ export function InsigniasRow({ insignias, className }: { insignias: Insignia[]; 
           key={i.id}
           title={i.descripcion}
           className={cn(
-            'flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[12px] font-medium transition-colors',
+            'flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[13.5px] font-medium transition-colors',
             i.conseguida ? 'border-accent/40 bg-accent-soft text-accent-strong' : 'border-dashed text-faint',
           )}
         >
@@ -157,7 +157,7 @@ export function InsigniasRow({ insignias, className }: { insignias: Insignia[]; 
 /** Aviso obligatorio (Anexo C del documento maestro): la herramienta orienta, no diagnostica. */
 export function AvisoOrientativo({ children, className }: { children?: React.ReactNode; className?: string }) {
   return (
-    <p className={cn('rounded-lg border border-dashed bg-surface-2 px-3 py-2 text-[12px] text-muted-foreground', className)}>
+    <p className={cn('rounded-lg border border-dashed bg-surface-2 px-3 py-2 text-[13.5px] text-muted-foreground', className)}>
       {children ?? 'Esta herramienta orienta la intervención y no reemplaza una evaluación diagnóstica.'}
     </p>
   )

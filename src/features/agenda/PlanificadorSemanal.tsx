@@ -109,7 +109,7 @@ export function PlanificadorSemanal({
           <Button variant="outline" size="iconSm" onClick={() => setSemanaBase((s) => addWeeks(s, -1))} aria-label="Semana anterior">
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          <span className="min-w-[180px] text-center text-[13.5px] font-semibold">
+          <span className="min-w-[180px] text-center text-[15px] font-semibold">
             {format(inicio, "d 'de' MMM", { locale: es })} – {format(fin, "d 'de' MMM", { locale: es })}
           </span>
           <Button variant="outline" size="iconSm" onClick={() => setSemanaBase((s) => addWeeks(s, 1))} aria-label="Semana siguiente">
@@ -118,7 +118,7 @@ export function PlanificadorSemanal({
         </div>
         <div className="flex items-center gap-2">
           {pendientesSemana > 0 && (
-            <span className="text-[12px] text-muted-foreground">
+            <span className="text-[13.5px] text-muted-foreground">
               {pendientesSemana} {pendientesSemana === 1 ? 'pendiente' : 'pendientes'} esta semana
             </span>
           )}
@@ -149,20 +149,20 @@ export function PlanificadorSemanal({
               <div className="flex items-center justify-between">
                 <div>
                   <p
-                    className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide"
+                    className="flex items-center gap-1.5 text-[12.5px] font-bold uppercase tracking-wide"
                     style={{ color: oscuro ? 'rgba(255,255,255,0.95)' : diaColor.strong }}
                   >
                     {format(dia, 'EEEE', { locale: es })}
                     {hoy && (
                       <span
-                        className="rounded-full px-1.5 py-0.5 text-[9px] text-white"
+                        className="rounded-full px-1.5 py-0.5 text-[10.5px] text-white"
                         style={{ background: oscuro ? 'rgba(255,255,255,0.3)' : diaColor.strong }}
                       >
                         HOY
                       </span>
                     )}
                   </p>
-                  <p className={cn('text-[15px] font-bold', oscuro && 'text-white')}>{format(dia, 'd MMM', { locale: es })}</p>
+                  <p className={cn('text-[16.5px] font-bold', oscuro && 'text-white')}>{format(dia, 'd MMM', { locale: es })}</p>
                 </div>
                 <button
                   onClick={() => abrirNuevo(dia)}
@@ -175,7 +175,7 @@ export function PlanificadorSemanal({
 
               <div className="flex flex-1 flex-col gap-1.5">
                 {eventosDia.length === 0 ? (
-                  <p className={cn('mt-2 text-[11px]', oscuro ? 'text-white/70' : 'text-faint')}>Sin eventos</p>
+                  <p className={cn('mt-2 text-[12.5px]', oscuro ? 'text-white/70' : 'text-faint')}>Sin eventos</p>
                 ) : (
                   eventosDia.map((e) => {
                     const tipo = tipos[e.tipo]
@@ -198,11 +198,11 @@ export function PlanificadorSemanal({
                         <div className="min-w-0 flex-1">
                           <div className="flex items-start gap-1">
                             <Icon className="mt-0.5 h-3 w-3 shrink-0" style={{ color: tipo.color }} />
-                            <p className={cn('break-words text-[11.5px] font-medium', e.completado && 'text-faint line-through')}>
+                            <p className={cn('break-words text-[13px] font-medium', e.completado && 'text-faint line-through')}>
                               {e.titulo}
                             </p>
                           </div>
-                          {e.nota && <p className="break-words text-[10.5px] text-muted-foreground">{e.nota}</p>}
+                          {e.nota && <p className="break-words text-[12px] text-muted-foreground">{e.nota}</p>}
                         </div>
                         <button onClick={() => eliminar.mutate(e.id)} className="shrink-0" aria-label="Borrar evento">
                           <Trash2 className="h-3 w-3 text-danger" />
@@ -320,7 +320,7 @@ function DialogoNuevoEvento({
             <Input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
           </div>
           <div>
-            <label className="flex items-center gap-2 text-[13px]">
+            <label className="flex items-center gap-2 text-[14.5px]">
               <input type="checkbox" checked={repetir} onChange={(e) => setRepetir(e.target.checked)} className="h-4 w-4" />
               Repetir todas las semanas
             </label>

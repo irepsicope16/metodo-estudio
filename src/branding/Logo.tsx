@@ -34,10 +34,10 @@ export function LogoHorizontal({ className, size = 30 }: LogoProps) {
     <div className={cn('flex items-center gap-2.5', className)}>
       <Isotipo size={size} />
       <div className="flex flex-col leading-none">
-        <span className="font-display text-[16px] font-semibold tracking-tight text-foreground">
+        <span className="font-display text-[17.5px] font-semibold tracking-tight text-foreground">
           Método <span className="text-accent">Estudio</span>
         </span>
-        <span className="mt-0.5 text-[10px] font-medium tracking-[0.14em] text-faint uppercase">
+        <span className="mt-0.5 text-[11.5px] font-medium tracking-[0.14em] text-faint uppercase">
           Lic. Irene Morbidelli
         </span>
       </div>
@@ -55,7 +55,7 @@ export function BrandCover({ className }: { className?: string }) {
         className="mx-auto w-full max-w-[220px]"
         style={{ filter: 'drop-shadow(0 14px 20px color-mix(in srgb, var(--color-accent) 35%, transparent))' }}
       />
-      <p className="mt-3 text-center text-[11.5px] font-bold uppercase tracking-[0.18em] text-accent-strong">
+      <p className="mt-3 text-center text-[13px] font-bold uppercase tracking-[0.18em] text-accent-strong">
         Conocé · Practicá · Mejorá
       </p>
     </div>
