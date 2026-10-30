@@ -3,7 +3,7 @@ import { BookOpenCheck, Brain, ClipboardCheck, Columns3, Gamepad2, History, List
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { FadeIn, IconBadge, PageHeader } from '@/components/shared'
 
-const HERRAMIENTAS = [
+export const HERRAMIENTAS = [
   {
     to: '/herramientas/cronometro',
     icon: Timer,

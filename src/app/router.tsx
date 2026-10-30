@@ -7,6 +7,7 @@ import { AppShell } from '@/components/layout/AppShell'
 
 const InicioPage = lazy(() => import('@/features/home/InicioPage'))
 const BienvenidaPreviewPage = lazy(() => import('@/features/home/BienvenidaPreviewPage'))
+const GuiaUsoPage = lazy(() => import('@/features/home/GuiaUsoPage'))
 const AutoperfilPage = lazy(() => import('@/features/autoperfil/AutoperfilPage'))
 const BibliotecaPage = lazy(() => import('@/features/biblioteca/BibliotecaPage'))
 const ActividadesPage = lazy(() => import('@/features/actividades/ActividadesPage'))
@@ -61,6 +62,7 @@ export const router = createHashRouter([
     children: [
       { path: '/', element: <Page><InicioPage /></Page> },
       { path: '/bienvenida', element: <Page><BienvenidaPreviewPage /></Page> },
+      { path: '/guia', element: <Page><GuiaUsoPage /></Page> },
       { path: '/autoperfil', element: <Page><AutoperfilPage /></Page> },
       { path: '/biblioteca', element: <Page><BibliotecaPage /></Page> },
       { path: '/actividades', element: <Page><ActividadesPage /></Page> },

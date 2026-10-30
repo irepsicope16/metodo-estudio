@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { addDays, format, isWithinInterval, startOfDay } from 'date-fns'
 import { es } from 'date-fns/locale'
-import { BookOpen, CalendarDays, Clock, Flame, Lightbulb, ListChecks, Sparkles, Timer, Trophy } from 'lucide-react'
+import { BookOpen, CalendarDays, Clock, Compass, Flame, Lightbulb, ListChecks, Sparkles, Timer, Trophy } from 'lucide-react'
 import { useEstudiantesStore } from '@/stores/estudiantesStore'
 import { useUIStore } from '@/stores/uiStore'
 import {
@@ -103,6 +103,22 @@ export default function InicioPage() {
           <EscritorioEstudio className="hidden h-[150px] w-[220px] shrink-0 sm:block" />
         </div>
       </div>
+
+      <Link
+        to="/guia"
+        className="flex items-center gap-4 rounded-2xl p-5 text-left shadow-[0_10px_24px_-12px_var(--color-accent)] transition-transform hover:-translate-y-0.5"
+        style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-accent))' }}
+      >
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/15">
+          <Compass className="h-6 w-6 text-white" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="text-[19px] font-bold leading-tight text-white">¿Cómo usar Método Estudio?</p>
+          <p className="mt-0.5 text-[13.5px] leading-relaxed text-white/85">
+            Por dónde empezar, qué hace cada herramienta, y la diferencia entre Agenda y Planificadores.
+          </p>
+        </div>
+      </Link>
 
       <Card className="border-primary/15 bg-primary-soft/40">
         <CardHeader>
