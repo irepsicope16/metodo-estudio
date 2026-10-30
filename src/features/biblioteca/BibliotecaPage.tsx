@@ -36,11 +36,13 @@ const NIVEL_BADGE_VARIANT: Record<NivelHerramienta, 'celeste' | 'primario' | 'ac
 
 const NIVEL_ORDEN: NivelHerramienta[] = [1, 2, 3]
 
-/** Mismos colores que las fichas (celeste/azul/rojo) pero pensados para un botón clickeable. */
-const NIVEL_FILTRO_COLOR: Record<NivelHerramienta, { fondo: string; texto: string }> = {
-  1: { fondo: 'var(--color-surface-2)', texto: 'var(--color-primary)' },
-  2: { fondo: 'var(--color-primary)', texto: 'var(--color-primary-foreground)' },
-  3: { fondo: 'var(--color-accent)', texto: 'var(--color-accent-foreground)' },
+/** Mismos colores que las fichas (celeste/azul/rojo) pero pensados para un botón clickeable.
+ *  Siempre rellenos (no solo con borde) para que se distingan del fondo de la tarjeta sin
+ *  depender de si están seleccionados o no. */
+const NIVEL_FILTRO_COLOR: Record<NivelHerramienta, { fondo: string; texto: string; anillo: string }> = {
+  1: { fondo: 'var(--color-surface-2)', texto: 'var(--color-primary)', anillo: 'var(--color-primary)' },
+  2: { fondo: 'var(--color-primary)', texto: 'var(--color-primary-foreground)', anillo: 'var(--color-primary-strong)' },
+  3: { fondo: 'var(--color-accent)', texto: 'var(--color-accent-foreground)', anillo: 'var(--color-accent-strong)' },
 }
 
 const VISTA_COLOR = {
@@ -163,8 +165,14 @@ export default function BibliotecaPage() {
                 key={n}
                 type="button"
                 onClick={() => setFiltro(n)}
-                className="h-8 rounded-lg border-[1.5px] px-3.5 text-[13.5px] font-semibold transition-colors"
-                style={activo ? { background: c.fondo, borderColor: c.fondo, color: c.texto } : { background: 'transparent', borderColor: c.fondo, color: 'var(--color-foreground)' }}
+                className="h-8 rounded-lg px-3.5 text-[13.5px] font-semibold shadow-sm transition-all"
+                style={{
+                  background: c.fondo,
+                  color: c.texto,
+                  outline: activo ? `2.5px solid ${c.anillo}` : '2.5px solid transparent',
+                  outlineOffset: '2px',
+                  opacity: filtro !== 'todos' && !activo ? 0.6 : 1,
+                }}
               >
                 {NIVEL_LABEL[n]}
               </button>
