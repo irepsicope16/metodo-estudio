@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { CheckCircle2, Circle, Lightbulb, ListChecks, PenLine, Star, Timer, Trash2 } from 'lucide-react'
+import { ArrowDown, CheckCircle2, Circle, Lightbulb, ListChecks, PenLine, Star, Timer, Trash2 } from 'lucide-react'
 import {
   useActividadesProbadas,
   useActualizarActividad,
@@ -15,13 +15,21 @@ import { Label, Textarea } from '@/components/ui/input'
 import { AvisoOrientativo, EmptyState, FadeIn, PageHeader } from '@/components/shared'
 import { toast } from '@/components/ui/toast'
 import { fechaCorta } from '@/lib/utils'
-import { moduleCardStyle, RUTA_COLOR } from '@/lib/moduleColors'
+import { RUTA_COLOR } from '@/lib/moduleColors'
 import { RUTAS } from '@/data/rutas'
 import { ACTIVIDADES } from '@/data/actividades'
 import type { ActividadCatalogo, ActividadProbada, NivelActividad } from '@/types'
 
 const NIVEL_LABEL: Record<NivelActividad, string> = { 1: 'Principiante', 2: 'Medio', 3: 'Superior' }
 const NIVEL_BADGE_VARIANT: Record<NivelActividad, 'celeste' | 'primario' | 'acento'> = { 1: 'celeste', 2: 'primario', 3: 'acento' }
+const NIVEL_ORDEN: NivelActividad[] = [1, 2, 3]
+
+/** Colores de "camino" por nivel: toda la ficha tinte de ese color, no solo el borde. */
+const NIVEL_PASO_ESTILO: Record<NivelActividad, { fondo: string; borde: string; circuloFondo: string; circuloTexto: string }> = {
+  1: { fondo: '#eaf2fb', borde: '#a9c9e8', circuloFondo: '#223346', circuloTexto: '#c8e0f5' },
+  2: { fondo: 'var(--color-primary-soft)', borde: 'var(--color-secondary)', circuloFondo: '#223346', circuloTexto: '#ffffff' },
+  3: { fondo: 'var(--color-accent-soft)', borde: '#cf9a92', circuloFondo: 'var(--color-accent)', circuloTexto: '#ffffff' },
+}
 
 type FiltroNivel = 'todos' | NivelActividad
 
@@ -106,79 +114,80 @@ export default function ActividadesPage() {
                 }}
                 className={destacada ? 'scroll-mt-4 rounded-xl p-2 ring-2 ring-accent ring-offset-4 ring-offset-background' : 'scroll-mt-4'}
               >
-                <div className="mb-2.5 flex flex-wrap items-center gap-2">
+                <div className="mb-3 flex flex-wrap items-center gap-2">
                   <h3 className="text-[13.5px] font-semibold tracking-tight">{ruta.nombre}</h3>
                   {destacada && <Badge variant="acento">Recomendada para vos</Badge>}
                 </div>
-                <div className="grid gap-2.5 lg:grid-cols-2">
-                  {fichas.map((actividad, idx) => {
-                    const probadaActual = probadaDe(actividad.id)
-                    const completada = probadaActual?.estado === 'completada'
-                    const Icon = actividad.nivel === 1 ? actividad.icon : undefined
+                {(() => {
+                  let contador = 0
+                  return NIVEL_ORDEN.filter((nivel) => fichas.some((a) => a.nivel === nivel)).map((nivel) => {
+                    const fichasDelNivel = fichas.filter((a) => a.nivel === nivel)
+                    const estilo = NIVEL_PASO_ESTILO[nivel]
                     return (
-                      <div
-                        key={actividad.id}
-                        className="rounded-xl border border-t-[3px] p-3.5 transition-transform hover:-translate-y-0.5 hover:shadow-md"
-                        style={moduleCardStyle(ruta.id)}
-                      >
-                        <div className="flex flex-wrap items-start justify-between gap-2">
-                          <button onClick={() => setDetalle(actividad)} className="flex min-w-0 flex-1 items-start gap-2.5 text-left">
-                            <span className="relative mt-0.5 shrink-0">
-                              {Icon ? (
-                                <span
-                                  className="flex h-7 w-7 items-center justify-center rounded-full text-white shadow-sm"
-                                  style={{ background: RUTA_COLOR[ruta.id]?.color }}
-                                >
-                                  <Icon className="h-3.5 w-3.5" />
-                                </span>
-                              ) : (
-                                <span
-                                  className="flex h-7 w-7 items-center justify-center rounded-full border-2 text-[12px] font-bold"
-                                  style={{ borderColor: RUTA_COLOR[ruta.id]?.color, color: RUTA_COLOR[ruta.id]?.color }}
-                                >
-                                  {idx + 1}
-                                </span>
-                              )}
-                              {Icon && (
-                                <span
-                                  className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full border border-surface bg-surface text-[9px] font-bold shadow-sm"
-                                  style={{ color: RUTA_COLOR[ruta.id]?.color }}
-                                >
-                                  {idx + 1}
-                                </span>
-                              )}
-                            </span>
-                            <div className="min-w-0">
-                              <p className="font-baloo text-[19px] font-bold leading-tight tracking-tight">{actividad.titulo}</p>
-                              <p className="mt-1 text-[18px] leading-relaxed text-muted-foreground">{actividad.descripcion}</p>
-                            </div>
-                          </button>
-                          <div className="flex shrink-0 items-center gap-1.5">
-                            <button
-                              onClick={() => marcarTilde(actividad, probadaActual)}
-                              aria-label={completada ? 'Marcar como no completada' : 'Marcar como completada'}
-                              title={completada ? 'Marcar como no completada' : 'Marcar como completada'}
-                            >
-                              {completada ? (
-                                <CheckCircle2 className="h-5 w-5 text-primary" />
-                              ) : (
-                                <Circle className="h-5 w-5 text-faint hover:text-primary" />
-                              )}
-                            </button>
-                            <Badge variant={NIVEL_BADGE_VARIANT[actividad.nivel]}>{NIVEL_LABEL[actividad.nivel]}</Badge>
-                          </div>
+                      <div key={nivel} className="mb-6">
+                        <div className="mb-2.5 flex items-center gap-2">
+                          <Badge variant={NIVEL_BADGE_VARIANT[nivel]}>{NIVEL_LABEL[nivel]}</Badge>
+                          <div className="h-px flex-1 bg-border" />
                         </div>
-                        {probadaActual && !completada && (
-                          <div className="mt-3">
-                            <span className="inline-flex items-center gap-1 rounded-full bg-surface px-2 py-0.5 text-[10.5px] font-medium text-primary">
-                              En curso
-                            </span>
-                          </div>
-                        )}
+                        <div>
+                          {fichasDelNivel.map((actividad, i) => {
+                            const numero = ++contador
+                            const probadaActual = probadaDe(actividad.id)
+                            const completada = probadaActual?.estado === 'completada'
+                            return (
+                              <div key={actividad.id}>
+                                <div
+                                  className="rounded-2xl border-2 p-4 transition-transform hover:-translate-y-0.5 hover:shadow-md"
+                                  style={{ background: estilo.fondo, borderColor: estilo.borde }}
+                                >
+                                  <div className="flex flex-wrap items-start justify-between gap-2">
+                                    <button onClick={() => setDetalle(actividad)} className="flex min-w-0 flex-1 items-start gap-3 text-left">
+                                      <span
+                                        className="font-baloo flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[19px] font-extrabold shadow-sm"
+                                        style={{ background: estilo.circuloFondo, color: estilo.circuloTexto }}
+                                      >
+                                        {numero}
+                                      </span>
+                                      <div className="min-w-0">
+                                        <p className="font-baloo text-[19px] font-bold leading-tight tracking-tight">{actividad.titulo}</p>
+                                        <p className="mt-1 text-[16px] leading-relaxed text-muted-foreground">{actividad.descripcion}</p>
+                                      </div>
+                                    </button>
+                                    <div className="flex shrink-0 items-center gap-1.5">
+                                      <button
+                                        onClick={() => marcarTilde(actividad, probadaActual)}
+                                        aria-label={completada ? 'Marcar como no completada' : 'Marcar como completada'}
+                                        title={completada ? 'Marcar como no completada' : 'Marcar como completada'}
+                                      >
+                                        {completada ? (
+                                          <CheckCircle2 className="h-5 w-5 text-primary" />
+                                        ) : (
+                                          <Circle className="h-5 w-5 text-faint hover:text-primary" />
+                                        )}
+                                      </button>
+                                    </div>
+                                  </div>
+                                  {probadaActual && !completada && (
+                                    <div className="mt-3">
+                                      <span className="inline-flex items-center gap-1 rounded-full bg-surface px-2 py-0.5 text-[10.5px] font-medium text-primary">
+                                        En curso
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+                                {i < fichasDelNivel.length - 1 && (
+                                  <div className="flex justify-center py-1">
+                                    <ArrowDown className="h-5 w-5 text-faint" />
+                                  </div>
+                                )}
+                              </div>
+                            )
+                          })}
+                        </div>
                       </div>
                     )
-                  })}
-                </div>
+                  })
+                })()}
               </section>
             )
           })}
