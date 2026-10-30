@@ -34,6 +34,8 @@ const NIVEL_BADGE_VARIANT: Record<NivelHerramienta, 'celeste' | 'primario' | 'ac
   3: 'acento',
 }
 
+const NIVEL_ORDEN: NivelHerramienta[] = [1, 2, 3]
+
 type FiltroNivel = 'todos' | NivelHerramienta
 type Vista = 'rutas' | 'visuales'
 
@@ -165,60 +167,64 @@ export default function BibliotecaPage() {
                 </div>
               </div>
 
-              {fichas.length > 0 && (
-              <div className="grid gap-3 lg:grid-cols-2">
-                {fichas.map((ficha) => {
-                  if (ficha.nivel === 1 && ficha.fraseSimple) {
-                    const Icon = ficha.icon
-                    return (
-                      <Card key={ficha.herramienta} className="border-t-[3px]" style={moduleCardStyle(ruta.id)}>
-                        <CardContent className="flex items-start gap-3 pt-4">
-                          {Icon && (
-                            <span
-                              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm"
-                              style={{ background: RUTA_COLOR[ruta.id]?.color }}
-                            >
-                              <Icon className="h-4.5 w-4.5" />
-                            </span>
-                          )}
-                          <div className="min-w-0 flex-1">
-                            <div className="flex flex-wrap items-center justify-between gap-2">
-                              <p className="text-[14px] font-semibold">{ficha.herramienta}</p>
-                              <Badge variant={NIVEL_BADGE_VARIANT[ficha.nivel]}>{NIVEL_LABEL[ficha.nivel]}</Badge>
-                            </div>
-                            <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{ficha.fraseSimple}</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    )
-                  }
+              {fichas.length > 0 &&
+                NIVEL_ORDEN.filter((nivel) => fichas.some((f) => f.nivel === nivel)).map((nivel) => {
+                  const fichasDelNivel = fichas.filter((f) => f.nivel === nivel)
                   return (
-                    <Card key={ficha.herramienta} className="border-t-[3px]" style={moduleCardStyle(ruta.id)}>
-                      <CardHeader>
-                        <div className="flex flex-wrap items-center justify-between gap-2">
-                          <CardTitle className="text-[14px]">{ficha.herramienta}</CardTitle>
-                          <Badge variant={NIVEL_BADGE_VARIANT[ficha.nivel]}>{NIVEL_LABEL[ficha.nivel]}</Badge>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="space-y-2 pt-0 text-[12.5px] leading-relaxed">
-                        <p>
-                          <span className="font-semibold text-foreground">Qué es: </span>
-                          <span className="text-muted-foreground">{ficha.queEs}</span>
-                        </p>
-                        <p>
-                          <span className="font-semibold text-foreground">Para qué sirve: </span>
-                          <span className="text-muted-foreground">{ficha.paraQue}</span>
-                        </p>
-                        <p>
-                          <span className="font-semibold text-foreground">Cómo aplicarla: </span>
-                          <span className="text-muted-foreground">{ficha.comoAplicarla}</span>
-                        </p>
-                      </CardContent>
-                    </Card>
+                    <div key={nivel} className="mb-5">
+                      <div className="mb-2.5 flex items-center gap-2">
+                        <Badge variant={NIVEL_BADGE_VARIANT[nivel]}>{NIVEL_LABEL[nivel]}</Badge>
+                        <div className="h-px flex-1 bg-border" />
+                      </div>
+                      <div className="grid gap-3 lg:grid-cols-2">
+                        {fichasDelNivel.map((ficha) => {
+                          if (ficha.nivel === 1 && ficha.fraseSimple) {
+                            const Icon = ficha.icon
+                            return (
+                              <Card key={ficha.herramienta} className="border-t-[3px]" style={moduleCardStyle(ruta.id)}>
+                                <CardContent className="flex items-start gap-3 pt-4">
+                                  {Icon && (
+                                    <span
+                                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm"
+                                      style={{ background: RUTA_COLOR[ruta.id]?.color }}
+                                    >
+                                      <Icon className="h-4.5 w-4.5" />
+                                    </span>
+                                  )}
+                                  <div className="min-w-0 flex-1">
+                                    <p className="text-[14px] font-semibold">{ficha.herramienta}</p>
+                                    <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{ficha.fraseSimple}</p>
+                                  </div>
+                                </CardContent>
+                              </Card>
+                            )
+                          }
+                          return (
+                            <Card key={ficha.herramienta} className="border-t-[3px]" style={moduleCardStyle(ruta.id)}>
+                              <CardHeader>
+                                <CardTitle className="text-[14px]">{ficha.herramienta}</CardTitle>
+                              </CardHeader>
+                              <CardContent className="space-y-2 pt-0 text-[12.5px] leading-relaxed">
+                                <p>
+                                  <span className="font-semibold text-foreground">Qué es: </span>
+                                  <span className="text-muted-foreground">{ficha.queEs}</span>
+                                </p>
+                                <p>
+                                  <span className="font-semibold text-foreground">Para qué sirve: </span>
+                                  <span className="text-muted-foreground">{ficha.paraQue}</span>
+                                </p>
+                                <p>
+                                  <span className="font-semibold text-foreground">Cómo aplicarla: </span>
+                                  <span className="text-muted-foreground">{ficha.comoAplicarla}</span>
+                                </p>
+                              </CardContent>
+                            </Card>
+                          )
+                        })}
+                      </div>
+                    </div>
                   )
                 })}
-              </div>
-              )}
 
               {videos.length > 0 && (
                 <div className="mt-3 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
