@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { Check, ClipboardCheck, Clock, History, Timer, Trophy, X } from 'lucide-react'
 import { useCrearEvaluacion, useEvaluaciones, useFichas, useResponderFicha } from '@/hooks/queries'
 import { EmptyState, FadeIn, PageHeader } from '@/components/shared'
+import { IlustracionEvaluacion } from '@/components/shared/IlustracionesHerramientas'
+import { IntroHerramienta } from '@/components/shared/IntroHerramienta'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { NativeSelect } from '@/components/ui/input'
@@ -171,6 +173,19 @@ export default function EvaluacionPage() {
   return (
     <FadeIn className="space-y-5">
       <PageHeader title="Autoevaluación" subtitle="Ponete a prueba con tus propias fichas, cronometrado y sin mirar la respuesta." />
+
+      <IntroHerramienta
+        clave="evaluacion"
+        queEs="Un examen armado con tus propias fichas: te pregunta, cronometra cuánto tardás y al final te muestra el puntaje."
+        comoSeHace={[
+          'Elegí el tema y cuántas preguntas querés.',
+          'Tocá «Empezar evaluación» y pensá la respuesta de cada pregunta.',
+          'Tocá «Mostrar respuesta» y marcá si la sabías o no.',
+          'Al terminar la última, ves tu porcentaje y el tiempo que tardaste, y queda en tu historial.',
+        ]}
+        ejemplo="10 preguntas del tema «Historia» → 8 de 10 correctas en 4:32."
+        ilustracion={<IlustracionEvaluacion />}
+      />
 
       <Card>
         <CardContent className="space-y-4 pt-5">

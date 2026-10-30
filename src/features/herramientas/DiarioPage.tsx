@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input, Label, Textarea } from '@/components/ui/input'
 import { AvisoOrientativo, EmptyState, FadeIn, PageHeader } from '@/components/shared'
+import { IlustracionDiario } from '@/components/shared/IlustracionesHerramientas'
+import { IntroHerramienta } from '@/components/shared/IntroHerramienta'
 import { toast } from '@/components/ui/toast'
 import { fechaLarga } from '@/lib/utils'
 
@@ -30,6 +32,19 @@ export default function DiarioPage() {
     <FadeIn className="space-y-5">
       <PageHeader title="Diario de metacognición" subtitle="Tres preguntas cortas después de estudiar, para ir viendo qué te funciona." />
       <AvisoOrientativo>Pensar en cómo estudiaste es tan importante como estudiar — así vas afinando tu propia estrategia.</AvisoOrientativo>
+
+      <IntroHerramienta
+        clave="diario"
+        queEs="Un registro corto después de cada sesión de estudio, para ir notando qué técnicas te funcionan mejor."
+        comoSeHace={[
+          'Después de estudiar, anotá qué método usaste (ej: mapas conceptuales, fichas).',
+          'Calificá con estrellas qué tan bien te funcionó.',
+          'Si se te ocurre algo para la próxima, anotalo.',
+          'Con el tiempo vas a ver un patrón de qué técnicas te rinden más.',
+        ]}
+        ejemplo="Método: «Fichas de repaso» → 4 estrellas → «La próxima vez, repasar también a la mañana»."
+        ilustracion={<IlustracionDiario />}
+      />
 
       <Card>
         <CardHeader>

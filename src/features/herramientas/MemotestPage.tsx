@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { Clock, Gamepad2, MousePointerClick, PartyPopper } from 'lucide-react'
 import { useFichas } from '@/hooks/queries'
 import { EmptyState, FadeIn, PageHeader } from '@/components/shared'
+import { IlustracionMemotest } from '@/components/shared/IlustracionesHerramientas'
+import { IntroHerramienta } from '@/components/shared/IntroHerramienta'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { NativeSelect } from '@/components/ui/input'
@@ -189,6 +191,18 @@ export default function MemotestPage() {
   return (
     <FadeIn className="space-y-5">
       <PageHeader title="Memotest" subtitle="Emparejá cada pregunta con su respuesta, contra el reloj." />
+      <IntroHerramienta
+        clave="memotest"
+        queEs="El clásico juego de memoria, pero con tus fichas: hay que encontrar la pregunta que hace pareja con su respuesta."
+        comoSeHace={[
+          'Elegí el tema y cuántos pares querés jugar.',
+          'Tocá «Jugar» y empezá a dar vuelta cartas, de a dos.',
+          'Si la pregunta y la respuesta coinciden, quedan boca arriba; si no, se vuelven a tapar.',
+          'Encontrá todos los pares — cuantos menos intentos y menos tiempo, mejor.',
+        ]}
+        ejemplo="Carta «¿Capital de Francia?» + carta «París» forman un par."
+        ilustracion={<IlustracionMemotest />}
+      />
       <Card>
         <CardContent className="space-y-4 pt-5">
           <div>

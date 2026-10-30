@@ -11,6 +11,8 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input, Label, Textarea } from '@/components/ui/input'
 import { AvisoOrientativo, EmptyState, FadeIn, PageHeader } from '@/components/shared'
+import { IlustracionAprendizajesSesion } from '@/components/shared/IlustracionesHerramientas'
+import { IntroHerramienta } from '@/components/shared/IntroHerramienta'
 import { toast } from '@/components/ui/toast'
 import { fechaLarga } from '@/lib/utils'
 
@@ -38,6 +40,19 @@ export default function AprendizajesSesionPage() {
         Pensado para usarlo vos con el estudiante: cargás la pregunta y lo que trabajaron como respuesta, y después de
         pensarla en voz alta, él mismo verifica y se pone la estrella.
       </AvisoOrientativo>
+
+      <IntroHerramienta
+        clave="aprendizajes-sesion"
+        queEs="Para usar en la sesión con la profesional: ella carga una pregunta y la respuesta trabajada, y el estudiante la piensa en voz alta antes de verla y se autoevalúa."
+        comoSeHace={[
+          'La profesional toca «Nuevo aprendizaje» y carga la pregunta y lo que se trabajó como respuesta.',
+          'El estudiante piensa o dice la respuesta en voz alta, sin escribir nada.',
+          'Toca «Verificá tu respuesta» para ver si coincidió.',
+          'Se pone una calificación con estrellas de qué tan bien le salió.',
+        ]}
+        ejemplo="Pregunta: «¿Qué aprendiste hoy sobre las fracciones?» → el estudiante responde oral, verifica y se pone 4 estrellas."
+        ilustracion={<IlustracionAprendizajesSesion />}
+      />
 
       {aprendizajes.length === 0 ? (
         <EmptyState icon={Brain} title="Todavía no hay aprendizajes cargados" description="Creá el primero con «Nuevo aprendizaje»." />

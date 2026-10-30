@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { EmptyState, FadeIn, PageHeader } from '@/components/shared'
+import { IlustracionMapas } from '@/components/shared/IlustracionesHerramientas'
+import { IntroHerramienta } from '@/components/shared/IntroHerramienta'
 import { toast } from '@/components/ui/toast'
 import { cn } from '@/lib/utils'
 import type { MapaConceptual, NodoMapa } from '@/types'
@@ -39,6 +41,18 @@ export default function MapasPage() {
             <Plus className="h-4 w-4" /> Nuevo mapa
           </Button>
         }
+      />
+      <IntroHerramienta
+        clave="mapas"
+        queEs="Un lienzo donde escribís ideas en burbujas y las conectás con líneas, para ver cómo se relacionan entre sí."
+        comoSeHace={[
+          'Tocá «Nuevo mapa» y ponele un título.',
+          'Tocá «Nodo» para agregar una idea; arrastrala a donde quieras del lienzo.',
+          'Tocá «Conectar nodos», elegí el primer nodo y después el segundo — quedan unidos con una línea.',
+          'Repetí hasta armar todo el mapa. Podés imprimirlo desde el editor.',
+        ]}
+        ejemplo='Nodo central «Revolución de Mayo» conectado a «Causas», «Cabildo Abierto» y «Consecuencias».'
+        ilustracion={<IlustracionMapas />}
       />
       {mapas.length === 0 ? (
         <EmptyState icon={Workflow} title="Todavía no creaste ningún mapa" description="Tocá «Nuevo mapa» para empezar." />

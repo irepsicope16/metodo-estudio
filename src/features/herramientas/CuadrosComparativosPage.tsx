@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Columns3, Plus, Printer, Trash2, X } from 'lucide-react'
 import { useCrearCuadro, useCuadros, useActualizarCuadro, useEliminarCuadro } from '@/hooks/queries'
 import { EmptyState, FadeIn, PageHeader } from '@/components/shared'
+import { IlustracionCuadros } from '@/components/shared/IlustracionesHerramientas'
+import { IntroHerramienta } from '@/components/shared/IntroHerramienta'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -173,6 +175,19 @@ export default function CuadrosComparativosPage() {
             <Plus className="h-4 w-4" /> Nuevo cuadro
           </Button>
         }
+      />
+
+      <IntroHerramienta
+        clave="cuadros"
+        queEs="Una tabla para poner dos o más elementos uno al lado del otro y compararlos criterio por criterio."
+        comoSeHace={[
+          'Tocá «Nuevo cuadro» y ponele un título.',
+          'Escribí el nombre de cada columna (lo que vas a comparar).',
+          'En cada fila, escribí un criterio y completá el valor para cada columna.',
+          'Agregá más filas o columnas con los botones de abajo, y guardá.',
+        ]}
+        ejemplo="Comparar «Mitosis» vs. «Meiosis» según los criterios «Cantidad de células resultantes» y «Función»."
+        ilustracion={<IlustracionCuadros />}
       />
 
       {cuadros.length === 0 ? (

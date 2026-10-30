@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { EmptyState, FadeIn, PageHeader } from '@/components/shared'
+import { IlustracionGuiaTextos } from '@/components/shared/IlustracionesHerramientas'
+import { IntroHerramienta } from '@/components/shared/IntroHerramienta'
 import { cn } from '@/lib/utils'
 import type { TextoGuia } from '@/types'
 
@@ -34,6 +36,19 @@ export default function GuiaTextosPage() {
       <PageHeader
         title="Guía de textos"
         subtitle="Un lugar para anotar qué estás leyendo y marcar tu avance en cada paso: leído, subrayado, resumido."
+      />
+
+      <IntroHerramienta
+        clave="guia-textos"
+        queEs="Una lista de lo que estás leyendo, con tres pasos para marcar tu avance en cada texto: leído, subrayado, resumido."
+        comoSeHace={[
+          'Escribí el título de lo que estás leyendo (ej: un capítulo) y agregalo.',
+          'A medida que avanzás, tocá cada paso: Leído, Subrayado, Resumido.',
+          'Cuando completaste los tres pasos, el texto queda tachado.',
+          'Arriba ves cuántos textos ya completaste del total.',
+        ]}
+        ejemplo="«Capítulo 5 de Historia» → Leído ✓, Subrayado ✓, Resumido (pendiente)."
+        ilustracion={<IlustracionGuiaTextos />}
       />
 
       <Card>

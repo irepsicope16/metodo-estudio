@@ -2,6 +2,8 @@ import { BLOQUES_CURSADA, DIAS_CURSADA, useHorarioCursadaStore } from '@/stores/
 import { Card, CardContent } from '@/components/ui/card'
 import { Label, Textarea } from '@/components/ui/input'
 import { FadeIn, PageHeader } from '@/components/shared'
+import { IlustracionHorarioCursada } from '@/components/shared/IlustracionesHerramientas'
+import { IntroHerramienta } from '@/components/shared/IntroHerramienta'
 
 export default function HorarioCursadaPage() {
   const { celdas, notas, setCelda, setNotas } = useHorarioCursadaStore()
@@ -9,6 +11,19 @@ export default function HorarioCursadaPage() {
   return (
     <FadeIn className="space-y-5">
       <PageHeader title="Horario de cursada" subtitle="Tu horario fijo de materias, siempre a mano — distinto de la Agenda, que es para fechas puntuales." />
+
+      <IntroHerramienta
+        clave="horario-cursada"
+        queEs="Tu horario fijo de materias, siempre a mano — distinto de la Agenda, que es para fechas puntuales."
+        comoSeHace={[
+          'Elegí la celda del día y horario que corresponda.',
+          'Escribí ahí el nombre de la materia.',
+          'Repetí para cada bloque de la semana.',
+          'Usá el campo de notas para anotar cambios de horario u otra info.',
+        ]}
+        ejemplo="Lunes, primer bloque → «Matemática»."
+        ilustracion={<IlustracionHorarioCursada />}
+      />
 
       <Card>
         <CardContent className="overflow-x-auto pt-5">

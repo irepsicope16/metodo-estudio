@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { ArrowDown, ArrowUp, History, Plus, Printer, Trash2 } from 'lucide-react'
 import { useCrearLineaTiempo, useLineasTiempo, useActualizarLineaTiempo, useEliminarLineaTiempo } from '@/hooks/queries'
 import { EmptyState, FadeIn, PageHeader } from '@/components/shared'
+import { IlustracionLineasTiempo } from '@/components/shared/IlustracionesHerramientas'
+import { IntroHerramienta } from '@/components/shared/IntroHerramienta'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -152,6 +154,19 @@ export default function LineasTiempoPage() {
             <Plus className="h-4 w-4" /> Nueva línea de tiempo
           </Button>
         }
+      />
+
+      <IntroHerramienta
+        clave="lineas-tiempo"
+        queEs="Una línea donde ordenás eventos según cuándo pasaron, para visualizar la secuencia completa."
+        comoSeHace={[
+          'Tocá «Nueva línea de tiempo» y ponele un título.',
+          'Por cada evento, escribí el año o fecha, y qué pasó.',
+          'Usá las flechas para reordenarlos si hace falta.',
+          'Guardá — la línea se arma sola arriba, en orden.',
+        ]}
+        ejemplo="«1810: Revolución de Mayo» → «1816: Declaración de la Independencia» → «1853: Constitución Nacional»."
+        ilustracion={<IlustracionLineasTiempo />}
       />
 
       {lineas.length === 0 ? (

@@ -8,6 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input, Label, NativeSelect, Textarea } from '@/components/ui/input'
 import { EmptyState, FadeIn, PageHeader } from '@/components/shared'
+import { IlustracionFichas } from '@/components/shared/IlustracionesHerramientas'
+import { IntroHerramienta } from '@/components/shared/IntroHerramienta'
 import { toast } from '@/components/ui/toast'
 import { cn } from '@/lib/utils'
 
@@ -79,6 +81,19 @@ export default function FichasPage() {
             </Button>
           </div>
         }
+      />
+
+      <IntroHerramienta
+        clave="fichas"
+        queEs="Tarjetas con una pregunta de un lado y la respuesta del otro. El sistema las hace volver a aparecer según si las supiste o no (repetición espaciada)."
+        comoSeHace={[
+          'Tocá «Nueva ficha», elegí o creá un tema, y escribí la pregunta y la respuesta.',
+          'O pegá un texto en una IA con el prompt que te damos y generá varias fichas de una («Generar con IA»).',
+          'Para repasar: tocá la ficha para darla vuelta, mirá la respuesta y marcá «La sabía» o «No la sabía».',
+          'Las que no sabías vuelven a aparecer antes que las que ya dominás.',
+        ]}
+        ejemplo="Pregunta: «¿Qué es la fotosíntesis?» → Respuesta: «El proceso por el cual las plantas producen su alimento usando luz solar»."
+        ilustracion={<IlustracionFichas />}
       />
 
       <div className="flex flex-wrap items-center justify-between gap-2">

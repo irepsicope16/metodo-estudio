@@ -2,6 +2,8 @@ import { CATEGORIAS_DISTRIBUCION, useDistribucionActividadesStore } from '@/stor
 import { Card, CardContent } from '@/components/ui/card'
 import { Label } from '@/components/ui/input'
 import { FadeIn, PageHeader } from '@/components/shared'
+import { IlustracionDistribucionActividades } from '@/components/shared/IlustracionesHerramientas'
+import { IntroHerramienta } from '@/components/shared/IntroHerramienta'
 import { cn } from '@/lib/utils'
 
 export default function DistribucionActividadesPage() {
@@ -21,6 +23,19 @@ export default function DistribucionActividadesPage() {
       <PageHeader
         title="Distribución de actividades"
         subtitle="¿Cómo se reparte tu día? Completá el porcentaje de cada categoría y mirá el gráfico actualizarse."
+      />
+
+      <IntroHerramienta
+        clave="distribucion-actividades"
+        queEs="Un gráfico circular que muestra cómo repartís las horas de tu día entre estudio, descanso, pendientes y recreación."
+        comoSeHace={[
+          'Deslizá cada barra para asignarle un porcentaje a esa categoría.',
+          'Mirá el gráfico circular actualizarse en tiempo real.',
+          'Intentá llegar al 100% repartiendo todo tu día.',
+          'Usalo para notar si le estás dedicando mucho tiempo a una sola cosa.',
+        ]}
+        ejemplo="Estudio 40% + Descanso 25% + Pendientes 20% + Recreación 15% = 100%."
+        ilustracion={<IlustracionDistribucionActividades />}
       />
 
       <div className="grid gap-5 lg:grid-cols-[auto_1fr] lg:items-center">
