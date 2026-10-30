@@ -8,9 +8,26 @@ import type { TecnicaCronometro } from '@/types'
 // cualquier página — sigue contando (y suena) mientras la pestaña del
 // navegador siga abierta, sin importar por dónde navegues dentro de la app.
 
+// Un solo AudioContext reutilizado para todos los beeps. Si se crea uno
+// nuevo recién cuando suena la alarma (minutos después, sin click del
+// usuario de por medio), los navegadores lo crean "suspendido" por su
+// política de autoplay y el sonido nunca se escucha. Por eso este contexto
+// se crea/desbloquea en alternar(), que sí corre dentro de un click real.
+let audioCtx: AudioContext | null = null
+
+function asegurarAudioCtx() {
+  try {
+    if (!audioCtx) audioCtx = new AudioContext()
+    if (audioCtx.state === 'suspended') void audioCtx.resume()
+  } catch {
+    /* sin soporte de audio, no interrumpe el flujo */
+  }
+}
+
 function beep() {
   try {
-    const ctx = new AudioContext()
+    if (!audioCtx) return
+    const ctx = audioCtx
     const osc = ctx.createOscillator()
     const gain = ctx.createGain()
     osc.connect(gain)
@@ -69,6 +86,7 @@ export const useCronometroStore = create<CronometroState>()((set, get) => ({
       set({ corriendo: false, intervalId: null })
       return
     }
+    asegurarAudioCtx()
     const id = window.setInterval(() => {
       const cur = get()
       if (cur.tecnica === 'libre') {
