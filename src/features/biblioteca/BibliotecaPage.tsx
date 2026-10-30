@@ -36,6 +36,18 @@ const NIVEL_BADGE_VARIANT: Record<NivelHerramienta, 'celeste' | 'primario' | 'ac
 
 const NIVEL_ORDEN: NivelHerramienta[] = [1, 2, 3]
 
+/** Mismos colores que las fichas (celeste/azul/rojo) pero pensados para un botón clickeable. */
+const NIVEL_FILTRO_COLOR: Record<NivelHerramienta, { fondo: string; texto: string }> = {
+  1: { fondo: 'var(--color-surface-2)', texto: 'var(--color-primary)' },
+  2: { fondo: 'var(--color-primary)', texto: 'var(--color-primary-foreground)' },
+  3: { fondo: 'var(--color-accent)', texto: 'var(--color-accent-foreground)' },
+}
+
+const VISTA_COLOR = {
+  rutas: { fondo: 'var(--color-primary)', suave: 'var(--color-primary-soft)', texto: 'var(--color-primary)' },
+  visuales: { fondo: 'var(--color-secondary)', suave: 'var(--color-secondary-soft)', texto: 'var(--color-secondary-strong)' },
+} as const
+
 type FiltroNivel = 'todos' | NivelHerramienta
 type Vista = 'rutas' | 'visuales'
 
@@ -63,24 +75,38 @@ export default function BibliotecaPage() {
         subtitle="Una ficha por cada herramienta de las 8 rutas: qué es, para qué sirve y cómo aplicarla."
       />
 
-      <div className="mb-6 flex gap-1.5 border-b">
+      <div className="mb-6 grid gap-3 sm:grid-cols-2">
         <button
           type="button"
           onClick={() => setVista('rutas')}
-          className={`border-b-2 px-3 py-2 text-[13px] font-medium transition-colors ${
-            vista === 'rutas' ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'
-          }`}
+          className="flex items-center gap-3 rounded-2xl border-2 p-4 text-left transition-all"
+          style={
+            vista === 'rutas'
+              ? { background: VISTA_COLOR.rutas.fondo, borderColor: VISTA_COLOR.rutas.fondo, color: 'var(--color-primary-foreground)' }
+              : { background: VISTA_COLOR.rutas.suave, borderColor: VISTA_COLOR.rutas.suave, color: VISTA_COLOR.rutas.texto }
+          }
         >
-          Por ruta
+          <BookOpen className="h-7 w-7 shrink-0" />
+          <div>
+            <p className="text-[17px] font-bold leading-tight">Por ruta</p>
+            <p className="text-[12.5px] opacity-85">Las fichas agrupadas en las 8 rutas de estudio</p>
+          </div>
         </button>
         <button
           type="button"
           onClick={() => setVista('visuales')}
-          className={`flex items-center gap-1.5 border-b-2 px-3 py-2 text-[13px] font-medium transition-colors ${
-            vista === 'visuales' ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'
-          }`}
+          className="flex items-center gap-3 rounded-2xl border-2 p-4 text-left transition-all"
+          style={
+            vista === 'visuales'
+              ? { background: VISTA_COLOR.visuales.fondo, borderColor: VISTA_COLOR.visuales.fondo, color: 'var(--color-secondary-foreground)' }
+              : { background: VISTA_COLOR.visuales.suave, borderColor: VISTA_COLOR.visuales.suave, color: VISTA_COLOR.visuales.texto }
+          }
         >
-          <Sparkles className="h-3.5 w-3.5" /> Técnicas visuales
+          <Sparkles className="h-7 w-7 shrink-0" />
+          <div>
+            <p className="text-[17px] font-bold leading-tight">Técnicas visuales</p>
+            <p className="text-[12.5px] opacity-85">Técnicas con un ejemplo gráfico para probar</p>
+          </div>
         </button>
       </div>
 
@@ -95,7 +121,7 @@ export default function BibliotecaPage() {
               return (
                 <Card key={t.id} className="flex flex-col border-t-[3px]" style={{ borderTopColor: c.color, boxShadow: `0 10px 20px -14px ${c.color}` }}>
                   <CardHeader>
-                    <CardTitle className="text-[14px]">{t.titulo}</CardTitle>
+                    <CardTitle className="text-[16px]">{t.titulo}</CardTitle>
                   </CardHeader>
                   <CardContent className="flex flex-1 flex-col gap-3 pt-0">
                     <VistaPreviaTecnica id={t.id} />
@@ -126,16 +152,24 @@ export default function BibliotecaPage() {
           tenés. Si estás en el nivel Superior igual podés necesitar arrancar por Principiante.
         </p>
         <div className="flex flex-wrap gap-1.5">
-          {(['todos', 1, 2, 3] as FiltroNivel[]).map((n) => (
-            <Button
-              key={n}
-              size="sm"
-              variant={filtro === n ? 'default' : 'outline'}
-              onClick={() => setFiltro(n)}
-            >
-              {n === 'todos' ? 'Todos los niveles' : NIVEL_LABEL[n]}
-            </Button>
-          ))}
+          <Button size="sm" variant={filtro === 'todos' ? 'default' : 'outline'} onClick={() => setFiltro('todos')}>
+            Todos los niveles
+          </Button>
+          {([1, 2, 3] as NivelHerramienta[]).map((n) => {
+            const c = NIVEL_FILTRO_COLOR[n]
+            const activo = filtro === n
+            return (
+              <button
+                key={n}
+                type="button"
+                onClick={() => setFiltro(n)}
+                className="h-8 rounded-lg border-[1.5px] px-3.5 text-[13.5px] font-semibold transition-colors"
+                style={activo ? { background: c.fondo, borderColor: c.fondo, color: c.texto } : { background: 'transparent', borderColor: c.fondo, color: 'var(--color-foreground)' }}
+              >
+                {NIVEL_LABEL[n]}
+              </button>
+            )
+          })}
         </div>
       </div>
 
@@ -156,7 +190,7 @@ export default function BibliotecaPage() {
             >
               <div className="mb-3 flex flex-wrap items-center gap-2">
                 <BookOpen className="h-4 w-4" style={{ color: RUTA_COLOR[ruta.id]?.color }} />
-                <h2 className="text-[15px] font-semibold tracking-tight">{ruta.nombre}</h2>
+                <h2 className="text-[18px] font-bold tracking-tight">{ruta.nombre}</h2>
                 {destacada && <Badge variant="acento">Recomendada para vos</Badge>}
                 <div className="flex flex-wrap gap-1">
                   {ruta.dimensiones.map((d) => (
@@ -192,8 +226,8 @@ export default function BibliotecaPage() {
                                     </span>
                                   )}
                                   <div className="min-w-0 flex-1">
-                                    <p className="text-[14px] font-semibold">{ficha.herramienta}</p>
-                                    <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{ficha.fraseSimple}</p>
+                                    <p className="text-[16px] font-semibold">{ficha.herramienta}</p>
+                                    <p className="mt-1 text-[13.5px] leading-relaxed text-muted-foreground">{ficha.fraseSimple}</p>
                                   </div>
                                 </CardContent>
                               </Card>
@@ -202,7 +236,7 @@ export default function BibliotecaPage() {
                           return (
                             <Card key={ficha.herramienta} className="border-t-[3px]" style={moduleCardStyle(ruta.id)}>
                               <CardHeader>
-                                <CardTitle className="text-[14px]">{ficha.herramienta}</CardTitle>
+                                <CardTitle className="text-[16px]">{ficha.herramienta}</CardTitle>
                               </CardHeader>
                               <CardContent className="space-y-2 pt-0 text-[12.5px] leading-relaxed">
                                 <p>

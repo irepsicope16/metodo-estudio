@@ -30,7 +30,7 @@
    ============================================================ */
 
 :root {
-  --background: #823535;
+  --background: #bd392c;
   --surface: #f5f9fd;
   --surface-2: #c8e0f5;
   --foreground: #1f2e3d;
@@ -42,9 +42,9 @@
   --primary-soft: #e3e8ec;
   --primary-foreground: #ffffff;
 
-  --accent: #a24949;
-  --accent-strong: #7d3737;
-  --accent-soft: #f3dedb;
+  --accent: #d8402d;
+  --accent-strong: #a82e1f;
+  --accent-soft: #fbe1dc;
   --accent-foreground: #ffffff;
 
   --secondary: #5e7686;
@@ -111,8 +111,8 @@
   --primary-soft: #232f39;
   --primary-foreground: #12191f;
 
-  --accent: #cc9191;
-  --accent-strong: #dbaaaa;
+  --accent: #d1847a;
+  --accent-strong: #e0a399;
   --accent-soft: #3a2420;
   --accent-foreground: #241210;
 

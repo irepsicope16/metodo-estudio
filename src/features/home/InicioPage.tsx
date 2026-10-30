@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { addDays, format, isWithinInterval, startOfDay } from 'date-fns'
 import { es } from 'date-fns/locale'
-import { BookOpen, CalendarDays, Clock, Flame, ListChecks, Sparkles, Timer, Trophy } from 'lucide-react'
+import { BookOpen, CalendarDays, Clock, Flame, Lightbulb, ListChecks, Sparkles, Timer, Trophy } from 'lucide-react'
 import { useEstudiantesStore } from '@/stores/estudiantesStore'
 import { useUIStore } from '@/stores/uiStore'
 import {
@@ -26,6 +26,14 @@ import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { AvisoOrientativo, EmptyState, FadeIn, IconBadge, InsigniasRow, StatCard } from '@/components/shared'
 import { EscritorioEstudio } from '@/components/illustrations/EscritorioEstudio'
+
+const RAZONES_METODO = [
+  'Aprendés más en menos tiempo, en vez de repetir sin entender.',
+  'Lo que estudiás se queda en la memoria a largo plazo, no solo hasta el día del examen.',
+  'Estudiar se vuelve menos abrumador — cuando sabés cómo organizarte, baja el estrés.',
+  'Ganás autonomía: vas a poder aplicar estas estrategias en cualquier materia, en cualquier etapa.',
+  'Descubrís cómo aprendés mejor vos, en vez de seguir una fórmula genérica para todos.',
+]
 
 export default function InicioPage() {
   const nombre = useEstudiantesStore((s) => s.estudiantes.find((e) => e.id === s.activoId)?.nombre ?? '')
@@ -95,6 +103,24 @@ export default function InicioPage() {
           <EscritorioEstudio className="hidden h-[150px] w-[220px] shrink-0 sm:block" />
         </div>
       </div>
+
+      <Card className="border-primary/15 bg-primary-soft/40">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-[14px]">
+            <IconBadge icon={Lightbulb} tone="primario" /> ¿Por qué aprender métodos de estudio?
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <ul className="space-y-2 text-[13.5px] leading-relaxed">
+            {RAZONES_METODO.map((razon, i) => (
+              <li key={i} className="flex gap-2.5">
+                <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                <span>{razon}</span>
+              </li>
+            ))}
+          </ul>
+        </CardContent>
+      </Card>
 
       {rachaEnRiesgo && (
         <Card className="border-danger/30 bg-danger-soft/40">

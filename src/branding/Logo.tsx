@@ -4,7 +4,8 @@ import logoFull from '@/assets/branding/logo-full.png'
 
 // ============================================================
 // Identidad visual Método Estudio: isotipo "E" (logo original de la
-// usuaria, en rojo ladrillo y azul marino). El isotipo chico (sidebar,
+// usuaria, recoloreado de rojo ladrillo a rojo puro + azul marino, a
+// pedido explícito). El isotipo chico (sidebar,
 // pestaña) es un recorte ajustado de la misma imagen; la portada grande
 // (BrandCover) usa el isologo completo con el círculo y el wordmark.
 // ============================================================
