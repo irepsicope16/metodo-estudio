@@ -122,8 +122,8 @@ export default function InicioPage() {
 
       <Card className="border-primary/15 bg-primary-soft/40">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-[15.5px]">
-            <IconBadge icon={Lightbulb} tone="primario" /> ¿Por qué aprender métodos de estudio?
+          <CardTitle className="flex items-center gap-2 text-[23px] font-bold text-accent-strong">
+            <IconBadge icon={Lightbulb} tone="acento" size="lg" /> Por qué es importante aprender métodos de estudio
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
