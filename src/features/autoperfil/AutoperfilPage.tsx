@@ -86,8 +86,11 @@ export default function AutoperfilPage() {
 
     return (
       <FadeIn className="space-y-4">
-        <PageHeader title="Mi autoperfil" subtitle="56 preguntas cortas, organizadas en 8 áreas. Podés pausar y retomar cuando quieras." />
-        <AvisoOrientativo>{MENSAJES.antesDelPerfil}</AvisoOrientativo>
+        <PageHeader title="Mi autoperfil" className="mb-0" />
+        <p className="text-center text-[19px] leading-relaxed text-muted-foreground">
+          56 preguntas cortas, organizadas en 8 áreas. Podés pausar y retomar cuando quieras.
+        </p>
+        <AvisoOrientativo className="text-[15.5px] font-bold text-center">{MENSAJES.antesDelPerfil}</AvisoOrientativo>
         <Card
           className="border-t-[3px]"
           style={{ borderTopColor: colorArea?.color, boxShadow: colorArea ? `0 10px 20px -14px ${colorArea.color}` : undefined }}
