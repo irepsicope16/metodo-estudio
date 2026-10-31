@@ -24,19 +24,32 @@ function asegurarAudioCtx() {
   }
 }
 
+function tocarTono(ctx: AudioContext) {
+  const osc = ctx.createOscillator()
+  const gain = ctx.createGain()
+  osc.connect(gain)
+  gain.connect(ctx.destination)
+  osc.frequency.value = 660
+  gain.gain.setValueAtTime(0.15, ctx.currentTime)
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6)
+  osc.start()
+  osc.stop(ctx.currentTime + 0.6)
+}
+
 function beep() {
   try {
     if (!audioCtx) return
     const ctx = audioCtx
-    const osc = ctx.createOscillator()
-    const gain = ctx.createGain()
-    osc.connect(gain)
-    gain.connect(ctx.destination)
-    osc.frequency.value = 660
-    gain.gain.setValueAtTime(0.15, ctx.currentTime)
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6)
-    osc.start()
-    osc.stop(ctx.currentTime + 0.6)
+    // Chrome (y otros) suspenden automáticamente un AudioContext que
+    // estuvo mucho tiempo sin sonar, para ahorrar batería — así que aunque
+    // se haya desbloqueado al tocar "Iniciar", 25 minutos después puede
+    // estar "suspended" otra vez. Por eso se revisa y se reactiva acá,
+    // justo antes de sonar, no solo al principio.
+    if (ctx.state === 'suspended') {
+      ctx.resume().then(() => tocarTono(ctx)).catch(() => {})
+    } else {
+      tocarTono(ctx)
+    }
   } catch {
     /* sin soporte de audio, no interrumpe el flujo */
   }
