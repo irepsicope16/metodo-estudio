@@ -310,6 +310,15 @@ export const FICHAS_POR_RUTA: Record<string, FichaHerramienta[]> = {
       icon: NotebookPen,
     },
     {
+      herramienta: 'Método Cornell',
+      nivel: 2,
+      queEs: 'Dividir la hoja en tres partes: una columna angosta a la izquierda para preguntas o palabras clave, una columna ancha a la derecha para los apuntes de la clase, y una franja abajo para un resumen de 2 o 3 líneas.',
+      paraQue: 'A diferencia de tomar apuntes "en bloque", separa lo que se escucha de lo que se repasa después — la columna de preguntas se puede tapar y usar para autoevaluarse, como si fueran fichas.',
+      comoAplicarla: 'Antes de la clase, trazar las tres zonas en la hoja. Durante la clase, anotar solo en la columna ancha. Después, en la columna angosta escribir preguntas que esas notas responden, y al final escribir el resumen con las propias palabras.',
+      fraseSimple: 'Apuntes a la derecha, preguntas a la izquierda, resumen abajo — así repasás tapando las notas.',
+      icon: Rows3,
+    },
+    {
       herramienta: 'Lista de revisión',
       nivel: 1,
       queEs: 'Un checklist propio de los errores más frecuentes del estudiante, para repasar antes de entregar un escrito.',
@@ -387,7 +396,7 @@ export const FICHAS_POR_RUTA: Record<string, FichaHerramienta[]> = {
       comoAplicarla: 'Al practicar ejercicios, mezclar dos o tres tipos distintos en lugar de resolver primero todos los de un tipo y después los del otro.',
     },
     {
-      herramienta: 'Explicación con propias palabras',
+      herramienta: 'Explicación con propias palabras (técnica Feynman)',
       nivel: 1,
       queEs: 'Contar un tema como si se lo estuviera enseñando a otra persona que no lo conoce.',
       paraQue: 'Explicar algo obliga a entenderlo de verdad; las lagunas se notan enseguida al intentar ponerlo en palabras propias.',
