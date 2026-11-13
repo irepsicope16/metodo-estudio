@@ -65,11 +65,22 @@ interface CronometroState {
   corriendo: boolean
   focoMinutosAcumulados: number
   intervalId: number | null
+  /** Marca de tiempo (Date.now()) a la que corresponde el estado actual — el
+   *  avance se calcula contra el reloj real, no contando ticks de
+   *  setInterval, porque el navegador frena o directamente pausa esos
+   *  ticks cuando la pestaña queda en segundo plano o el dispositivo se
+   *  bloquea. Así, aunque los ticks se atrasen o se corten, en cuanto
+   *  vuelve a ejecutar código (un tick tardío, o al volver a la pestaña)
+   *  se pone al día de una sola vez en lugar de quedarse corriendo de más. */
+  referencia: number | null
   setTecnica: (t: TecnicaCronometro) => void
   setMinutosFoco: (m: number) => void
   setMinutosDescanso: (m: number) => void
   alternar: () => void
   reiniciar: () => void
+  /** Pone el estado al día contra el reloj real. Se llama desde el
+   *  intervalo y también al volver a la pestaña. */
+  ponerseAlDia: () => void
   /** Duración a registrar si se guarda la sesión ahora mismo. */
   duracionActual: () => number
 }
@@ -84,6 +95,7 @@ export const useCronometroStore = create<CronometroState>()((set, get) => ({
   corriendo: false,
   focoMinutosAcumulados: 0,
   intervalId: null,
+  referencia: null,
 
   setTecnica: (tecnica) => {
     get().reiniciar()
@@ -92,38 +104,58 @@ export const useCronometroStore = create<CronometroState>()((set, get) => ({
   setMinutosFoco: (minutosFoco) => set({ minutosFoco, segundosRestantes: minutosFoco * 60 }),
   setMinutosDescanso: (minutosDescanso) => set({ minutosDescanso }),
 
+  ponerseAlDia: () => {
+    const s = get()
+    if (!s.corriendo || s.referencia == null) return
+    const ahora = Date.now()
+    const transcurrido = Math.floor((ahora - s.referencia) / 1000)
+    if (transcurrido < 1) return
+    const nuevaReferencia = s.referencia + transcurrido * 1000
+
+    if (s.tecnica === 'libre') {
+      set({ segundosLibres: s.segundosLibres + transcurrido, referencia: nuevaReferencia })
+      return
+    }
+
+    let restante = s.segundosRestantes - transcurrido
+    let enDescanso = s.enDescanso
+    let focoMinutosAcumulados = s.focoMinutosAcumulados
+    let huboTransicion = false
+    let resguardo = 0
+    // Normalmente es una sola vuelta; el while solo importa si pasó MUCHO
+    // tiempo real sin que corriera ningún tick (pestaña en segundo plano
+    // mucho rato) y hay que "saltar" más de un ciclo foco/descanso.
+    while (restante <= 0 && resguardo < 1000) {
+      resguardo++
+      huboTransicion = true
+      if (!enDescanso) {
+        enDescanso = true
+        focoMinutosAcumulados += s.minutosFoco
+        restante += s.minutosDescanso * 60
+      } else {
+        enDescanso = false
+        restante += s.minutosFoco * 60
+      }
+    }
+
+    if (huboTransicion) {
+      beep()
+      toast.info(enDescanso ? '¡Descanso! Te lo ganaste.' : 'Descanso terminado, volvamos.')
+    }
+    set({ segundosRestantes: restante, enDescanso, focoMinutosAcumulados, referencia: nuevaReferencia })
+  },
+
   alternar: () => {
     const s = get()
     if (s.corriendo) {
+      get().ponerseAlDia()
       if (s.intervalId) clearInterval(s.intervalId)
-      set({ corriendo: false, intervalId: null })
+      set({ corriendo: false, intervalId: null, referencia: null })
       return
     }
     asegurarAudioCtx()
-    const id = window.setInterval(() => {
-      const cur = get()
-      if (cur.tecnica === 'libre') {
-        set({ segundosLibres: cur.segundosLibres + 1 })
-        return
-      }
-      if (cur.segundosRestantes > 1) {
-        set({ segundosRestantes: cur.segundosRestantes - 1 })
-        return
-      }
-      beep()
-      if (!cur.enDescanso) {
-        toast.info('¡Descanso! Te lo ganaste.')
-        set({
-          enDescanso: true,
-          segundosRestantes: cur.minutosDescanso * 60,
-          focoMinutosAcumulados: cur.focoMinutosAcumulados + cur.minutosFoco,
-        })
-      } else {
-        toast.info('Descanso terminado, volvamos.')
-        set({ enDescanso: false, segundosRestantes: cur.minutosFoco * 60 })
-      }
-    }, 1000)
-    set({ corriendo: true, intervalId: id })
+    const id = window.setInterval(() => get().ponerseAlDia(), 1000)
+    set({ corriendo: true, intervalId: id, referencia: Date.now() })
   },
 
   reiniciar: () => {
@@ -133,6 +165,7 @@ export const useCronometroStore = create<CronometroState>()((set, get) => ({
     set({
       corriendo: false,
       intervalId: null,
+      referencia: null,
       enDescanso: false,
       segundosRestantes: minutosFoco * 60,
       segundosLibres: 0,
@@ -145,3 +178,14 @@ export const useCronometroStore = create<CronometroState>()((set, get) => ({
     return s.tecnica === 'libre' ? Math.round(s.segundosLibres / 60) : s.focoMinutosAcumulados + (s.enDescanso ? s.minutosFoco : 0)
   },
 }))
+
+// Los navegadores retrasan mucho (o directamente congelan) el setInterval
+// de una pestaña en segundo plano. Al volver a primer plano, nos ponemos
+// al día enseguida en vez de esperar al próximo tick (que puede tardar).
+if (typeof document !== 'undefined') {
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      useCronometroStore.getState().ponerseAlDia()
+    }
+  })
+}
