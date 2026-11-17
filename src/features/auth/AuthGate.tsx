@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BookOpen, Briefcase, CalendarDays, Eye, EyeOff, GraduationCap, ListChecks, Lock, Sparkles, Timer } from 'lucide-react'
+import { BookOpen, Brain, Briefcase, CalendarDays, Eye, EyeOff, GraduationCap, ListChecks, Lock, Sparkles, Timer, Trophy } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
 import { FadeIn } from '@/components/shared'
 import { BrandCover } from '@/branding/Logo'
@@ -12,9 +12,11 @@ type Modo = 'login' | 'registro' | 'recuperar'
 const CARACTERISTICAS = [
   { icon: Sparkles, texto: 'Autoperfil de 56 preguntas cortas, organizadas en 8 áreas — un punto de partida, no un diagnóstico.' },
   { icon: BookOpen, texto: 'Biblioteca con 8 rutas de estudio en 3 niveles de complejidad, explicadas en pocas líneas cada una.' },
-  { icon: ListChecks, texto: 'Catálogo de actividades para practicar, no solo leer sobre la técnica.' },
-  { icon: Timer, texto: '12 herramientas (cronómetro, fichas de repaso, mapas conceptuales y más) en un solo lugar.' },
-  { icon: CalendarDays, texto: 'Agenda y planificadores para organizar entregas, evaluaciones y la semana.' },
+  { icon: ListChecks, texto: 'Catálogo de actividades para practicar, no solo leer sobre la técnica — cada estudiante arma su propio ranking de qué le sirve.' },
+  { icon: Timer, texto: '12 herramientas en un solo lugar: cronómetro Pomodoro, fichas con repetición espaciada, mapas conceptuales, memotest, autoevaluación y más.' },
+  { icon: CalendarDays, texto: 'Agenda única para evaluaciones y entregas, más planificadores semanales separados por nivel educativo (primaria, secundaria, universidad).' },
+  { icon: Trophy, texto: 'Diario de metacognición y seguimiento de progreso (racha, minutos estudiados, insignias) — para que el esfuerzo se vea, no solo se haga.' },
+  { icon: Brain, texto: '"Aprendizajes de la sesión": para usar junto al estudiante — vos cargás la pregunta, él la piensa en voz alta y se autoevalúa.' },
 ]
 
 /** Presentación pública antes del login — para que un/a colega que recibe el link entienda
