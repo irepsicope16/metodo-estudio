@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Briefcase, Eye, EyeOff, GraduationCap, Lock } from 'lucide-react'
+import { BookOpen, Briefcase, CalendarDays, Eye, EyeOff, GraduationCap, ListChecks, Lock, Sparkles, Timer } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
 import { FadeIn } from '@/components/shared'
 import { BrandCover } from '@/branding/Logo'
@@ -8,6 +8,48 @@ import { Input, Label } from '@/components/ui/input'
 import type { RolCuenta } from '@/types'
 
 type Modo = 'login' | 'registro' | 'recuperar'
+
+const CARACTERISTICAS = [
+  { icon: Sparkles, texto: 'Autoperfil de 56 preguntas cortas, organizadas en 8 áreas — un punto de partida, no un diagnóstico.' },
+  { icon: BookOpen, texto: 'Biblioteca con 8 rutas de estudio en 3 niveles de complejidad, explicadas en pocas líneas cada una.' },
+  { icon: ListChecks, texto: 'Catálogo de actividades para practicar, no solo leer sobre la técnica.' },
+  { icon: Timer, texto: '12 herramientas (cronómetro, fichas de repaso, mapas conceptuales y más) en un solo lugar.' },
+  { icon: CalendarDays, texto: 'Agenda y planificadores para organizar entregas, evaluaciones y la semana.' },
+]
+
+/** Presentación pública antes del login — para que un/a colega que recibe el link entienda
+ *  de qué se trata la app antes de registrarse. No se muestra durante la recuperación de
+ *  contraseña, para mantener ese paso corto y enfocado. */
+function PresentacionLanding({ onRegistrarse }: { onRegistrarse: () => void }) {
+  return (
+    <div className="mx-auto w-full max-w-[640px] rounded-2xl bg-gradient-to-br from-surface-2 via-surface to-accent-soft px-6 py-8 text-center shadow-[0_2px_4px_rgba(16,24,32,0.06),0_16px_32px_-12px_rgba(16,24,32,0.18)] sm:px-10">
+      <BrandCover className="mx-auto max-w-[200px]" />
+      <h1 className="font-display mt-5 text-[26px] font-bold tracking-tight sm:text-[32px]">
+        Una plataforma para aprender a estudiar, no solo qué estudiar
+      </h1>
+      <p className="mx-auto mt-3 max-w-[520px] text-[15.5px] leading-relaxed text-muted-foreground">
+        Creada por la Lic. Irene Morbidelli, psicopedagoga. Es un recurso más para el trabajo con estudiantes — vos
+        decidís si lo usás, cuándo y con quién. No reemplaza tu criterio profesional.
+      </p>
+
+      <div className="mt-6 space-y-2.5 text-left">
+        {CARACTERISTICAS.map((c, i) => (
+          <div key={i} className="flex items-start gap-3 rounded-xl border bg-surface p-3.5">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+              <c.icon className="h-4.5 w-4.5" />
+            </span>
+            <p className="text-[14px] leading-relaxed">{c.texto}</p>
+          </div>
+        ))}
+      </div>
+
+      <Button size="lg" className="mt-6 w-full max-w-[320px]" onClick={onRegistrarse}>
+        Registrate y empezá
+      </Button>
+      <p className="mt-2.5 text-[13px] text-faint">¿Ya tenés cuenta? Bajá para ingresar.</p>
+    </div>
+  )
+}
 
 function CampoPassword({ id, label, value, onChange }: { id: string; label: string; value: string; onChange: (v: string) => void }) {
   const [verPassword, setVerPassword] = useState(false)
@@ -34,10 +76,15 @@ export function AuthGate() {
   const [modo, setModo] = useState<Modo>('login')
 
   return (
-    <div className="flex h-screen w-full items-center justify-center overflow-y-auto bg-background p-4">
+    <div className="flex min-h-screen w-full flex-col items-center overflow-y-auto bg-background p-4 py-10">
+      {modo !== 'recuperar' && (
+        <div className="mb-8 w-full">
+          <PresentacionLanding onRegistrarse={() => setModo('registro')} />
+        </div>
+      )}
       <div className="w-full max-w-[460px] rounded-2xl bg-gradient-to-br from-surface-2 via-surface to-accent-soft px-6 py-8 shadow-[0_2px_4px_rgba(16,24,32,0.06),0_16px_32px_-12px_rgba(16,24,32,0.18)] sm:px-10">
         <FadeIn className="text-center">
-          <BrandCover className="mx-auto max-w-[200px]" />
+          {modo === 'recuperar' && <BrandCover className="mx-auto max-w-[200px]" />}
           {modo === 'login' && <FormularioLogin onIrARegistro={() => setModo('registro')} onIrARecuperar={() => setModo('recuperar')} />}
           {modo === 'registro' && <FormularioRegistro onIrALogin={() => setModo('login')} />}
           {modo === 'recuperar' && <FormularioRecuperar onIrALogin={() => setModo('login')} />}
